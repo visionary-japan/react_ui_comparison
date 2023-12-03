@@ -1,40 +1,40 @@
-import { useState } from 'react';
-import viteLogo from '/vite.svg';
+/* eslint-disable react/prop-types */
+import React, { useState } from 'react';
 import './App.css';
-import reactLogo from './assets/react.svg';
+import { Defaults } from './Defaults.tsx';
+import { Draggable } from './Draggable.tsx';
+import { Droppable } from './Droppable.tsx';
+
+const MemoDefaults = React.memo(Defaults);
+const MemoDraggable = React.memo(Draggable);
+const MemoDroppable = React.memo(Droppable);
+
+export interface DragData {
+    x: number;
+    y: number;
+    width: number;
+    height: number;
+    color: string;
+}
 
 export function App() {
-    const [count, setCount] = useState(0);
+    const [dragData, setDragData] = useState<DragData | null>(null);
+
+    const handleDrag = (props: DragData) => {
+        setDragData({
+            x: props.x,
+            y: props.y,
+            width: props.width,
+            height: props.height,
+            color: props.color,
+        });
+    };
 
     return (
         <>
-            <div>
-                <a href='https://vitejs.dev' target='_blank' rel='noreferrer'>
-                    <img src={viteLogo} className='logo' alt='Vite logo' />
-                </a>
-                <a href='https://react.dev' target='_blank' rel='noreferrer'>
-                    <img
-                        src={reactLogo}
-                        className='logo react'
-                        alt='React logo'
-                    />
-                </a>
-            </div>
-            <h1>Vite + React</h1>
-            <div className='card'>
-                <button
-                    type='button'
-                    onClick={() => setCount(count => count + 1)}
-                >
-                    count is {count}
-                </button>
-                <p>
-                    Edit <code>src/App.tsx</code> and save to test HMR
-                </p>
-            </div>
-            <p className='read-the-docs'>
-                Click on the Vite and React logos to learn more
-            </p>
+            <MemoDefaults />
+            <MemoDroppable dragData={dragData} />
+            <MemoDraggable handleDrag={handleDrag} />
         </>
     );
 }

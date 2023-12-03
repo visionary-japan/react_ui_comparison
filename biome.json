@@ -6,7 +6,8 @@
     "linter": {
         "enabled": true,
         "rules": {
-            "all": true
+            "all": true,
+            "style": { "useBlockStatements": "off" }
         }
     },
     "formatter": {

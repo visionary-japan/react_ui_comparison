@@ -18,6 +18,21 @@
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
 
+.drag-wrap {
+  cursor: pointer;
+  position: absolute;
+  will-change: left, top;
+  background-color: white;
+  border-radius: 2rem;
+  z-index: 1;
+}
+#drag-vite {
+  left: 100px;
+  top: 100px;
+  width: 100px;
+  height: 100px;
+}
+
 @keyframes logo-spin {
   from {
     transform: rotate(0deg);
@@ -28,7 +43,7 @@
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
+  .logo {
     animation: logo-spin infinite 20s linear;
   }
 }
