@@ -1,8 +1,9 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react-swc'
+import react from '@vitejs/plugin-react-swc';
+import { defineConfig } from 'vite';
 
 // https://vitejs.dev/config/
+// biome-ignore lint/nursery/noDefaultExport: <explanation>
 export default defineConfig({
-  plugins: [react()],
-  base: 'react_dnd_detectionCompare',
-})
+    plugins: [react()],
+    base: 'react_dnd_detectionCompare',
+});
