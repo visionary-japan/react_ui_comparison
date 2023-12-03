@@ -1,7 +1,6 @@
 {
   "name": "react-dnd-detectioncompare",
   "private": false,
-  "homepage": "https://visionary-japan.github.io/react_dnd_detectionCompare",
   "version": "0.0.0",
   "type": "module",
   "scripts": {
