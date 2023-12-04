@@ -20,7 +20,7 @@ export interface DragdataStatic {
 }
 
 // ドロップ関連
-export const dropAmount = 200;
+export const dropAmount = 240;
 
 // ドラッグ関連
 export const dragdataInit: Dragdata = {
