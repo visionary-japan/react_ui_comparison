@@ -1,57 +1,11 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-}
-
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-.drag-wrap {
-  cursor: pointer;
-  position: absolute;
-  will-change: left, top;
-  background-color: white;
-  border-radius: 2rem;
-  z-index: 1;
-}
-#drag-vite {
-  left: 100px;
-  top: 100px;
-  width: 100px;
-  height: 100px;
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
+#overlay {
+  /* 位置 */
+  position: fixed;
+  left: 0;
+  top: 0;
+  /* サイズ */
+  width: 100vw;
+  height: 100vh;
+  /* イベント無効化 */
+  pointer-events: none;
 }

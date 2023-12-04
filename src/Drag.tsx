@@ -1,33 +1,29 @@
 import React, { useRef, useState } from 'react';
-import { DragData } from './App';
-import './App.css';
-
-const color = 'red';
+import './Drag.css';
+import { Dragdata, DragdataStatic, location } from './configs';
 
 interface Props {
-    handleDrag: (props: DragData) => void;
+    dragdataDynamic: Dragdata;
+    dragdataStatic: DragdataStatic;
+    handleDragStart: (id: string) => void;
+    handleDrag: (props: Dragdata) => void;
 }
-export function Draggable(props: Props) {
+export function Drag(props: Props) {
     const [isDragging, setIsDragging] = useState<boolean>(false);
-    const [offset, setOffset] = useState({ x: 0, y: 0 });
+    const [offset, setOffset] = useState<location>({ x: 0, y: 0 });
+
     const ref = useRef<HTMLDivElement>(null);
 
     const handlePointerDown = (event: React.PointerEvent) => {
         if (!ref.current) return;
-        ref.current.style.backgroundColor = color;
+        ref.current.classList.add('dragging');
         setIsDragging(true);
         event.currentTarget.setPointerCapture(event.pointerId);
         const rect = event.currentTarget.getBoundingClientRect();
         const x = event.clientX - rect.left;
         const y = event.clientY - rect.top;
         setOffset({ x, y });
-        props.handleDrag({
-            x,
-            y,
-            width: ref.current.clientWidth,
-            height: ref.current.clientHeight,
-            color,
-        });
+        props.handleDragStart(props.dragdataStatic.id);
     };
     const handlePointerMove = (event: React.PointerEvent) => {
         if (!(isDragging && ref.current)) return;
@@ -35,24 +31,27 @@ export function Draggable(props: Props) {
         const y = event.clientY - offset.y;
         ref.current.style.left = `${x}px`;
         ref.current.style.top = `${y}px`;
+        const rect = ref.current.getBoundingClientRect();
         props.handleDrag({
-            x,
-            y,
-            width: ref.current.clientWidth,
-            height: ref.current.clientHeight,
-            color,
+            clientX: event.clientX,
+            clientY: event.clientY,
+            location: {
+                x,
+                y,
+            },
+            size: rect,
         });
     };
     const handlePointerUp = () => {
         if (!(isDragging && ref.current)) return;
         setIsDragging(false);
-        ref.current.style.backgroundColor = 'white';
+        ref.current.classList.remove('dragging');
     };
 
     return (
         <div
             ref={ref}
-            id='drag-vite'
+            id={props.dragdataStatic.id}
             className='drag-wrap'
             onPointerDown={handlePointerDown}
             onPointerMove={handlePointerMove}

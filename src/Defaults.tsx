@@ -1,14 +1,15 @@
 import { useState } from 'react';
 import viteLogo from '/vite.svg';
-import './App.css';
+import './Defaults.css';
 import reactLogo from './assets/react.svg';
 
 export function Defaults() {
-    // ボタン関連
     const [count, setCount] = useState<number>(0);
+
     const handleClickButton = () => {
         setCount(count => count + 1);
     };
+
     return (
         <>
             <div>
