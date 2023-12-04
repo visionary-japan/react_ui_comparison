@@ -41,27 +41,25 @@ export function App() {
 
     return (
         <>
-            <div>
-                <MemoDefaults />
-                <div id='drop-wrap'>
-                    {Array.from({ length: dropAmount }, (_, i) => (
-                        <MemoDrop
-                            key={`${i}`}
-                            dragdataDynamic={dragdata}
-                            dragdataStatic={dragdatasStatic[dragIndex]}
-                        />
-                    ))}
-                </div>
-                {dragdatasStatic.map((drag, i) => (
-                    <MemoDrag
+            <MemoDefaults />
+            <div id='drop-wrap'>
+                {Array.from({ length: dropAmount }, (_, i) => (
+                    <MemoDrop
                         key={`${i}`}
                         dragdataDynamic={dragdata}
-                        dragdataStatic={drag}
-                        handleDragStart={handleDragStart}
-                        handleDrag={handleDrag}
+                        dragdataStatic={dragdatasStatic[dragIndex]}
                     />
                 ))}
             </div>
+            {dragdatasStatic.map((drag, i) => (
+                <MemoDrag
+                    key={`${i}`}
+                    dragdataDynamic={dragdata}
+                    dragdataStatic={drag}
+                    handleDragStart={handleDragStart}
+                    handleDrag={handleDrag}
+                />
+            ))}
             <div ref={ref} id='overlay' />
         </>
     );

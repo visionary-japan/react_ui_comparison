@@ -11,7 +11,7 @@
 }
 
 /* 固有 */
-
+/* 01 */
 #cursor {
   /* 位置 */
   left: 100px;
@@ -25,6 +25,7 @@
   border-radius: 16px;  
 }
 
+/* 02 */
 #center {
   /* 位置 */
   left: 200px;
@@ -55,6 +56,7 @@
   width: 1px;
 }
 
+/* 03 */
 #percent {
   /* 位置 */
   left: 300px;
@@ -74,6 +76,7 @@
   z-index: -1;
 }
 
+/* 04 */
 #fakeCursor {
   /* 位置 */
   left: 100px;
@@ -98,6 +101,7 @@
   background-color: red;
 }
 
+/* 05 */
 #distance {
   /* 位置 */
   left: 200px;
@@ -114,6 +118,7 @@
   filter: drop-shadow(0 0 32px yellow);
 }
 
+/* 06 */
 #velocity {
   /* 位置 */
   left: 300px;

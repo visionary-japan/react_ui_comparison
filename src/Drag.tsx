@@ -21,8 +21,14 @@ export function Drag(props: Props) {
         setIsDragging(true);
         event.currentTarget.setPointerCapture(event.pointerId);
         const rect = event.currentTarget.getBoundingClientRect();
-        const x = event.clientX - rect.left;
-        const y = event.clientY - rect.top;
+        const x = event.clientX - rect.x;
+        const y = event.clientY - rect.y;
+        props.handleDrag({
+            clientX: event.clientX,
+            clientY: event.clientY,
+            location: rect,
+            size: rect,
+        });
         setOffset({ x, y });
         props.handleDragStart(props.dragdataStatic.id);
     };
