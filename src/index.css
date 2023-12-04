@@ -13,6 +13,8 @@
   -moz-osx-font-smoothing: grayscale;
 
   user-select: none;
+  -ms-touch-action: none;
+  touch-action: none;
   overflow:hidden;
 }
 
@@ -73,6 +75,5 @@ button:focus-visible {
 #root {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
   text-align: center;
 }

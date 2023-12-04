@@ -15,6 +15,7 @@ export function Drag(props: Props) {
     const ref = useRef<HTMLDivElement>(null);
 
     const handlePointerDown = (event: React.PointerEvent) => {
+        event.preventDefault();
         if (!ref.current) return;
         ref.current.classList.add('dragging');
         setIsDragging(true);
@@ -26,6 +27,7 @@ export function Drag(props: Props) {
         props.handleDragStart(props.dragdataStatic.id);
     };
     const handlePointerMove = (event: React.PointerEvent) => {
+        event.preventDefault();
         if (!(isDragging && ref.current)) return;
         const x = event.clientX - offset.x;
         const y = event.clientY - offset.y;
