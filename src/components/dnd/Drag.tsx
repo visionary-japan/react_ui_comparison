@@ -3,14 +3,16 @@ import './Drag.css';
 import { DragData, DropData, location } from './configs';
 
 interface Props {
-    dragdataDynamic: DragData;
-    dragdataStatic: DropData;
+    dragData: DragData;
+    dropData: DropData;
     handleDragStart: (id: string) => void;
     handleDrag: (props: DragData) => void;
 }
 export function Drag(props: Props) {
     const [isDragging, setIsDragging] = useState<boolean>(false);
-    const [offset, setOffset] = useState<location>({ x: 0, y: 0 });
+    const [locOffset, setLocOffset] = useState<location>({ x: 0, y: 0 });
+    const [locRectLast, setLocRectLast] = useState<location>({ x: 0, y: 0 });
+    const [timeLast, setTimeLast] = useState<number>(0);
 
     const ref = useRef<HTMLDivElement>(null);
 
@@ -29,17 +31,21 @@ export function Drag(props: Props) {
             locRect: rect,
             sizRect: rect,
         });
-        setOffset({ x, y });
-        props.handleDragStart(props.dragdataStatic.id);
+        setLocOffset({ x, y });
+        setLocRectLast({ x, y });
+        setTimeLast(Date.now());
+        props.handleDragStart(props.dropData.id);
     };
     const handlePointerMove = (event: React.PointerEvent) => {
         event.preventDefault();
         if (!(isDragging && ref.current)) return;
-        const x = event.clientX + window.scrollX - offset.x;
-        const y = event.clientY + window.scrollY - offset.y;
+        const x = event.clientX + window.scrollX - locOffset.x;
+        const y = event.clientY + window.scrollY - locOffset.y;
         ref.current.style.left = `${x}px`;
         ref.current.style.top = `${y}px`;
         const rect = ref.current.getBoundingClientRect();
+        const time = Date.now();
+        const timeDelta = (time - timeLast) / 100;
         props.handleDrag({
             locScroll: { x: window.scrollX, y: window.scrollY },
             locClient: { x: event.clientX, y: event.clientY },
@@ -48,7 +54,13 @@ export function Drag(props: Props) {
                 y,
             },
             sizRect: rect,
+            locNext: {
+                x: x + (x - locRectLast.x) / timeDelta,
+                y: y + (y - locRectLast.y) / timeDelta,
+            },
         });
+        setLocRectLast({ x, y });
+        setTimeLast(Date.now());
     };
     const handlePointerUp = () => {
         if (!(isDragging && ref.current)) return;
@@ -59,7 +71,7 @@ export function Drag(props: Props) {
     return (
         <div
             ref={ref}
-            id={props.dragdataStatic.id}
+            id={props.dropData.id}
             className='drag-wrap'
             onPointerDown={handlePointerDown}
             onPointerMove={handlePointerMove}

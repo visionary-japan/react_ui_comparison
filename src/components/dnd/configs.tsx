@@ -16,9 +16,10 @@ export interface DragData {
     locClient?: location;
     locRect?: location;
     sizRect?: size;
+    locNext?: location;
 }
 export interface DropData {
-    id: string;
+    id: string; // TODO IDはきちんと制約したい
     color: string;
     isOver: (dragData: DragData, rectDrop: DOMRect) => boolean;
 }
@@ -128,23 +129,23 @@ export const dropDatas: DropData[] = [
             const distance =
                 (dragCenterX - dropCenterX) ** 2 +
                 (dragCenterY - dropCenterY) ** 2;
-            return distance <= 10000;
+            return distance <= 16384; // 2^14
         },
     },
     {
         id: 'velocity',
         color: 'purple',
         isOver: (props: DragData, dropRect: DOMRect) => {
-            const { locScroll, locRect, sizRect } = props;
-            if (!(locScroll && locRect && sizRect)) return false;
-            const dragCenterX = locRect.x + sizRect.width / 2;
-            const dragCenterY = locRect.y + sizRect.height / 2;
-            const dropCenterX = locScroll.x + dropRect.x + dropRect.width / 2;
-            const dropCenterY = locScroll.y + dropRect.y + dropRect.height / 2;
-            const distance =
-                (dragCenterX - dropCenterX) ** 2 +
-                (dragCenterY - dropCenterY) ** 2;
-            return distance <= 10000;
+            const { locScroll, locRect, sizRect, locNext } = props;
+            if (!(locScroll && locRect && sizRect && locNext)) return false;
+            const nextDragCenterX = locNext.x + sizRect.width / 2;
+            const nextDragCenterY = locNext.y + sizRect.height / 2;
+            return (
+                locScroll.x + dropRect.left <= nextDragCenterX &&
+                locScroll.x + dropRect.right >= nextDragCenterX &&
+                locScroll.y + dropRect.top <= nextDragCenterY &&
+                locScroll.y + dropRect.bottom >= nextDragCenterY
+            );
         },
     },
 ];

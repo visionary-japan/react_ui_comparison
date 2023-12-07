@@ -3,8 +3,8 @@ import './Drop.css';
 import { DragData, DropData, dropStyle } from './configs';
 
 interface Props {
-    dragdataDynamic: DragData | null;
-    dragdataStatic: DropData;
+    dragData: DragData | null;
+    dropData: DropData;
 }
 export function Drop(props: Props) {
     const [isOver, setIsOver] = useState<boolean>(false);
@@ -12,18 +12,18 @@ export function Drop(props: Props) {
     const ref = useRef<HTMLDivElement | null>(null);
 
     useEffect(() => {
-        if (props.dragdataDynamic && props.dragdataStatic) {
+        if (props.dragData && props.dropData) {
             if (!ref.current) return;
             setIsOver(
-                props.dragdataStatic.isOver(
-                    props.dragdataDynamic,
+                props.dropData.isOver(
+                    props.dragData,
                     ref.current.getBoundingClientRect(),
                 ),
             );
         } else {
             setIsOver(false);
         }
-    }, [props.dragdataDynamic, props.dragdataStatic]);
+    }, [props.dragData, props.dropData]);
 
     return (
         <div
@@ -31,7 +31,7 @@ export function Drop(props: Props) {
             className={isOver ? 'drop over' : 'drop'}
             style={{
                 ...dropStyle,
-                borderColor: isOver ? props.dragdataStatic?.color : 'gray',
+                borderColor: isOver ? props.dropData?.color : 'gray',
             }}
         />
     );

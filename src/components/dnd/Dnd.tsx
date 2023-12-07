@@ -29,6 +29,7 @@ export function Dnd() {
             locRect: props.locRect,
             locScroll: props.locScroll,
             sizRect: props.sizRect,
+            locNext: props.locNext,
         });
     };
 
@@ -58,16 +59,16 @@ export function Dnd() {
                 {Array.from({ length: dropAmount }, (_, i) => (
                     <MemoDrop
                         key={`${i}`}
-                        dragdataDynamic={dragData}
-                        dragdataStatic={dropDatas[dragIndex]}
+                        dragData={dragData}
+                        dropData={dropDatas[dragIndex]}
                     />
                 ))}
             </div>
             {dropDatas.map((drag, i) => (
                 <MemoDrag
                     key={`${i}`}
-                    dragdataDynamic={dragData}
-                    dragdataStatic={drag}
+                    dragData={dragData}
+                    dropData={drag}
                     handleDragStart={handleDragStart}
                     handleDrag={handleDrag}
                 />
