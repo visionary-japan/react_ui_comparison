@@ -5,9 +5,11 @@ export function Index() {
     return (
         <div>
             <h1>React UI Comparison</h1>
-            <img src='' alt='' />
             <nav>
                 <ul>
+                    <ul>
+                        <li>{import.meta.env.VITE_BASE_PATH}</li>
+                    </ul>
                     <li>
                         <Link to='/'>Index</Link>
                     </li>

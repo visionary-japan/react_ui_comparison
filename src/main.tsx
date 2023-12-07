@@ -7,7 +7,7 @@ import './main.css';
 
 reactDom.createRoot(document.getElementById('root') as HTMLElement).render(
     <React.StrictMode>
-        <BrowserRouter basename={import.meta.env.VITE_BASE_PATH}>
+        <BrowserRouter basename={import.meta.env.BASE_URL}>
             <Routes>
                 <Route path='/' element={<Index />} />
                 <Route path='dnd' element={<App />} />
