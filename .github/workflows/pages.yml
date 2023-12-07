@@ -40,6 +40,8 @@ jobs:
         run: npm install
       - name: Build
         run: npm run build
+      - name: Set 404 Page
+        run: cp ./dist/index.html ./dist/404.html
       - name: Setup Pages
         uses: actions/configure-pages@v3
       - name: Upload artifact
