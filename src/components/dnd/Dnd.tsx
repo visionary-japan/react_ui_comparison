@@ -37,6 +37,7 @@ export function Dnd() {
         if (!ref.current) return;
         setDragIndex(-1);
         setDragData(dragDataInit);
+        // TODO 1つ余分にGapを含むせいかキレイにならないことがある
         setDropAmount(
             Math.floor(
                 (ref.current.clientWidth -

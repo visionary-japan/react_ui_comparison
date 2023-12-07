@@ -101,7 +101,7 @@ export const dropDatas: DropData[] = [
         },
     },
     {
-        id: 'fakeCursor',
+        id: 'hotspot',
         color: 'white',
         isOver: (props: DragData, dropRect: DOMRect) => {
             const { locScroll, locRect, sizRect } = props;

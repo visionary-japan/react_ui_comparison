@@ -1,21 +1,25 @@
 #drop-wrap {
   /* 固定配置 */
   position: absolute;
-  left: 0;
   top: 0;
-  /* イベント無効化 */
-  pointer-events: none;
+  left: 0;
+
   /* 子要素配置 */
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+
+  /* イベント無効化 */
+  pointer-events: none;
 }
 
 .drop {
+  border-color: gray;
+
   /* 枠 */
   border-style: dashed;
-  border-color: gray; 
+
   /* 動的 */
   will-change: filter;
 }
