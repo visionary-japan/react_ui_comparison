@@ -26,7 +26,7 @@ export interface DropData {
 
 // ドロップ関連
 export const dropWrapStyle: React.CSSProperties = {
-    gap: 8,
+    gap: 2,
     margin: 8,
 };
 export const dropStyle: React.CSSProperties = {
