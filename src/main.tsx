@@ -1,10 +1,17 @@
 import React from 'react';
 import reactDom from 'react-dom/client';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { App } from './App.tsx';
-import './index.css';
+import { Index } from './Index.tsx';
+import './main.css';
 
 reactDom.createRoot(document.getElementById('root') as HTMLElement).render(
     <React.StrictMode>
-        <App />
+        <BrowserRouter basename={import.meta.env.VITE_BASE_PATH}>
+            <Routes>
+                <Route path='/' element={<Index />} />
+                <Route path='dnd' element={<App />} />
+            </Routes>
+        </BrowserRouter>
     </React.StrictMode>,
 );

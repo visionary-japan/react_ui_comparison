@@ -62,8 +62,8 @@
   left: 300px;
   top: 300px;
   /* サイズ */
-  width: 300px;
-  height: 300px;
+  width: 100px;
+  height: 100px;
 }
 #percent::after {
   content: '';

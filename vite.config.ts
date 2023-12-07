@@ -5,5 +5,5 @@ import { defineConfig } from 'vite';
 // biome-ignore lint/nursery/noDefaultExport: <explanation>
 export default defineConfig({
     plugins: [react()],
-    base: 'react_dnd_detectionCompare',
+    base: process.env.VITE_BASE_PATH,
 });
