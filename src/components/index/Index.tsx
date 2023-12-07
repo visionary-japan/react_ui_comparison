@@ -1,15 +1,17 @@
+import React from 'react';
 import { Link } from 'react-router-dom';
-import './App.css';
+import { Defaults } from './Defaults';
+import './Index.css';
 
 export function Index() {
+    const MemoDefaults = React.memo(Defaults);
     return (
         <div>
-            <h1>React UI Comparison</h1>
+            <MemoDefaults
+                title={(import.meta.env.VITE_BASE_PATH as string).toUpperCase()}
+            />
             <nav>
                 <ul>
-                    <ul>
-                        <li>{import.meta.env.VITE_BASE_PATH}</li>
-                    </ul>
                     <li>
                         <Link to='/'>Index</Link>
                     </li>

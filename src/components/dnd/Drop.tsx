@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
 import './Drop.css';
-import { Dragdata, DragdataStatic } from './configs';
+import { DragData, DropData, dropStyle } from './configs';
 
 interface Props {
-    dragdataDynamic: Dragdata | null;
-    dragdataStatic: DragdataStatic;
+    dragdataDynamic: DragData | null;
+    dragdataStatic: DropData;
 }
 export function Drop(props: Props) {
     const [isOver, setIsOver] = useState<boolean>(false);
@@ -30,6 +30,7 @@ export function Drop(props: Props) {
             ref={ref}
             className={isOver ? 'drop over' : 'drop'}
             style={{
+                ...dropStyle,
                 borderColor: isOver ? props.dragdataStatic?.color : 'gray',
             }}
         />

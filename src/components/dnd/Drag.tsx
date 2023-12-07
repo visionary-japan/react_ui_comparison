@@ -1,12 +1,12 @@
 import React, { useRef, useState } from 'react';
 import './Drag.css';
-import { Dragdata, DragdataStatic, location } from './configs';
+import { DragData, DropData, location } from './configs';
 
 interface Props {
-    dragdataDynamic: Dragdata;
-    dragdataStatic: DragdataStatic;
+    dragdataDynamic: DragData;
+    dragdataStatic: DropData;
     handleDragStart: (id: string) => void;
-    handleDrag: (props: Dragdata) => void;
+    handleDrag: (props: DragData) => void;
 }
 export function Drag(props: Props) {
     const [isDragging, setIsDragging] = useState<boolean>(false);
@@ -24,10 +24,10 @@ export function Drag(props: Props) {
         const x = event.clientX - rect.x;
         const y = event.clientY - rect.y;
         props.handleDrag({
-            clientX: event.clientX,
-            clientY: event.clientY,
-            location: rect,
-            size: rect,
+            locScroll: { x: window.scrollX, y: window.scrollY },
+            locClient: { x: event.clientX, y: event.clientY },
+            locRect: rect,
+            sizRect: rect,
         });
         setOffset({ x, y });
         props.handleDragStart(props.dragdataStatic.id);
@@ -35,19 +35,19 @@ export function Drag(props: Props) {
     const handlePointerMove = (event: React.PointerEvent) => {
         event.preventDefault();
         if (!(isDragging && ref.current)) return;
-        const x = event.clientX - offset.x;
-        const y = event.clientY - offset.y;
+        const x = event.clientX + window.scrollX - offset.x;
+        const y = event.clientY + window.scrollY - offset.y;
         ref.current.style.left = `${x}px`;
         ref.current.style.top = `${y}px`;
         const rect = ref.current.getBoundingClientRect();
         props.handleDrag({
-            clientX: event.clientX,
-            clientY: event.clientY,
-            location: {
+            locScroll: { x: window.scrollX, y: window.scrollY },
+            locClient: { x: event.clientX, y: event.clientY },
+            locRect: {
                 x,
                 y,
             },
-            size: rect,
+            sizRect: rect,
         });
     };
     const handlePointerUp = () => {

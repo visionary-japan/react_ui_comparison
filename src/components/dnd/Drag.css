@@ -17,12 +17,12 @@
   left: 100px;
   top: 100px;
   /* サイズ */
-  width: 100px;
-  height: 100px;
+  width: 96px;
+  height: 96px;
   /* 色 */
   background-color: red;
   /* 枠 */
-  border-radius: 16px;  
+  border-radius: 16px;
 }
 
 /* 02 */
@@ -31,8 +31,8 @@
   left: 200px;
   top: 200px;
   /* サイズ */
-  width: 100px;
-  height: 100px;
+  width: 96px;
+  height: 96px;
   /* 色 */
   background-color: green;
   /* 枠 */
@@ -62,8 +62,8 @@
   left: 300px;
   top: 300px;
   /* サイズ */
-  width: 100px;
-  height: 100px;
+  width: 96px;
+  height: 96px;
 }
 #percent::after {
   content: '';
@@ -82,8 +82,8 @@
   left: 100px;
   top: 400px;
   /* サイズ */
-  width: 100px;
-  height: 100px;
+  width: 96px;
+  height: 96px;
   /* 画像 */
   background-image: url('/public/computer_cursor_arrow_white.png');
   background-position: top;
@@ -107,8 +107,8 @@
   left: 200px;
   top: 500px;
   /* サイズ */
-  width: 100px;
-  height: 100px;
+  width: 96px;
+  height: 96px;
   /* 色 */
   background-color: yellow;
   /* 枠 */
@@ -124,8 +124,8 @@
   left: 300px;
   top: 600px;
   /* サイズ */
-  width: 50px;
-  height: 50px;
+  width: 48px;
+  height: 48px;
   /* 色 */
   background-color: purple;
   /* 枠 */

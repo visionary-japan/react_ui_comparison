@@ -2,28 +2,21 @@
   /* 固定配置 */
   position: absolute;
   left: 0;
-  top: 50%;
-  transform: translateY(-50%);
+  top: 0;
   /* イベント無効化 */
   pointer-events: none;
   /* 子要素配置 */
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
-  gap: 8px;
-  margin: 8px;
 }
 
 .drop {
-  /* サイズ */
-  width: 64px;
-  height: 64px;
   /* 枠 */
   border-style: dashed;
-  border-width: 2px;
-  border-color: gray;
-  /*  */
+  border-color: gray; 
+  /* 動的 */
   will-change: filter;
 }
 

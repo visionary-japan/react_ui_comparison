@@ -1,9 +1,12 @@
 import { useState } from 'react';
 import viteLogo from '/vite.svg';
+import reactLogo from '../../assets/react.svg';
 import './Defaults.css';
-import reactLogo from './assets/react.svg';
 
-export function Defaults() {
+interface Props {
+    title: string;
+}
+export function Defaults(props: Props) {
     const [count, setCount] = useState<number>(0);
 
     const handleClickButton = () => {
@@ -38,7 +41,7 @@ export function Defaults() {
                     </a>
                 </div>
             </div>
-            <h1>Vite + React</h1>
+            <h1>{props.title}</h1>
             <div className='card'>
                 <button type='button' onClick={handleClickButton}>
                     count is {count}
