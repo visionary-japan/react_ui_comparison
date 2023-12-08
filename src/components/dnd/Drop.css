@@ -9,9 +9,6 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-
-  /* イベント無効化 */
-  pointer-events: none;
 }
 
 .drop {
