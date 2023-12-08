@@ -27,6 +27,11 @@ export function Index() {
                             <li>
                                 <Link to='/dnd/dnd'>DnD HTML5 API</Link>
                             </li>
+                            <li>
+                                <Link to='/dnd/sortablejs'>
+                                    DnD Sortable.js
+                                </Link>
+                            </li>
                         </ul>
                         <li>
                             <Link to='/btn'>Btn</Link>

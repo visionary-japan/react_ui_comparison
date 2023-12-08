@@ -1,6 +1,18 @@
-#wrap {
-  display: flex;
-  gap: 32px;
-  align-items: center;
-  justify-content: center;
+.app {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+.draggable {
+  max-width: 180px;
+  padding: 10px 15px;
+  margin: auto;
+  color: white;
+  cursor: pointer;
+  background: rgb(71 119 214);
+  border-radius: 6px;
+}
+
+.draggable:not(:last-child) {
+  margin-bottom: 8px;
 }

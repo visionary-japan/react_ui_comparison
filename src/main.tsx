@@ -6,6 +6,7 @@ import { Btn } from './pages/btn/Btn.tsx';
 import { DndIndex } from './pages/dnd/DndIndex.tsx';
 import { DndDnd } from './pages/dnd/dnd/DndDnd.tsx';
 import { DndPointer } from './pages/dnd/pointer/DndPointer.tsx';
+import { DndSortablejs } from './pages/dnd/sortablejs/DndSortablejs.tsx';
 import { Index } from './pages/index/Index.tsx';
 
 reactDom.createRoot(document.getElementById('root') as HTMLElement).render(
@@ -17,6 +18,7 @@ reactDom.createRoot(document.getElementById('root') as HTMLElement).render(
                 <Route path='dnd' element={<DndIndex />} />
                 <Route path='dnd/dnd' element={<DndDnd />} />
                 <Route path='dnd/pointer' element={<DndPointer />} />
+                <Route path='dnd/sortablejs' element={<DndSortablejs />} />
                 <Route path='*' element={<Navigate to='/' />} />
             </Routes>
         </BrowserRouter>
