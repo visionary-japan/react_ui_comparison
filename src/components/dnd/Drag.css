@@ -1,6 +1,7 @@
 /* 共通 */
 .drag-wrap {
   position: absolute;
+  touch-action: none;
   cursor: pointer;
   opacity: 0.75;
   will-change: left, top, filter, opacity;
