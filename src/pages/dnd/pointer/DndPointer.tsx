@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Drag } from '../../../components/dnd/pointer/DragPointer.tsx';
 import { Drop } from '../../../components/dnd/pointer/DropPointer.tsx';
 import { useResizeObserver } from '../../../hooks/useDivResizeObserver.tsx';
@@ -16,12 +16,12 @@ const MemoDrag = React.memo(Drag);
 const MemoDrop = React.memo(Drop);
 
 export function DndPointer() {
-    const [dragIndex, setDragIndex] = useState<number>(-1);
+    const [dragId, setDragId] = useState<string>('');
     const [dragData, setDragData] = useState<DragData>(dragDataInit);
     const [dropAmount, setDropAmount] = useState<number>(120);
 
     const handleDragStart = (id: string) => {
-        setDragIndex(dropDatas.map(val => val.id).indexOf(id));
+        setDragId(id);
     };
     const handleDrag = (props: DragData) => {
         setDragData({
@@ -35,7 +35,7 @@ export function DndPointer() {
 
     const handleResize = useCallback(() => {
         if (!ref.current) return;
-        setDragIndex(-1);
+        setDragId('');
         setDragData(dragDataInit);
         setDropAmount(
             Math.floor(
@@ -56,25 +56,33 @@ export function DndPointer() {
         }px`;
     }, []);
 
+    useEffect(() => {
+        return () => {
+            document.body.style.height = '';
+        };
+    }, []);
+
     const ref = useRef<HTMLDivElement>(null);
     useResizeObserver(ref, handleResize);
 
     return (
         <div id='wrap'>
-            <div ref={ref} id='drop-wrap' style={dropWrapStyle}>
+            <h1>DnD Pointer</h1>
+            <div ref={ref} id='dnd-pointer-drop-wrap' style={dropWrapStyle}>
                 {Array.from({ length: dropAmount }, (_, i) => (
                     <MemoDrop
                         key={`${i}`}
                         dragData={dragData}
-                        dropData={dropDatas[dragIndex]}
+                        dropData={dropDatas[dragId]}
                     />
                 ))}
             </div>
-            {dropDatas.map((drag, i) => (
+            {Object.keys(dropDatas).map((key: string, i: number) => (
                 <MemoDrag
                     key={`${i}`}
+                    id={key}
                     dragData={dragData}
-                    dropData={drag}
+                    dropData={dropDatas[key]}
                     handleDragStart={handleDragStart}
                     handleDrag={handleDrag}
                 />

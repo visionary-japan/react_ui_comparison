@@ -32,7 +32,11 @@ export function Drop(props: Props) {
     return (
         <div
             ref={ref}
-            className={isOver ? 'drop over' : 'drop'}
+            className={
+                isOver
+                    ? 'dnd-pointer-drop dnd-pointer-over'
+                    : 'dnd-pointer-drop'
+            }
             style={{
                 ...dropStyle,
                 borderColor: isOver ? props.dropData?.color : 'gray',

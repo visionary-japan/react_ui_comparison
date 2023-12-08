@@ -1,20 +1,4 @@
-#drop-wrap {
-  /* 固定配置 */
-  position: absolute;
-  top: 0;
-  left: 0;
-
-  /* 子要素配置 */
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-}
-
-.drop {
-  /* 背景色 */
-  border-color: gray;
-
+.dnd-pointer-drop {
   /* 枠 */
   border-style: dashed;
 
@@ -22,7 +6,7 @@
   will-change: filter;
 }
 
-.over {
+.dnd-pointer-over {
   /* 色 */
   filter: brightness(2.5);
 }

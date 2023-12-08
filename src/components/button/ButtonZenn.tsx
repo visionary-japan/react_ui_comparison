@@ -1,6 +1,5 @@
 import clsx from 'clsx';
 import { cloneElement, forwardRef, isValidElement } from 'react';
-import './ButtonZenn.css';
 
 // https://zenn.dev/kiyoshiro9446/scraps/46b4e4be23bcde
 export type ButtonProps = {

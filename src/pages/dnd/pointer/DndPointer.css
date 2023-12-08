@@ -1,5 +1,12 @@
-#wrap {
-  /* サイズ */
-  width: 100vw;
-  height: 100%;
+#dnd-pointer-drop-wrap {
+  /* 固定配置 */
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  /* 子要素配置 */
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
 }

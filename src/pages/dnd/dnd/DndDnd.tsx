@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import './DndDnd.css';
 
 export function DndDnd() {
     const [isDragging, setIsDragging] = useState(false);
@@ -37,7 +36,8 @@ export function DndDnd() {
     };
 
     return (
-        <div id='wrap'>
+        <div id='dnd-dnd-wrap'>
+            <h1>DnD HTML5 API</h1>
             <div
                 style={{
                     height: 64,

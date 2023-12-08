@@ -1,13 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Defaults } from '../../components/default/Vite';
-import './Index.css';
 
 const MemoDefaults = React.memo(Defaults);
 
 export function Index() {
     return (
-        <div>
+        <div id='wrap'>
             <MemoDefaults
                 title={(import.meta.env.VITE_BASE_PATH as string).toUpperCase()}
             />

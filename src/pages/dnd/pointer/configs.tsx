@@ -19,9 +19,11 @@ export interface DragData {
     locNext?: location;
 }
 export interface DropData {
-    id: string; // TODO IDはきちんと制約したい
     color: string;
     isOver: (dragData: DragData, rectDrop: DOMRect) => boolean;
+}
+export interface DropDatas {
+    [id: string]: DropData;
 }
 
 // ドロップ関連
@@ -47,9 +49,8 @@ export const dragDataInit: DragData = {
         height: 0,
     },
 };
-export const dropDatas: DropData[] = [
-    {
-        id: 'cursor',
+export const dropDatas: DropDatas = {
+    cursor: {
         color: 'red',
         isOver: (props: DragData, dropRect: DOMRect) => {
             const { locClient } = props;
@@ -62,8 +63,7 @@ export const dropDatas: DropData[] = [
             );
         },
     },
-    {
-        id: 'center',
+    center: {
         color: 'green',
         isOver: (props: DragData, dropRect: DOMRect) => {
             const { locScroll, locRect, sizRect } = props;
@@ -78,8 +78,7 @@ export const dropDatas: DropData[] = [
             );
         },
     },
-    {
-        id: 'percent',
+    percent: {
         color: 'blue',
         isOver: (props: DragData, dropRect: DOMRect) => {
             const { locScroll, locRect, sizRect } = props;
@@ -100,8 +99,7 @@ export const dropDatas: DropData[] = [
             return overlapWidth * overlapHeight >= dropArea * 0.25;
         },
     },
-    {
-        id: 'hotspot',
+    hotspot: {
         color: 'white',
         isOver: (props: DragData, dropRect: DOMRect) => {
             const { locScroll, locRect, sizRect } = props;
@@ -116,8 +114,7 @@ export const dropDatas: DropData[] = [
             );
         },
     },
-    {
-        id: 'distance',
+    distance: {
         color: 'yellow',
         isOver: (props: DragData, dropRect: DOMRect) => {
             const { locScroll, locRect, sizRect } = props;
@@ -132,8 +129,7 @@ export const dropDatas: DropData[] = [
             return distance <= 16384; // 2^14
         },
     },
-    {
-        id: 'velocity',
+    velocity: {
         color: 'purple',
         isOver: (props: DragData, dropRect: DOMRect) => {
             const { locScroll, locRect, sizRect, locNext } = props;
@@ -148,4 +144,4 @@ export const dropDatas: DropData[] = [
             );
         },
     },
-];
+};

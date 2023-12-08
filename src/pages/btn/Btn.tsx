@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 import ButtonZenn from '../../components/button/ButtonZenn';
-import './Btn.css';
 
 export function Btn() {
     return (

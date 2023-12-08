@@ -1,9 +1,8 @@
 import { Link } from 'react-router-dom';
-import './DndIndex.css';
 
 export function DndIndex() {
     return (
-        <div>
+        <div id='wrap'>
             <ul>
                 <li>
                     <Link to='/dnd/pointer'>DnD Pointer</Link>

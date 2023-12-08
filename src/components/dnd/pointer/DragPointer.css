@@ -1,5 +1,5 @@
 /* 共通 */
-.drag-wrap {
+.dnd-pointer-drag-wrap {
   position: absolute;
   touch-action: none;
   cursor: pointer;
@@ -7,7 +7,7 @@
   will-change: left, top, filter, opacity;
 }
 
-.dragging {
+.dnd-pointer-dragging {
   filter: drop-shadow(0 0 16px black);
   opacity: 0.9;
 }

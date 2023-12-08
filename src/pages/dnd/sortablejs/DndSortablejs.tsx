@@ -4,28 +4,16 @@ import './DndSortablejs.css';
 
 const draggableList = [
     {
-        id: 'Mike',
-        name: 'Mike',
+        id: '01',
+        name: '01',
     },
     {
-        id: 'Michael',
-        name: 'Michael',
+        id: '02',
+        name: '02',
     },
     {
-        id: 'Mason',
-        name: 'Mason',
-    },
-    {
-        id: 'Miller',
-        name: 'Miller',
-    },
-    {
-        id: 'Milner',
-        name: 'Milner',
-    },
-    {
-        id: 'Merry',
-        name: 'Merry',
+        id: '03',
+        name: '03',
     },
 ];
 
@@ -33,20 +21,16 @@ export function DndSortablejs() {
     const [list, setList] = React.useState(draggableList);
 
     return (
-        <div className='app'>
-            <h1>
-                Very Simple Draggable Stuff <>⚛️</>
-            </h1>
+        <div id='wrap'>
+            <h1>DnD Sortable.js</h1>
             <ReactSortable
-                filter='.addImageButtonContainer'
-                dragClass='sortableDrag'
                 list={list}
                 setList={setList}
                 animation={200}
                 easing='ease-out'
             >
                 {list.map(item => (
-                    <div key={item.name} className='draggable'>
+                    <div key={item.id} className='dnd-sortablejs-draggable'>
                         {item.name}
                     </div>
                 ))}

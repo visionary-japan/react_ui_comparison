@@ -7,6 +7,7 @@ import {
 import './DragPointer.css';
 
 interface Props {
+    id: string;
     dragData: DragData;
     dropData: DropData;
     handleDragStart: (id: string) => void;
@@ -22,7 +23,7 @@ export function Drag(props: Props) {
 
     const handlePointerDown = (event: React.PointerEvent) => {
         if (!ref.current) return;
-        ref.current.classList.add('dragging');
+        ref.current.classList.add('dnd-pointer-dragging');
         setIsDragging(true);
         event.currentTarget.setPointerCapture(event.pointerId);
         const rect = event.currentTarget.getBoundingClientRect();
@@ -37,7 +38,7 @@ export function Drag(props: Props) {
         setLocOffset({ x, y });
         setLocRectLast({ x, y });
         setTimeLast(Date.now());
-        props.handleDragStart(props.dropData.id);
+        props.handleDragStart(props.id);
     };
     const handlePointerMove = (event: React.PointerEvent) => {
         if (!(isDragging && ref.current)) return;
@@ -67,14 +68,14 @@ export function Drag(props: Props) {
     const handlePointerUp = () => {
         if (!(isDragging && ref.current)) return;
         setIsDragging(false);
-        ref.current.classList.remove('dragging');
+        ref.current.classList.remove('dnd-pointer-dragging');
     };
 
     return (
         <div
             ref={ref}
-            id={props.dropData.id}
-            className='drag-wrap'
+            id={props.id}
+            className='dnd-pointer-drag-wrap'
             onPointerDown={handlePointerDown}
             onPointerMove={handlePointerMove}
             onPointerUp={handlePointerUp}
