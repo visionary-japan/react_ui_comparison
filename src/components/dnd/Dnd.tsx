@@ -47,7 +47,12 @@ export function Dnd() {
                         (dropWrapStyle.gap as number)),
             ) * 16,
         );
-        document.body.style.height = `${ref.current.clientHeight}px`;
+        console.log(ref.current.style.marginTop);
+        document.body.style.height = `${
+            ref.current.clientHeight +
+            parseInt(ref.current.style.marginTop) +
+            parseInt(ref.current.style.marginBottom)
+        }px`;
     }, []);
 
     const ref = useRef<HTMLDivElement>(null);

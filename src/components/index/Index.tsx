@@ -10,7 +10,7 @@ export function Index() {
             <MemoDefaults
                 title={(import.meta.env.VITE_BASE_PATH as string).toUpperCase()}
             />
-            <nav>
+            <div>
                 <ul>
                     <li>
                         <Link to='/'>Index</Link>
@@ -21,7 +21,7 @@ export function Index() {
                         </li>
                     </ul>
                 </ul>
-            </nav>
+            </div>
         </div>
     );
 }

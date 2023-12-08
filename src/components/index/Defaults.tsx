@@ -14,7 +14,7 @@ export function Defaults(props: Props) {
     };
 
     return (
-        <>
+        <div id='wrap'>
             <div id='head'>
                 <div className='logo-wrap'>
                     <a
@@ -47,6 +47,6 @@ export function Defaults(props: Props) {
                     count is {count}
                 </button>
             </div>
-        </>
+        </div>
     );
 }
