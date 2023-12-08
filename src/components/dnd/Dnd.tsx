@@ -47,7 +47,6 @@ export function Dnd() {
                         (dropWrapStyle.gap as number)),
             ) * 16,
         );
-        document.body.style.height = `${ref.current.clientHeight}px`;
         // TODO Refは依存配列に含めなくて良いのに警告が出てしまう
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
