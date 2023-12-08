@@ -37,7 +37,7 @@ export function Dnd() {
         if (!ref.current) return;
         setDragIndex(-1);
         setDragData(dragDataInit);
-        // TODO 1つ余分にGapを含むせいかキレイにならないことがある
+        // TODO 1つ余分にGapを含むせいかキレイな16行にならないことがある
         setDropAmount(
             Math.floor(
                 (ref.current.clientWidth -
@@ -47,6 +47,7 @@ export function Dnd() {
                         (dropWrapStyle.gap as number)),
             ) * 16,
         );
+        document.body.style.height = `${ref.current.clientHeight}px`;
         // TODO Refは依存配列に含めなくて良いのに警告が出てしまう
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
@@ -55,7 +56,7 @@ export function Dnd() {
         useResizeObserver(handleResize);
 
     return (
-        <>
+        <div ref={ref} id='wrap'>
             <div id='drop-wrap' style={dropWrapStyle}>
                 {Array.from({ length: dropAmount }, (_, i) => (
                     <MemoDrop
@@ -74,7 +75,6 @@ export function Dnd() {
                     handleDrag={handleDrag}
                 />
             ))}
-            <div ref={ref} id='overlay' />
-        </>
+        </div>
     );
 }
