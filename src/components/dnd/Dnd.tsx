@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import { useResizeObserver } from '../../hooks/useDivResizeObserver.tsx';
 import './Dnd.css';
 import { Drag } from './Drag.tsx';
@@ -47,16 +47,15 @@ export function Dnd() {
                         (dropWrapStyle.gap as number)),
             ) * 16,
         );
-        // TODO Refは依存配列に含めなくて良いのに警告が出てしまう
-        // eslint-disable-next-line react-hooks/exhaustive-deps
+        document.body.style.height = `${ref.current.clientHeight}px`;
     }, []);
 
-    const ref: React.RefObject<HTMLDivElement> =
-        useResizeObserver(handleResize);
+    const ref = useRef<HTMLDivElement>(null);
+    useResizeObserver(ref, handleResize);
 
     return (
-        <div ref={ref} id='wrap'>
-            <div id='drop-wrap' style={dropWrapStyle}>
+        <div id='wrap'>
+            <div ref={ref} id='drop-wrap' style={dropWrapStyle}>
                 {Array.from({ length: dropAmount }, (_, i) => (
                     <MemoDrop
                         key={`${i}`}

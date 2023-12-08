@@ -1,15 +1,12 @@
-import { useEffect, useRef } from 'react';
+import { RefObject, useEffect } from 'react';
 
-export const useResizeObserver = (
-    callback: (entries: ResizeObserverEntry[]) => void,
-): React.RefObject<HTMLDivElement> => {
-    const ref = useRef<HTMLDivElement>(null);
-
+export function useResizeObserver<T extends Element>(
+    ref: RefObject<T>,
+    callback: ResizeObserverCallback,
+) {
     useEffect(() => {
-        const resizeObzerver = new ResizeObserver(entries => callback(entries));
+        const resizeObzerver = new ResizeObserver(callback);
         ref.current && resizeObzerver.observe(ref.current);
         return () => resizeObzerver.disconnect();
-    }, [callback]);
-
-    return ref;
-};
+    }, [ref, callback]);
+}
