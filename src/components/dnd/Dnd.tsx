@@ -37,14 +37,16 @@ export function Dnd() {
         if (!ref.current) return;
         setDragIndex(-1);
         setDragData(dragDataInit);
-        // TODO 1つ余分にGapを含むせいかキレイな16行にならないことがある
         setDropAmount(
             Math.floor(
                 (ref.current.clientWidth -
-                    (dropWrapStyle.margin as number) * 2) /
-                    ((dropStyle.width as number) +
-                        (dropStyle.borderWidth as number) * 2 +
-                        (dropWrapStyle.gap as number)),
+                    parseFloat(ref.current.style.marginLeft) -
+                    parseFloat(ref.current.style.marginRight) +
+                    parseFloat(dropWrapStyle.gap as string)) /
+                    (parseFloat(dropStyle.width as string) +
+                        parseFloat(dropStyle.borderWidth as string) * 2 +
+                        parseFloat(dropWrapStyle.gap as string)) +
+                    0.25, // TODO なぜかこの +0.25 のおかげでキレイになってるけど、マジで意味わからん
             ) * 16,
         );
         document.body.style.height = `${

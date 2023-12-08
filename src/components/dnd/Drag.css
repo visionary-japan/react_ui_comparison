@@ -18,7 +18,7 @@
 #cursor {
   /* 位置 */
   top: 100px;
-  left: 100px;
+  left: 20%;
 
   /* サイズ */
   width: 96px;
@@ -35,7 +35,7 @@
 #center {
   /* 位置 */
   top: 200px;
-  left: 200px;
+  left: 40%;
 
   /* サイズ */
   width: 96px;
@@ -71,10 +71,9 @@
 
 /* 03 */
 #percent {
-  top: 300px;
-
   /* 位置 */
-  left: 300px;
+  top: 300px;
+  left: 60%;
 
   /* サイズ */
   width: 96px;
@@ -95,10 +94,9 @@
 /* 04 */
 
 #hotspot {
-  top: 400px;
-
   /* 位置 */
-  left: 100px;
+  top: 400px;
+  left: 20%;
 
   /* サイズ */
   width: 96px;
@@ -124,10 +122,9 @@
 
 /* 05 */
 #distance {
-  top: 500px;
-
   /* 位置 */
-  left: 200px;
+  top: 500px;
+  left: 40%;
 
   /* サイズ */
   width: 96px;
@@ -146,10 +143,9 @@
 
 /* 06 */
 #velocity {
-  top: 600px;
-
   /* 位置 */
-  left: 300px;
+  top: 600px;
+  left: 60%;
 
   /* サイズ */
   width: 48px;
