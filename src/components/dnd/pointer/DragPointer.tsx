@@ -1,6 +1,10 @@
 import React, { useRef, useState } from 'react';
-import './Drag.css';
-import { DragData, DropData, location } from './configs';
+import {
+    DragData,
+    DropData,
+    location,
+} from '../../../pages/dnd/pointer/configs';
+import './DragPointer.css';
 
 interface Props {
     dragData: DragData;

@@ -1,0 +1,14 @@
+.button {
+  /*  variantの値によらず、Buttonコンポーネント共通のスタイル */
+  border-radius: 4px;
+}
+
+.button[data-variant="primary"] {
+  /*  variant="primary"のときのスタイル */
+  color: white;
+}
+
+.button[data-variant="secondary"] {
+  /*  variant="secondary"のときのスタイル */
+  color: white;
+}

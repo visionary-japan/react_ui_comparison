@@ -1,9 +1,9 @@
 /* eslint-disable react/prop-types */
 import React, { useCallback, useRef, useState } from 'react';
-import { useResizeObserver } from '../../hooks/useDivResizeObserver.tsx';
-import './Dnd.css';
-import { Drag } from './Drag.tsx';
-import { Drop } from './Drop.tsx';
+import { Drag } from '../../../components/dnd/pointer/DragPointer.tsx';
+import { Drop } from '../../../components/dnd/pointer/DropPointer.tsx';
+import { useResizeObserver } from '../../../hooks/useDivResizeObserver.tsx';
+import './DndPointer.css';
 import {
     DragData,
     dragDataInit,
@@ -15,7 +15,7 @@ import {
 const MemoDrag = React.memo(Drag);
 const MemoDrop = React.memo(Drop);
 
-export function Dnd() {
+export function DndPointer() {
     const [dragIndex, setDragIndex] = useState<number>(-1);
     const [dragData, setDragData] = useState<DragData>(dragDataInit);
     const [dropAmount, setDropAmount] = useState<number>(120);
@@ -47,7 +47,7 @@ export function Dnd() {
                         parseFloat(dropStyle.borderWidth as string) * 2 +
                         parseFloat(dropWrapStyle.gap as string)) +
                     0.25, // TODO なぜかこの +0.25 のおかげでキレイになってるけど、マジで意味わからん
-            ) * 16,
+            ) * 20,
         );
         document.body.style.height = `${
             ref.current.clientHeight +
