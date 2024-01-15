@@ -1,3 +1,7 @@
+# 配置
+
+https://visionary-japan.github.io/react_ui_comparison/
+
 # 使用方法
 
 ## DnD
