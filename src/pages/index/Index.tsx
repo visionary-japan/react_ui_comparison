@@ -35,6 +35,9 @@ export function Index() {
                         <li>
                             <Link to='/btn'>Btn</Link>
                         </li>
+                        <li>
+                            <Link to='/query'>Query</Link>
+                        </li>
                     </ul>
                 </ul>
             </div>
