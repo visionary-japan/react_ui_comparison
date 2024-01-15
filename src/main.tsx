@@ -8,7 +8,7 @@ import { DndDnd } from './pages/dnd/dnd/DndDnd.tsx';
 import { DndPointer } from './pages/dnd/pointer/DndPointer.tsx';
 import { DndSortablejs } from './pages/dnd/sortablejs/DndSortablejs.tsx';
 import { Index } from './pages/index/Index.tsx';
-import { Query } from './pages/query/query.tsx';
+import { Query } from './pages/query/Query.tsx';
 
 reactDom.createRoot(document.getElementById('root') as HTMLElement).render(
     <React.StrictMode>
