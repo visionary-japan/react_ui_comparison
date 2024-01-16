@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 export function useQuery() {
@@ -6,16 +6,30 @@ export function useQuery() {
     const [str, setStr] = useState<string>('');
     const [num, setNum] = useState<number>(0);
 
+    const getParam = useCallback(
+        (key: string) => {
+            return searchParams.get(key) || '';
+        },
+        [searchParams],
+    );
+
+    const castStrToNum = (s: string) => {
+        switch (s) {
+            case 'NaN':
+                return NaN;
+            default:
+                return Number(s);
+        }
+    };
+
     useEffect(() => {
-        const newStr = searchParams.get('str');
-        const newNum = searchParams.get('num');
-        setStr(newStr || '');
-        setNum(Number(newNum) || 0); // TODO ただのNumberキャストはどうなん
-    }, [searchParams]); // TODO strとnumでのみを追跡すればいいはず
+        setStr(getParam('str'));
+        setNum(castStrToNum(getParam('num')));
+    }, [getParam]);
 
     const onChangeParams = (newStr: string, newNum: number) => {
         setSearchParams({ str: newStr, num: String(newNum) });
     };
 
-    return { str, num, onChangeParams };
+    return { str, num, onChangeParams, castStrToNum };
 }
