@@ -1,15 +1,22 @@
 import clsx from 'clsx';
-import { cloneElement, forwardRef, isValidElement } from 'react';
+import {
+    type ComponentPropsWithRef,
+    type FC,
+    type ReactElement,
+    cloneElement,
+    forwardRef,
+    isValidElement,
+} from 'react';
 
 // https://zenn.dev/kiyoshiro9446/scraps/46b4e4be23bcde
 export type ButtonProps = {
     variant?: 'primary' | 'secondary';
     disabled?: boolean;
-    leftIcon?: React.ReactElement;
-    rightIcon?: React.ReactElement;
+    leftIcon?: ReactElement;
+    rightIcon?: ReactElement;
 } & (
-    | { asChild: true; children: React.ReactElement }
-    | ({ asChild?: false } & React.ComponentPropsWithRef<'button'>)
+    | { asChild: true; children: ReactElement }
+    | ({ asChild?: false } & ComponentPropsWithRef<'button'>)
 );
 
 const ButtonZenn = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
@@ -53,6 +60,6 @@ const ButtonZenn = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
         shouldActAsChild ? children.props.children : children,
         rightIcon ? <span>{rightIcon}</span> : null,
     );
-}) as React.FC<ButtonProps>;
+}) as FC<ButtonProps>;
 
 export default ButtonZenn;

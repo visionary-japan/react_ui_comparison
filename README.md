@@ -1,7 +1,3 @@
-# 配置
-
-https://visionary-japan.github.io/react_ui_comparison/
-
 # 使用方法
 
 ## DnD
@@ -9,6 +5,8 @@ https://visionary-japan.github.io/react_ui_comparison/
 以下の記事を参照:
 
 https://qiita.com/nyarlathotep/private/451181c4f2e53a8e4298
+
+---
 
 # React + TypeScript + Vite
 
@@ -41,3 +39,37 @@ export default {
 - Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
 - Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
 
+---
+
+# 環境構築
+
+## ライブラリ
+
+## VSCODE
+
+### 拡張機能
+
+#### 必須
+
+`.vscode\extensions.json`
+
+- JavaScript and TypeScript Nightly
+- Biome
+
+## 起動
+
+```
+npm run dev
+```
+
+```
+num run build
+```
+
+## 配置
+
+Push したら Git が勝手にやってくれる
+
+`.github\workflows\pages.yml`
+
+https://visionary-japan.github.io/react_ui_comparison/

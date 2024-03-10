@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Defaults } from '../../components/default/Vite';
+import { Vite } from '../../components/Vite/Vite';
 
-const MemoDefaults = React.memo(Defaults);
+const MemoDefaults = React.memo(Vite);
 
 export function Index() {
     return (

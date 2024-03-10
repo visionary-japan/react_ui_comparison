@@ -21,8 +21,8 @@
 .def-vite-logo {
   height: 6em;
   padding: 1.5em;
-  will-change: filter;
   transition: filter 300ms;
+  will-change: filter;
 }
 
 .def-vite-logo:hover {
@@ -66,7 +66,8 @@
 }
 
 .def-vite-button {
-  padding: 0.6em 1.2em;
+  width: 128px;
+  height: 48px;
   font-family: inherit;
   font-size: 1em;
   font-weight: 500;
@@ -84,5 +85,5 @@
 
 .def-vite-button:focus,
 .def-vite-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  border-color: #fff;
 }

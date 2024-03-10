@@ -1,16 +1,32 @@
 import { useState } from 'react';
 import viteLogo from '/vite.svg';
 import reactLogo from '../../assets/react.svg';
+import { Button } from '../button/Button';
 import './Vite.css';
 
 interface Props {
     title: string;
 }
-export function Defaults(props: Props) {
+export function Vite(props: Props) {
     const [count, setCount] = useState<number>(0);
+    const [isButtonHover, setIsButtonHover] = useState<boolean>(false);
+    const [isButtonFocus, setIsButtonFocus] = useState<boolean>(false);
 
     const handleClickButton = () => {
         setCount(count => count + 1);
+    };
+
+    const handleButtonEnter = () => {
+        setIsButtonHover(true);
+    };
+    const handleButtonLeave = () => {
+        setIsButtonHover(false);
+    };
+    const handleButtonFocus = () => {
+        setIsButtonFocus(true);
+    };
+    const handleButtonBlur = () => {
+        setIsButtonFocus(false);
     };
 
     return (
@@ -56,6 +72,20 @@ export function Defaults(props: Props) {
                 >
                     count is {count}
                 </button>
+            </div>
+            <div className='def-vite-card'>
+                <Button
+                    type='button'
+                    onClick={handleClickButton}
+                    isHover={isButtonHover}
+                    isFocus={isButtonFocus}
+                    onPointerEnter={handleButtonEnter}
+                    onPointerLeave={handleButtonLeave}
+                    onFocus={handleButtonFocus}
+                    onBlur={handleButtonBlur}
+                >
+                    count is {count}
+                </Button>
             </div>
         </>
     );
