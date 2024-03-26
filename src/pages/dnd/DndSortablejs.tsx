@@ -1,6 +1,6 @@
+import stylex from '@stylexjs/stylex';
 import React from 'react';
 import { ReactSortable } from 'react-sortablejs';
-import './DndSortablejs.css';
 
 const draggableList = [
     {
@@ -17,11 +17,27 @@ const draggableList = [
     },
 ];
 
+const styles = stylex.create({
+    base: {
+        minWidth: 180,
+        padding: '10px 15px',
+        margin: 'auto',
+        color: 'white',
+        cursor: 'pointer',
+        background: 'rgb(71 119 214)',
+        borderRadius: 6,
+        marginBottom: {
+            default: 8,
+            // ':last-child': 8,
+        },
+    },
+});
+
 export function DndSortablejs() {
     const [list, setList] = React.useState(draggableList);
 
     return (
-        <div id='wrap'>
+        <>
             <h1>DnD Sortable.js</h1>
             <ReactSortable
                 list={list}
@@ -30,11 +46,11 @@ export function DndSortablejs() {
                 easing='ease-out'
             >
                 {list.map(item => (
-                    <div key={item.id} className='dnd-sortablejs-draggable'>
+                    <div key={item.id} {...stylex.props(styles.base)}>
                         {item.name}
                     </div>
                 ))}
             </ReactSortable>
-        </div>
+        </>
     );
 }

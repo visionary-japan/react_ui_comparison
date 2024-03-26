@@ -56,12 +56,12 @@
 }
 
 .def-vite-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+  font-size: 4em;
+  line-height: 2;
 }
 
 .def-vite-card {
-  padding: 2em;
+  padding: 1em;
   text-align: center;
 }
 
@@ -86,4 +86,16 @@
 .def-vite-button:focus,
 .def-vite-button:focus-visible {
   border-color: #fff;
+}
+
+@media (prefers-color-scheme: dark) {
+  .def-vite-button {
+    background-color: #1a1a1a;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  .def-vite-button {
+    background-color: #f9f9f9;
+  }
 }

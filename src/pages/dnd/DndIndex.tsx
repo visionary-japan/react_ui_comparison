@@ -8,7 +8,7 @@ export function DndIndex() {
                     <Link to='/dnd/pointer'>DnD Pointer</Link>
                 </li>
                 <li>
-                    <Link to='/dnd/dnd'>DnD HTML5 API</Link>
+                    <Link to='/dnd/htmlapi'>DnD HTML5 API</Link>
                 </li>
                 <li>
                     <Link to='/dnd/sortablejs'>DnD Sortable.js</Link>

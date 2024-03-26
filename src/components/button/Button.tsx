@@ -1,11 +1,8 @@
 import * as stylex from '@stylexjs/stylex';
 import type { ButtonHTMLAttributes, FC } from 'react';
 
-// https://zenn.dev/u_10/articles/8c3cda00a701e9
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
     size?: 'small' | 'medium' | 'large';
-    isHover: boolean;
-    isFocus: boolean;
 }
 
 const styles = stylex.create({
@@ -13,18 +10,21 @@ const styles = stylex.create({
         fontFamily: 'inherit',
         color: '#646cff',
         cursor: 'pointer',
-        backgroundColor: '#1a1a1a',
-        border: '1px solid transparent',
-        borderRadius: '8px',
+        backgroundColor: {
+            default: '#1a1a1a',
+            '@media (prefers-color-scheme: dark)': '#1a1a1a',
+            '@media (prefers-color-scheme: light)': '#f9f9f9',
+        },
+        borderWidth: 1,
+        borderStyle: 'solid',
+        borderColor: {
+            default: 'transparent',
+            ':hover': '#646cff',
+            ':focus': '#eee',
+        },
+        borderRadius: 8,
         transition: 'border-color 0.25s',
         willChange: 'border-color',
-    },
-    hover: {
-        borderColor: '#646cff',
-    },
-    focus: {
-        borderColor: '#fff',
-        // outline: '4px auto -webkit-focus-ring-color',
     },
 });
 
@@ -49,24 +49,13 @@ const sizes = stylex.create({
     },
 });
 
-export const Button: FC<ButtonProps> = ({
-    type,
+export const Button: FC<Props> = ({
+    type = 'button',
     size = 'medium',
-    isHover,
-    isFocus,
     children,
     ...props
 }) => (
-    <button
-        type={type} // submitとresetを許可しないなら固定でbuttonにすべき
-        {...stylex.props(
-            styles.base,
-            isHover && styles.hover,
-            isFocus && styles.focus,
-            sizes[size],
-        )}
-        {...props}
-    >
+    <button type={type} {...stylex.props(styles.base, sizes[size])} {...props}>
         {children}
     </button>
 );

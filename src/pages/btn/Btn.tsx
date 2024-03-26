@@ -6,6 +6,11 @@ export function Btn() {
         <div id='wrap'>
             <div>
                 <h1>Zenn Button</h1>
+                <p>
+                    <a href='https://zenn.dev/kiyoshiro9446/scraps/46b4e4be23bcde'>
+                        https://zenn.dev/kiyoshiro9446/scraps/46b4e4be23bcde
+                    </a>
+                </p>
                 <div>
                     <h2>普通にbuttonタグとして使う</h2>
                     <ButtonZenn variant='primary'>普通のボタン</ButtonZenn>

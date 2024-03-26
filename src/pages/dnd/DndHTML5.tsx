@@ -1,42 +1,37 @@
+import type React from 'react';
 import { useState } from 'react';
 
-export function DndDnd() {
+export function DndHTML5() {
     const [isDragging, setIsDragging] = useState(false);
     const [isDroppable, setIsDroppable] = useState(false);
 
     const onDragStart = (e: React.DragEvent<HTMLDivElement>) => {
-        console.log('non drag start', e);
         setIsDragging(true);
-        // e.dataTransfer.setData('text/plain', e.currentTarget.id);
-        // e.dataTransfer.dropEffect = 'move';
+        e.dataTransfer.setData('text/plain', e.currentTarget.id);
+        e.dataTransfer.dropEffect = 'move';
     };
-    const onDragEnd = (e: React.DragEvent<HTMLDivElement>) => {
-        console.log('on drag end', e);
+    const onDragEnd = () => {
         setIsDragging(false);
     };
 
     const onDragEnter = (e: React.DragEvent<HTMLDivElement>) => {
-        console.log('on drag enter', e);
         if (e.currentTarget.id === 'drop-area') {
             setIsDroppable(true);
         }
     };
     const onDragLeave = (e: React.DragEvent<HTMLDivElement>) => {
-        // 放しても実行される
-        console.log('on drag leave', e);
         if (e.currentTarget.id === 'drop-area') {
             setIsDroppable(false);
         }
     };
     const onDrop = (e: React.DragEvent<HTMLDivElement>) => {
-        console.log('on drop', e);
         if (e.currentTarget.id === 'drop-area') {
             setIsDroppable(false);
         }
     };
 
     return (
-        <div id='dnd-dnd-wrap'>
+        <>
             <h1>DnD HTML5 API</h1>
             <div
                 style={{
@@ -67,6 +62,6 @@ export function DndDnd() {
             >
                 drop area
             </div>
-        </div>
+        </>
     );
 }

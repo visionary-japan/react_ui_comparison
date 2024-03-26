@@ -1,10 +1,24 @@
-import React, { useRef, useState } from 'react';
-import {
-    DragData,
-    DropData,
-    location,
-} from '../../../pages/dnd/pointer/configs';
-import './DragPointer.css';
+import stylex from '@stylexjs/stylex';
+import type { FC, PointerEvent } from 'react';
+import { memo, useRef, useState } from 'react';
+import type { Location } from '../../@types';
+import type { DragData, DropData } from '../../pages/dnd/config';
+
+const styles = stylex.create({
+    base: {
+        position: 'absolute',
+        touchAction: 'none',
+        width: 96,
+        height: 96,
+        cursor: 'pointer',
+        opacity: 0.75,
+        willChange: 'left, top, filter, opacity',
+    },
+    dragging: {
+        filter: 'drop-shadow(0 0 16px black)',
+        opacity: 0.9,
+    },
+});
 
 interface Props {
     id: string;
@@ -13,17 +27,17 @@ interface Props {
     handleDragStart: (id: string) => void;
     handleDrag: (props: DragData) => void;
 }
-export function Drag(props: Props) {
+
+const Drag: FC<Props> = props => {
     const [isDragging, setIsDragging] = useState<boolean>(false);
-    const [locOffset, setLocOffset] = useState<location>({ x: 0, y: 0 });
-    const [locRectLast, setLocRectLast] = useState<location>({ x: 0, y: 0 });
+    const [locOffset, setLocOffset] = useState<Location>({ x: 0, y: 0 });
+    const [locRectLast, setLocRectLast] = useState<Location>({ x: 0, y: 0 });
     const [timeLast, setTimeLast] = useState<number>(0);
 
     const ref = useRef<HTMLDivElement>(null);
 
-    const handlePointerDown = (event: React.PointerEvent) => {
+    const handlePointerDown = (event: PointerEvent) => {
         if (!ref.current) return;
-        ref.current.classList.add('dnd-pointer-dragging');
         setIsDragging(true);
         event.currentTarget.setPointerCapture(event.pointerId);
         const rect = event.currentTarget.getBoundingClientRect();
@@ -40,7 +54,7 @@ export function Drag(props: Props) {
         setTimeLast(Date.now());
         props.handleDragStart(props.id);
     };
-    const handlePointerMove = (event: React.PointerEvent) => {
+    const handlePointerMove = (event: PointerEvent) => {
         if (!(isDragging && ref.current)) return;
         const x = event.clientX + window.scrollX - locOffset.x;
         const y = event.clientY + window.scrollY - locOffset.y;
@@ -52,10 +66,7 @@ export function Drag(props: Props) {
         props.handleDrag({
             locScroll: { x: window.scrollX, y: window.scrollY },
             locClient: { x: event.clientX, y: event.clientY },
-            locRect: {
-                x,
-                y,
-            },
+            locRect: { x, y },
             sizRect: rect,
             locNext: {
                 x: x + (x - locRectLast.x) / timeDelta,
@@ -68,17 +79,24 @@ export function Drag(props: Props) {
     const handlePointerUp = () => {
         if (!(isDragging && ref.current)) return;
         setIsDragging(false);
-        ref.current.classList.remove('dnd-pointer-dragging');
     };
 
     return (
         <div
             ref={ref}
-            id={props.id}
             className='dnd-pointer-drag-wrap'
             onPointerDown={handlePointerDown}
             onPointerMove={handlePointerMove}
             onPointerUp={handlePointerUp}
+            {...stylex.props(
+                styles.base,
+                isDragging && styles.dragging,
+                props.dropData.styles.base,
+                isDragging && props.dropData.styles.dragging,
+                props.dropData.styles.image,
+            )}
         />
     );
-}
+};
+
+export const PointerDrag = memo(Drag);
