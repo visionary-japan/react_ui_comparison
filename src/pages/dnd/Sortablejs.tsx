@@ -1,6 +1,7 @@
 import stylex from '@stylexjs/stylex';
-import React from 'react';
+import React, { type FC, memo } from 'react';
 import { ReactSortable } from 'react-sortablejs';
+import { H1 } from '../../components/heading/H1';
 
 const draggableList = [
     {
@@ -28,17 +29,17 @@ const styles = stylex.create({
         borderRadius: 6,
         marginBottom: {
             default: 8,
-            // ':last-child': 8,
+            ':last-child': 0,
         },
     },
 });
 
-export function DndSortablejs() {
+const Component: FC = () => {
     const [list, setList] = React.useState(draggableList);
 
     return (
         <>
-            <h1>DnD Sortable.js</h1>
+            <H1>DnD Sortable.js</H1>
             <ReactSortable
                 list={list}
                 setList={setList}
@@ -53,4 +54,6 @@ export function DndSortablejs() {
             </ReactSortable>
         </>
     );
-}
+};
+
+export const Sortablejs = memo(Component);

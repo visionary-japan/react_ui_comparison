@@ -53,9 +53,9 @@ export const Button: FC<Props> = ({
     type = 'button',
     size = 'medium',
     children,
-    ...props
+    ...attrs
 }) => (
-    <button type={type} {...stylex.props(styles.base, sizes[size])} {...props}>
+    <button type={type} {...stylex.props(styles.base, sizes[size])} {...attrs}>
         {children}
     </button>
 );

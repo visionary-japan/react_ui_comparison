@@ -1,5 +1,5 @@
 import * as stylex from '@stylexjs/stylex';
-import { Button } from '../../components/button/Button';
+import { Button } from '../../components/button/ButtonVite';
 import { useQuery } from '../../hooks/useQuery';
 
 const styles = stylex.create({

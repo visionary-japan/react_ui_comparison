@@ -14,6 +14,18 @@
   -moz-osx-font-smoothing: grayscale;
   -webkit-touch-callout: none;
   -webkit-tap-highlight-color: rgb(0 0 0 / 0%);
+
+  --is-mobile: false;
+
+  @media (width <= 540px) {
+    --is-mobile: true;
+  }
+}
+
+@container style(--is-mobile: true) {
+  .is-mobile {
+    background-color: red;
+  }
 }
 
 body {
@@ -25,14 +37,12 @@ body {
 }
 
 img {
-  pointer-events: none;
+  -webkit-user-drag: none;
 }
 
 #root {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  display: grid;
+  place-items: center;
   width: 100vw;
   height: 100%;
 }

@@ -6,6 +6,7 @@ import {
     DROP_WIDTH,
     PointerDrop,
 } from '../../components/dnd/PointerDrop.tsx';
+import { H1 } from '../../components/heading/H1.tsx';
 import { useResizeObserver } from '../../hooks/useDivResizeObserver.tsx';
 import { dragDataInit, dropDatas } from './config/configs.ts';
 import type { DndKeys, DragData } from './config/index';
@@ -28,7 +29,7 @@ const styles = stylex.create({
     },
 });
 
-const Pointer: FC = () => {
+const Component: FC = () => {
     const [dragId, setDragId] = useState<DndKeys | undefined>(undefined);
     const [dragData, setDragData] = useState<DragData>(dragDataInit);
     const [dropAmount, setDropAmount] = useState<number>(120);
@@ -83,8 +84,8 @@ const Pointer: FC = () => {
     useResizeObserver(ref, handleResize);
 
     return (
-        <div id='wrap'>
-            <h1>DnD Pointer</h1>
+        <div>
+            <H1>DnD Pointer</H1>
             <div ref={ref} {...stylex.props(styles.base)}>
                 {Array.from({ length: dropAmount }, (_, i) => (
                     <PointerDrop
@@ -110,4 +111,4 @@ const Pointer: FC = () => {
     );
 };
 
-export const DndPointer = memo(Pointer);
+export const Pointer = memo(Component);

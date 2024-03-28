@@ -1,7 +1,8 @@
 import type React from 'react';
-import { useState } from 'react';
+import { memo, useState } from 'react';
+import { H1 } from '../../components/heading/H1';
 
-export function DndHTML5() {
+const Component = () => {
     const [isDragging, setIsDragging] = useState(false);
     const [isDroppable, setIsDroppable] = useState(false);
 
@@ -32,7 +33,7 @@ export function DndHTML5() {
 
     return (
         <>
-            <h1>DnD HTML5 API</h1>
+            <H1>DnD HTML5 API</H1>
             <div
                 style={{
                     height: 64,
@@ -64,4 +65,6 @@ export function DndHTML5() {
             </div>
         </>
     );
-}
+};
+
+export const HTML5 = memo(Component);
