@@ -4,12 +4,15 @@ import { memo, useRef, useState } from 'react';
 import type { Location } from '../../@types';
 import type { DragData, DropData } from '../../pages/dnd/config';
 
+const width = 72;
+const height = 72;
+
 const styles = stylex.create({
     base: {
         position: 'absolute',
         touchAction: 'none',
-        width: 96,
-        height: 96,
+        width: width,
+        height: height,
         cursor: 'pointer',
         opacity: 0.75,
         willChange: 'left, top, filter, opacity',
@@ -91,9 +94,9 @@ const Drag: FC<Props> = props => {
             {...stylex.props(
                 styles.base,
                 isDragging && styles.dragging,
-                props.dropData.styles.base,
-                isDragging && props.dropData.styles.dragging,
-                props.dropData.styles.image,
+                props.dropData.dragStyles.base,
+                isDragging && props.dropData.dragStyles.dragging,
+                props.dropData.dragStyles.image,
             )}
         />
     );

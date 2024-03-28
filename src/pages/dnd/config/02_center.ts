@@ -1,12 +1,13 @@
 import * as stylex from '@stylexjs/stylex';
 import type { DragData, DropData } from '.';
 
-const styles = stylex.create({
+// ドラッグ要素のスタイル
+const dragStyles = stylex.create({
     base: {
         backgroundColor: 'green',
         top: 200,
         left: '40%',
-        borderRadius: 16,
+        borderRadius: '50%',
         '::before': {
             position: 'absolute',
             content: '',
@@ -30,9 +31,18 @@ const styles = stylex.create({
     image: {},
 });
 
+// ドロップ要素のスタイル
+const dropStyles = stylex.create({
+    over: {
+        borderColor: {
+            '@media (prefers-color-scheme: light)': '#00ff00',
+            '@media (prefers-color-scheme: dark)': '#00ff00',
+        },
+    },
+});
+
 // ドロップ要素
 export const center: DropData = {
-    color: 'green',
     isOver: (props: DragData, dropRect: DOMRect) => {
         const { locScroll, locRect, sizRect } = props;
         if (!(locScroll && locRect && sizRect)) return false;
@@ -45,5 +55,6 @@ export const center: DropData = {
             locScroll.y + dropRect.bottom >= centerY
         );
     },
-    styles,
+    dragStyles,
+    dropStyles,
 };

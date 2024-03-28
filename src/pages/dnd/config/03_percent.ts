@@ -1,7 +1,8 @@
 import * as stylex from '@stylexjs/stylex';
 import type { DragData, DropData } from '.';
 
-const styles = stylex.create({
+// ドラッグ要素のスタイル
+const dragStyles = stylex.create({
     base: {
         top: 300,
         left: '60%',
@@ -20,9 +21,18 @@ const styles = stylex.create({
     image: {},
 });
 
+// ドロップ要素のスタイル
+const dropStyles = stylex.create({
+    over: {
+        borderColor: {
+            '@media (prefers-color-scheme: light)': '#0000ff',
+            '@media (prefers-color-scheme: dark)': '#0000ff',
+        },
+    },
+});
+
 // ドロップ要素
 export const percent: DropData = {
-    color: 'blue',
     isOver: (props: DragData, dropRect: DOMRect) => {
         const { locScroll, locRect, sizRect } = props;
         if (!(locScroll && locRect && sizRect)) return false;
@@ -39,5 +49,6 @@ export const percent: DropData = {
         if (overlapHeight <= 0) return false;
         return overlapWidth * overlapHeight >= dropArea * 0.25;
     },
-    styles,
+    dragStyles,
+    dropStyles,
 };

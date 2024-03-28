@@ -15,9 +15,9 @@ type StyleKeys = 'base' | 'dragging' | 'image';
 
 // ドロップ情報
 export interface DropData {
-    color: string;
     isOver: (dragData: DragData, rectDrop: DOMRect) => boolean;
-    styles: { [key in StyleKeys]: UserAuthoredStyles };
+    dragStyles: { [key in StyleKeys]: UserAuthoredStyles };
+    dropStyles: { over: UserAuthoredStyles };
 }
 
 export type DndKeys =

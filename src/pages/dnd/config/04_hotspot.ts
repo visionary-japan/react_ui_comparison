@@ -1,7 +1,8 @@
 import * as stylex from '@stylexjs/stylex';
 import type { DragData, DropData } from '.';
 
-const styles = stylex.create({
+// ドラッグ要素のスタイル
+const dragStyles = stylex.create({
     base: {
         top: 400,
         left: '20%',
@@ -28,9 +29,18 @@ const styles = stylex.create({
     },
 });
 
+// ドロップ要素のスタイル
+const dropStyles = stylex.create({
+    over: {
+        borderColor: {
+            '@media (prefers-color-scheme: light)': '#ccd3d9',
+            '@media (prefers-color-scheme: dark)': '#acb3b9',
+        },
+    },
+});
+
 // ドロップ要素
 export const hotspot: DropData = {
-    color: 'white',
     isOver: (props: DragData, dropRect: DOMRect) => {
         const { locScroll, locRect, sizRect } = props;
         if (!(locScroll && locRect && sizRect)) return false;
@@ -43,5 +53,6 @@ export const hotspot: DropData = {
             locScroll.y + dropRect.bottom >= topY
         );
     },
-    styles,
+    dragStyles,
+    dropStyles,
 };

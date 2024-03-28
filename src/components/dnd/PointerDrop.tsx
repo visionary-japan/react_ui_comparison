@@ -7,23 +7,19 @@ interface Props {
     dropData: DropData | undefined;
 }
 
-export const DropWidth = 60;
-export const DropHeight = 60;
-export const DropBorderWidth = 2;
+export const DROP_WIDTH = 60;
+export const DROP_HEIGHT = 60;
+export const DROP_BORDER_WIDTH = 2;
 
 const styles = stylex.create({
     base: {
-        width: DropWidth,
-        height: DropHeight,
-        borderWidth: DropBorderWidth,
+        width: DROP_WIDTH,
+        height: DROP_HEIGHT,
+        borderWidth: DROP_BORDER_WIDTH,
         borderStyle: 'dashed',
-        willChange: 'border-style',
-        borderColor: 'gray',
+        borderColor: '#aaaaaa',
+        willChange: 'border-color',
     },
-    over: (color: string | undefined) => ({
-        filter: 'brightness(2.5)',
-        borderColor: color,
-    }),
 });
 
 const Drop: FC<Props> = props => {
@@ -50,7 +46,7 @@ const Drop: FC<Props> = props => {
             ref={ref}
             {...stylex.props(
                 styles.base,
-                isOver && styles.over(props.dropData?.color),
+                isOver && props.dropData?.dropStyles.over,
             )}
         />
     );

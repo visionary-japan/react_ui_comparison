@@ -2,29 +2,29 @@ import stylex from '@stylexjs/stylex';
 import { type FC, memo, useCallback, useEffect, useRef, useState } from 'react';
 import { PointerDrag } from '../../components/dnd/PointerDrag.tsx';
 import {
-    DropBorderWidth,
-    DropWidth,
+    DROP_BORDER_WIDTH,
+    DROP_WIDTH,
     PointerDrop,
 } from '../../components/dnd/PointerDrop.tsx';
 import { useResizeObserver } from '../../hooks/useDivResizeObserver.tsx';
 import { dragDataInit, dropDatas } from './config/configs.ts';
 import type { DndKeys, DragData } from './config/index';
 
-const margin = 8;
-const gap = 2;
-const columns = 30;
+const DROP_MARGIN = 8;
+const DROP_GAP = 2;
+const DROP_COLUMNS = 30;
 
 const styles = stylex.create({
     base: {
         position: 'absolute',
         top: 0,
         left: 0,
-        margin: margin,
+        margin: DROP_MARGIN,
         display: 'flex',
         flexWrap: 'wrap',
         alignItems: 'center',
         justifyContent: 'center',
-        gap: gap,
+        gap: DROP_GAP,
     },
 });
 
@@ -61,10 +61,10 @@ const Pointer: FC = () => {
                 (ref.current.clientWidth -
                     Number(ref.current.style.marginLeft) -
                     Number(ref.current.style.marginRight) +
-                    gap) /
-                    (DropWidth + DropBorderWidth * 2 + gap) +
+                    DROP_GAP) /
+                    (DROP_WIDTH + DROP_BORDER_WIDTH * 2 + DROP_GAP) +
                     0.25, // TODO なぜかこの +0.25 のおかげでキレイになってるけど、マジで意味わからん
-            ) * columns,
+            ) * DROP_COLUMNS,
         );
         document.body.style.height = `${
             ref.current.clientHeight +
