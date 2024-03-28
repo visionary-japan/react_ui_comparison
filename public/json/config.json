@@ -1,0 +1,12 @@
+{
+    "json1": [
+        { "keyString": "jsonString1-1" },
+        { "keyString": "jsonString1-2" },
+        { "keyString": "jsonString1-3" }
+    ],
+    "json2": [
+        { "keyString": "jsonString2-1" },
+        { "keyString": "jsonString2-2" },
+        { "keyString": "jsonString2-3" }
+    ]
+}

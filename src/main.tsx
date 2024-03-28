@@ -8,7 +8,7 @@ import { HTML5 } from './pages/dnd/HTML5.tsx';
 import { Pointer } from './pages/dnd/Pointer.tsx';
 import { Sortablejs } from './pages/dnd/Sortablejs.tsx';
 import { DndIndex } from './pages/dnd/_DndIndex.tsx';
-import { Js } from './pages/public/Js.tsx';
+import { Public } from './pages/public/Public.tsx';
 import { Query } from './pages/query/Query.tsx';
 
 reactDom.createRoot(document.getElementById('root') as HTMLElement).render(
@@ -22,7 +22,7 @@ reactDom.createRoot(document.getElementById('root') as HTMLElement).render(
                 <Route path='dnd/pointer' element={<Pointer />} />
                 <Route path='dnd/sortablejs' element={<Sortablejs />} />
                 <Route path='query' element={<Query />} />
-                <Route path='public' element={<Js />} />
+                <Route path='public' element={<Public />} />
                 <Route path='*' element={<Navigate to='/' />} />
             </Routes>
         </BrowserRouter>

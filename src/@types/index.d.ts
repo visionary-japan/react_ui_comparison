@@ -27,3 +27,7 @@ declare global {
 declare module '/public/js/configs.js' {
     export const EXPORT_CONFIGS: Configs;
 }
+
+export interface JsonConfigs {
+    [id: string]: Config[];
+}
