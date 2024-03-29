@@ -7,7 +7,6 @@ import { FlexCenter } from '../components/div/FlexCenter';
 import { H1 } from '../components/heading/H1';
 import { Logo } from '../components/image/Logo';
 import { Links } from '../components/link/Links';
-import './Index.css';
 
 const viteLogoStyles = stylex.create({
     img: {
@@ -44,16 +43,7 @@ const Component: FC = () => {
                 />
             </FlexCenter>
             <H1>{(import.meta.env.VITE_BASE_PATH as string).toUpperCase()}</H1>
-            <div className='def-vite-card'>
-                <button
-                    type='button'
-                    className='def-vite-button'
-                    onClick={handleClickButton}
-                >
-                    count is {count}
-                </button>
-            </div>
-            <div className='def-vite-card'>
+            <div style={{ padding: '1em', textAlign: 'center' }}>
                 <Button type='button' onClick={handleClickButton}>
                     count is {count}
                 </Button>

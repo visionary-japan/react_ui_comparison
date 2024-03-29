@@ -1,5 +1,5 @@
-import type { UserAuthoredStyles } from '@stylexjs/stylex';
 import stylex from '@stylexjs/stylex';
+import type { UserAuthoredStyles } from '@stylexjs/stylex';
 import { type FC, memo } from 'react';
 
 interface Props {

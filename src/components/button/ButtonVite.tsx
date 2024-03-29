@@ -21,6 +21,7 @@ const styles = stylex.create({
             default: 'transparent',
             ':hover': '#646cff',
             ':focus': '#eee',
+            ':focus-visible': '#eee',
         },
         borderRadius: 8,
         transition: 'border-color 0.25s',
