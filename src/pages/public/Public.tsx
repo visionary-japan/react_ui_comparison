@@ -1,5 +1,4 @@
 import { type FC, memo, useEffect, useState } from 'react';
-import { EXPORT_CONFIGS } from '/public/js/configs.js';
 import type { JsonConfigs } from '../../@types';
 import { H1 } from '../../components/heading/H1';
 
@@ -20,11 +19,6 @@ const Component: FC = () => {
             {windowConfigs &&
                 Object.keys(windowConfigs).map(key => (
                     <div key={key}>{windowConfigs?.[key]?.keyString}</div>
-                ))}
-            <H1>JS: EXPORT_CONFIGS</H1>
-            {EXPORT_CONFIGS &&
-                Object.keys(EXPORT_CONFIGS).map(key => (
-                    <div key={key}>{EXPORT_CONFIGS?.[key]?.keyString}</div>
                 ))}
             <H1>JSON: FETCH</H1>
             {json &&

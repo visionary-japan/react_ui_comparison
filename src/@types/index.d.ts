@@ -24,7 +24,7 @@ declare global {
     }
 }
 
-declare module '/public/js/configs.js' {
+declare module '/js/configs.js' {
     export const EXPORT_CONFIGS: Configs;
 }
 
