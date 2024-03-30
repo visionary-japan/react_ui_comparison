@@ -1,5 +1,5 @@
 import * as stylex from '@stylexjs/stylex';
-import type { ButtonHTMLAttributes, FC } from 'react';
+import { type ButtonHTMLAttributes, type FC, memo } from 'react';
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
     size?: 'small' | 'medium' | 'large';
@@ -50,7 +50,7 @@ const sizes = stylex.create({
     },
 });
 
-export const Button: FC<Props> = ({
+const Component: FC<Props> = ({
     type = 'button',
     size = 'medium',
     children,
@@ -60,3 +60,5 @@ export const Button: FC<Props> = ({
         {children}
     </button>
 );
+
+export const ButtonVite = memo(Component);

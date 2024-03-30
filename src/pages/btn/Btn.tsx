@@ -1,7 +1,9 @@
 import { Link } from 'react-router-dom';
-import { Button } from '../../components/button/ButtonVite';
-import ButtonZenn from '../../components/button/ButtonZenn';
+import { ButtonVite } from '../../components/button/ButtonVite';
+import { ButtonZenn } from '../../components/button/ButtonZenn';
+import { DivCustom } from '../../components/div/DivCustom';
 import { H1 } from '../../components/heading/H1';
+import { H2 } from '../../components/heading/H2';
 
 export function Btn() {
     return (
@@ -12,30 +14,30 @@ export function Btn() {
                     https://zenn.dev/kiyoshiro9446/scraps/46b4e4be23bcde
                 </a>
             </p>
-            <div>
-                <h2>普通にbuttonタグとして使う</h2>
+            <DivCustom styleTypes={['margin']}>
+                <H2>普通にbuttonタグとして使う</H2>
                 <ButtonZenn variant='primary'>普通のボタン</ButtonZenn>
-            </div>
-            <div>
-                <h2>aタグとして振る舞う</h2>
+            </DivCustom>
+            <DivCustom styleTypes={['margin']}>
+                <H2>aタグとして振る舞う</H2>
                 <ButtonZenn variant='primary' asChild>
                     <a href='dnd'>Dnd</a>
                 </ButtonZenn>
-            </div>
-            <div>
-                <h2>Linkとして振る舞う</h2>
+            </DivCustom>
+            <DivCustom styleTypes={['margin']}>
+                <H2>Linkとして振る舞う</H2>
                 <ButtonZenn variant='primary' asChild>
                     <Link to='dnd'>Dnd</Link>
                 </ButtonZenn>
-            </div>
-            <div>
-                <h2>イチオシ挙動</h2>
+            </DivCustom>
+            <DivCustom styleTypes={['margin']}>
+                <H2>イチオシ挙動</H2>
                 <ButtonZenn disabled asChild>
                     <a href='dnd'>Dnd</a>
                 </ButtonZenn>
-            </div>
+            </DivCustom>
             <H1>Vite Default Button</H1>
-            <Button />
+            <ButtonVite>Vite</ButtonVite>
         </div>
     );
 }

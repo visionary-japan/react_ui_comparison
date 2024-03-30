@@ -1,5 +1,6 @@
 import { type FC, memo } from 'react';
 import { Link } from 'react-router-dom';
+import { H1 } from '../heading/H1';
 
 interface Props {
     path?: string;
@@ -9,20 +10,25 @@ const Component: FC<Props> = props => {
     const Dnd = () => (
         <ul>
             <li>
-                <Link to='/dnd/pointer'>DnD Pointer</Link>
+                <Link to='/dnd/pointer'>Pointer</Link>
             </li>
             <li>
-                <Link to='/dnd/htmlapi'>DnD HTML5 API</Link>
+                <Link to='/dnd/htmlapi'>HTML5 API</Link>
             </li>
             <li>
-                <Link to='/dnd/sortablejs'>DnD Sortable.js</Link>
+                <Link to='/dnd/sortablejs'>Sortable.js</Link>
             </li>
         </ul>
     );
 
     switch (props.path) {
         case '/dnd':
-            return <Dnd />;
+            return (
+                <>
+                    <H1>DnD Index</H1>
+                    <Dnd />
+                </>
+            );
         default:
             return (
                 <div>
@@ -64,4 +70,4 @@ const Component: FC<Props> = props => {
     }
 };
 
-export const Links = memo(Component);
+export const LinkIndex = memo(Component);

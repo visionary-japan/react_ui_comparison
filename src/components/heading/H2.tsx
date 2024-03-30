@@ -4,16 +4,16 @@ import type { Props } from '.';
 
 const styles = stylex.create({
     base: {
-        fontSize: '4em',
+        fontSize: '2em',
         lineHeight: 1.5,
         margin: 0,
     },
 });
 
 const Component: FC<Props> = ({ children, ...attrs }) => (
-    <h1 {...attrs} {...stylex.props(styles.base)}>
+    <h2 {...attrs} {...stylex.props(styles.base)}>
         {children}
-    </h1>
+    </h2>
 );
 
-export const H1 = memo(Component);
+export const H2 = memo(Component);

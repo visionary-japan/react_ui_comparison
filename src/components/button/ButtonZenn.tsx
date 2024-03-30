@@ -6,6 +6,7 @@ import {
     cloneElement,
     forwardRef,
     isValidElement,
+    memo,
 } from 'react';
 
 // https://zenn.dev/kiyoshiro9446/scraps/46b4e4be23bcde
@@ -19,7 +20,7 @@ export type ButtonProps = {
     | ({ asChild?: false } & ComponentPropsWithRef<'button'>)
 );
 
-const ButtonZenn = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
+const Component = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
     {
         variant = 'priamry',
         disabled,
@@ -62,4 +63,4 @@ const ButtonZenn = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
     );
 }) as FC<ButtonProps>;
 
-export default ButtonZenn;
+export const ButtonZenn = memo(Component);

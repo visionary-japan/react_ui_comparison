@@ -1,5 +1,6 @@
 import * as stylex from '@stylexjs/stylex';
-import { Button } from '../../components/button/ButtonVite';
+import { type FC, memo } from 'react';
+import { ButtonVite } from '../../components/button/ButtonVite';
 import { useQuery } from '../../hooks/useQuery';
 
 const styles = stylex.create({
@@ -10,7 +11,7 @@ const styles = stylex.create({
     },
 });
 
-export function Query() {
+const Component: FC = () => {
     const { str, num, onChangeParams } = useQuery();
 
     return (
@@ -20,41 +21,43 @@ export function Query() {
                 <li>num: {num}</li>
             </ul>
             <div {...stylex.props(styles.base)}>
-                <Button
+                <ButtonVite
                     type='button'
                     onClick={() => {
                         onChangeParams(str + 1, num);
                     }}
                 >
                     str + 1
-                </Button>
-                <Button
+                </ButtonVite>
+                <ButtonVite
                     type='button'
                     onClick={() => {
                         onChangeParams(str.replace(/1(?!.*1)/, ''), num);
                     }}
                 >
                     str - 1
-                </Button>
+                </ButtonVite>
             </div>
             <div {...stylex.props(styles.base)}>
-                <Button
+                <ButtonVite
                     type='button'
                     onClick={() => {
                         onChangeParams(str, num + 1);
                     }}
                 >
                     num + 1
-                </Button>
-                <Button
+                </ButtonVite>
+                <ButtonVite
                     type='button'
                     onClick={() => {
                         onChangeParams(str, num - 1);
                     }}
                 >
                     num - 1
-                </Button>
+                </ButtonVite>
             </div>
         </>
     );
-}
+};
+
+export const Query = memo(Component);

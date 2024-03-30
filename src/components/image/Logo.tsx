@@ -1,12 +1,15 @@
 import stylex from '@stylexjs/stylex';
-import type { UserAuthoredStyles } from '@stylexjs/stylex';
+import type {
+    StyleXStyles,
+    UserAuthoredStyles,
+} from '@stylexjs/stylex/lib/StyleXTypes';
 import { type FC, memo } from 'react';
 
 interface Props {
     url: string;
     src: string;
     alt: string;
-    styles: { img: UserAuthoredStyles };
+    styles: { img: StyleXStyles<UserAuthoredStyles> };
 }
 
 const spin = stylex.keyframes({

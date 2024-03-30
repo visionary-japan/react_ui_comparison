@@ -2,11 +2,11 @@ import stylex from '@stylexjs/stylex';
 import { type FC, memo, useState } from 'react';
 import logoVite from '/vite.svg';
 import logoReact from '../assets/react.svg';
-import { Button } from '../components/button/ButtonVite';
-import { FlexCenter } from '../components/div/FlexCenter';
+import { ButtonVite } from '../components/button/ButtonVite';
+import { DivCustom } from '../components/div/DivCustom';
 import { H1 } from '../components/heading/H1';
 import { Logo } from '../components/image/Logo';
-import { Links } from '../components/link/Links';
+import { LinkIndex } from '../components/link/LinkIndex';
 
 const viteLogoStyles = stylex.create({
     img: {
@@ -28,7 +28,7 @@ const Component: FC = () => {
 
     return (
         <div>
-            <FlexCenter>
+            <DivCustom styleTypes={['flexCenter']}>
                 <Logo
                     url='https://vitejs.dev'
                     src={logoVite}
@@ -41,14 +41,14 @@ const Component: FC = () => {
                     alt='React Logo'
                     styles={reactLogoStyles}
                 />
-            </FlexCenter>
+            </DivCustom>
             <H1>{(import.meta.env.VITE_BASE_PATH as string).toUpperCase()}</H1>
-            <div style={{ padding: '1em', textAlign: 'center' }}>
-                <Button type='button' onClick={handleClickButton}>
+            <DivCustom styleTypes={['margin', 'center']}>
+                <ButtonVite type='button' onClick={handleClickButton}>
                     count is {count}
-                </Button>
-            </div>
-            <Links />
+                </ButtonVite>
+            </DivCustom>
+            <LinkIndex />
         </div>
     );
 };
