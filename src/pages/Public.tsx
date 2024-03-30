@@ -1,6 +1,6 @@
 import { type FC, memo, useEffect, useState } from 'react';
-import type { JsonConfigs } from '../../@types';
-import { H1 } from '../../components/heading/H1';
+import type { JsonConfigs } from '../@types';
+import { H1 } from '../components/heading/H1';
 
 const Component: FC = () => {
     const windowConfigs = window.configs;

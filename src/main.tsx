@@ -3,13 +3,13 @@ import reactDom from 'react-dom/client';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { LinkIndex } from './components/link/LinkIndex.tsx';
 import './main.css';
+import { Btn } from './pages/Btn.tsx';
 import { Index } from './pages/Index.tsx';
-import { Btn } from './pages/btn/Btn.tsx';
+import { Public } from './pages/Public.tsx';
+import { Query } from './pages/Query.tsx';
 import { HTML5 } from './pages/dnd/HTML5.tsx';
 import { Pointer } from './pages/dnd/Pointer.tsx';
 import { Sortablejs } from './pages/dnd/Sortablejs.tsx';
-import { Public } from './pages/public/Public.tsx';
-import { Query } from './pages/query/Query.tsx';
 
 reactDom.createRoot(document.getElementById('root') as HTMLElement).render(
     <React.StrictMode>
