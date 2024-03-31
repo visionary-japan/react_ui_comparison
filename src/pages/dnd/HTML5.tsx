@@ -1,35 +1,47 @@
 import type React from 'react';
-import { type FC, memo, useState } from 'react';
+import { type FC, memo, useCallback, useState } from 'react';
 import { H1 } from '../../components/heading/H1';
 
 const Component: FC = () => {
     const [isDragging, setIsDragging] = useState(false);
     const [isDroppable, setIsDroppable] = useState(false);
 
-    const onDragStart = (e: React.DragEvent<HTMLDivElement>) => {
-        setIsDragging(true);
-        e.dataTransfer.setData('text/plain', e.currentTarget.id);
-        e.dataTransfer.dropEffect = 'move';
-    };
-    const onDragEnd = () => {
+    const handleDragStart = useCallback(
+        (e: React.DragEvent<HTMLDivElement>) => {
+            setIsDragging(true);
+            e.dataTransfer.setData('text/plain', e.currentTarget.id);
+            e.dataTransfer.dropEffect = 'move';
+        },
+        [],
+    );
+    const handleDrag = useCallback((_: React.DragEvent<HTMLDivElement>) => {
+        // console.log('dragging', e);
+    }, []);
+    const handleDragEnd = useCallback(() => {
         setIsDragging(false);
-    };
+    }, []);
 
-    const onDragEnter = (e: React.DragEvent<HTMLDivElement>) => {
-        if (e.currentTarget.id === 'drop-area') {
-            setIsDroppable(true);
-        }
-    };
-    const onDragLeave = (e: React.DragEvent<HTMLDivElement>) => {
+    const handleDragEnter = useCallback(
+        (e: React.DragEvent<HTMLDivElement>) => {
+            if (e.currentTarget.id === 'drop-area') {
+                setIsDroppable(true);
+            }
+        },
+        [],
+    );
+    const handleDragLeave = useCallback(
+        (e: React.DragEvent<HTMLDivElement>) => {
+            if (e.currentTarget.id === 'drop-area') {
+                setIsDroppable(false);
+            }
+        },
+        [],
+    );
+    const handleDrop = useCallback((e: React.DragEvent<HTMLDivElement>) => {
         if (e.currentTarget.id === 'drop-area') {
             setIsDroppable(false);
         }
-    };
-    const onDrop = (e: React.DragEvent<HTMLDivElement>) => {
-        if (e.currentTarget.id === 'drop-area') {
-            setIsDroppable(false);
-        }
-    };
+    }, []);
 
     return (
         <>
@@ -41,9 +53,9 @@ const Component: FC = () => {
                     backgroundColor: isDragging ? 'red' : 'gray',
                 }}
                 draggable
-                onDragStart={onDragStart}
-                onDragEnd={onDragEnd}
-                // onDrag={(e) => console.log('on drag', e)} // ドラッグ中に発火するだけで未使用でもOK
+                onDragStart={handleDragStart}
+                onDragEnd={handleDragEnd}
+                onDrag={handleDrag}
             >
                 drag item
             </div>
@@ -54,12 +66,10 @@ const Component: FC = () => {
                     width: 128,
                     backgroundColor: isDroppable ? 'green' : 'darkgray',
                 }}
-                onDragEnter={onDragEnter}
-                onDragLeave={onDragLeave}
-                onDragOver={e => {
-                    e.preventDefault(); // これがないとdropイベントが発火しない
-                }}
-                onDrop={onDrop}
+                onDragEnter={handleDragEnter}
+                onDragLeave={handleDragLeave}
+                onDragOver={e => e.preventDefault()} // これがないとdropイベントが発火しない
+                onDrop={handleDrop}
             >
                 drop area
             </div>
