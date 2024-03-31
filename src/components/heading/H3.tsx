@@ -7,6 +7,8 @@ const styles = stylex.create({
         fontSize: '1.5em',
         lineHeight: 1,
         margin: 0,
+        width: '100%',
+        textAlign: 'left',
     },
 });
 

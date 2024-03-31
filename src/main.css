@@ -29,7 +29,7 @@
 }
 
 body {
-  display: flex;
+  display: grid;
   place-items: center;
   min-width: 320px;
   min-height: 100svh;
@@ -43,8 +43,6 @@ img {
 #root {
   display: grid;
   place-items: center;
-  width: 100vw;
-  height: 100svh;
 }
 
 @media (prefers-color-scheme: light) {
