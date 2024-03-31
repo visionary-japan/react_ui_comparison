@@ -28,15 +28,15 @@ const dropStyles = stylex.create({
 // ドロップ要素
 export const velocity: DropData = {
     isOver: (props: DragData, dropRect: DOMRect) => {
-        const { locScroll, locRect, sizRect, locNext } = props;
-        if (!(locScroll && locRect && sizRect && locNext)) return false;
-        const nextDragCenterX = locNext.x + sizRect.width / 2;
-        const nextDragCenterY = locNext.y + sizRect.height / 2;
+        const { rect, rectNext } = props;
+        if (!(rect && rectNext)) return false;
+        const nextCenterX = rectNext.x + rect.width / 2;
+        const nextCenterY = rectNext.y + rect.height / 2;
         return (
-            locScroll.x + dropRect.left <= nextDragCenterX &&
-            locScroll.x + dropRect.right >= nextDragCenterX &&
-            locScroll.y + dropRect.top <= nextDragCenterY &&
-            locScroll.y + dropRect.bottom >= nextDragCenterY
+            dropRect.left <= nextCenterX &&
+            dropRect.right >= nextCenterX &&
+            dropRect.top <= nextCenterY &&
+            dropRect.bottom >= nextCenterY
         );
     },
     dragStyles,

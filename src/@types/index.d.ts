@@ -1,13 +1,10 @@
+// 書き込み可能な型
+export type Writable<T> = { -readonly [K in keyof T]: T[K] };
+
 // 座標
-export interface Location {
+export interface Coordinate {
     x: number;
     y: number;
-}
-
-// 大きさ
-export interface Size {
-    width: number;
-    height: number;
 }
 
 interface Config {

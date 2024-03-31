@@ -1,13 +1,11 @@
 import type { UserAuthoredStyles } from '@stylexjs/stylex';
-import type { Location, Size } from '../../@types';
+import type { Coordinate } from '../../../@types';
 
 // ドラッグ情報
 export interface DragData {
-    locScroll?: Location;
-    locClient?: Location;
-    locRect?: Location;
-    sizRect?: Size;
-    locNext?: Location;
+    rect?: DOMRect;
+    rectNext?: DOMRect;
+    cooClient?: Coordinate;
 }
 
 // 型

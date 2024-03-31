@@ -11,7 +11,7 @@ const dragStyles = stylex.create({
         backgroundSize: 'contain',
         '::after': {
             content: '',
-            backgroundColor: 'red',
+            backgroundColor: '#ff0000',
             position: 'absolute',
             top: 0,
             left: '50%',
@@ -34,7 +34,7 @@ const dropStyles = stylex.create({
     over: {
         borderColor: {
             '@media (prefers-color-scheme: light)': '#ccd3d9',
-            '@media (prefers-color-scheme: dark)': '#acb3b9',
+            '@media (prefers-color-scheme: dark)': '#ecf3f9',
         },
     },
 });
@@ -42,15 +42,15 @@ const dropStyles = stylex.create({
 // ドロップ要素
 export const hotspot: DropData = {
     isOver: (props: DragData, dropRect: DOMRect) => {
-        const { locScroll, locRect, sizRect } = props;
-        if (!(locScroll && locRect && sizRect)) return false;
-        const centerX = locRect.x + sizRect.width / 2;
-        const topY = locRect.y;
+        const { rect } = props;
+        if (!rect) return false;
+        const centerX = rect.x + rect.width / 2;
+        const topY = rect.y;
         return (
-            locScroll.x + dropRect.left <= centerX &&
-            locScroll.x + dropRect.right >= centerX &&
-            locScroll.y + dropRect.top <= topY &&
-            locScroll.y + dropRect.bottom >= topY
+            dropRect.left <= centerX &&
+            dropRect.right >= centerX &&
+            dropRect.top <= topY &&
+            dropRect.bottom >= topY
         );
     },
     dragStyles,

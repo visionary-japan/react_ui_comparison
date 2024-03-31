@@ -34,18 +34,16 @@ const dropStyles = stylex.create({
 // ドロップ要素
 export const percent: DropData = {
     isOver: (props: DragData, dropRect: DOMRect) => {
-        const { locScroll, locRect, sizRect } = props;
-        if (!(locScroll && locRect && sizRect)) return false;
+        const { rect } = props;
+        if (!rect) return false;
         const dropArea = dropRect.width * dropRect.height;
         const overlapWidth =
-            Math.min(locRect.x + sizRect.width, locScroll.x + dropRect.right) -
-            Math.max(locRect.x, locScroll.x + dropRect.left);
+            Math.min(rect.x + rect.width, dropRect.right) -
+            Math.max(rect.x, dropRect.left);
         if (overlapWidth <= 0) return false;
         const overlapHeight =
-            Math.min(
-                locRect.y + sizRect.height,
-                locScroll.y + dropRect.bottom,
-            ) - Math.max(locRect.y, locScroll.y + dropRect.top);
+            Math.min(rect.y + rect.height, dropRect.bottom) -
+            Math.max(rect.y, dropRect.top);
         if (overlapHeight <= 0) return false;
         return overlapWidth * overlapHeight >= dropArea * 0.25;
     },

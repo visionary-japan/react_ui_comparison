@@ -1,5 +1,5 @@
 import stylex from '@stylexjs/stylex';
-import { type FC, memo, useCallback, useEffect, useRef, useState } from 'react';
+import { type FC, memo, useCallback, useRef, useState } from 'react';
 import { PointerDrag } from '../../components/dnd/PointerDrag.tsx';
 import {
     DROP_BORDER_WIDTH,
@@ -8,7 +8,7 @@ import {
 } from '../../components/dnd/PointerDrop.tsx';
 import { H1 } from '../../components/heading/H1.tsx';
 import { useResizeObserver } from '../../hooks/useDivResizeObserver.tsx';
-import { dragDataInit, dropDatas } from './config/configs.ts';
+import { dropDatas } from './config/configs.ts';
 import type { DndKeys, DragData } from './config/index';
 
 const DROP_MARGIN = 8;
@@ -31,32 +31,23 @@ const styles = stylex.create({
 
 const Component: FC = () => {
     const [dragId, setDragId] = useState<DndKeys | undefined>(undefined);
-    const [dragData, setDragData] = useState<DragData>(dragDataInit);
+    const [dragData, setDragData] = useState<DragData | undefined>(undefined);
     const [dropAmount, setDropAmount] = useState<number>(120);
 
-    const handleDragStart = (id: DndKeys | undefined) => {
+    // イベントハンドラ
+    // ドラッグ開始
+    const handleDragStart = useCallback((id: DndKeys | undefined) => {
         setDragId(id);
-    };
-    const handleDrag = (props: DragData) => {
-        setDragData({
-            // TODO さすがにこれはヤバイ
-            // eslint-disable-next-line react/prop-types
-            locClient: props.locClient,
-            // eslint-disable-next-line react/prop-types
-            locRect: props.locRect,
-            // eslint-disable-next-line react/prop-types
-            locScroll: props.locScroll,
-            // eslint-disable-next-line react/prop-types
-            sizRect: props.sizRect,
-            // eslint-disable-next-line react/prop-types
-            locNext: props.locNext,
-        });
-    };
+    }, []);
+    // ドラッグ中
+    const handleDrag = useCallback((props: DragData) => {
+        setDragData(props);
+    }, []);
 
     const handleResize = useCallback(() => {
         if (!ref.current) return;
         setDragId(undefined);
-        setDragData(dragDataInit);
+        setDragData(undefined);
         setDropAmount(
             Math.floor(
                 (ref.current.clientWidth -
@@ -72,12 +63,6 @@ const Component: FC = () => {
             Number(ref.current.style.marginTop) +
             Number(ref.current.style.marginBottom)
         }px`;
-    }, []);
-
-    useEffect(() => {
-        return () => {
-            document.body.style.height = '';
-        };
     }, []);
 
     const ref = useRef<HTMLDivElement>(null);
@@ -100,7 +85,6 @@ const Component: FC = () => {
                     <PointerDrag
                         key={key}
                         id={key}
-                        dragData={dragData}
                         dropData={dropDatas[key as DndKeys]}
                         handleDragStart={() => handleDragStart(key as DndKeys)}
                         handleDrag={handleDrag}

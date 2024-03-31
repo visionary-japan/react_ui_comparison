@@ -26,13 +26,13 @@ const dropStyles = stylex.create({
 // ドロップ要素
 export const cursor: DropData = {
     isOver: (props: DragData, dropRect: DOMRect) => {
-        const { locClient } = props;
-        if (!locClient) return false;
+        const { cooClient } = props;
+        if (!cooClient) return false;
         return (
-            locClient.x >= dropRect.left &&
-            locClient.x <= dropRect.right &&
-            locClient.y >= dropRect.top &&
-            locClient.y <= dropRect.bottom
+            cooClient.x >= dropRect.left &&
+            cooClient.x <= dropRect.right &&
+            cooClient.y >= dropRect.top &&
+            cooClient.y <= dropRect.bottom
         );
     },
     dragStyles,
