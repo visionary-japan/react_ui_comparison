@@ -11,16 +11,16 @@ import { useResizeObserver } from '../../hooks/useDivResizeObserver.tsx';
 import { dropDatas } from './config/configs.ts';
 import type { DndKeys, DragData } from './config/index';
 
-const DROP_MARGIN = 8;
+const DROP_PADDING = 8;
 const DROP_GAP = 2;
-const DROP_COLUMNS = 30;
+const DROP_COLUMNS = 25;
 
 const styles = stylex.create({
     base: {
         position: 'absolute',
         top: 0,
         left: 0,
-        margin: DROP_MARGIN,
+        padding: DROP_PADDING,
         display: 'flex',
         flexWrap: 'wrap',
         alignItems: 'center',
@@ -54,15 +54,9 @@ const Component: FC = () => {
                     Number(ref.current.style.marginLeft) -
                     Number(ref.current.style.marginRight) +
                     DROP_GAP) /
-                    (DROP_WIDTH + DROP_BORDER_WIDTH * 2 + DROP_GAP) +
-                    0.25, // TODO なぜかこの +0.25 のおかげでキレイになってるけど、マジで意味わからん
+                    (DROP_WIDTH + DROP_BORDER_WIDTH * 2 + DROP_GAP),
             ) * DROP_COLUMNS,
         );
-        document.body.style.height = `${
-            ref.current.clientHeight +
-            Number(ref.current.style.marginTop) +
-            Number(ref.current.style.marginBottom)
-        }px`;
     }, []);
 
     const ref = useRef<HTMLDivElement>(null);

@@ -7,6 +7,7 @@ import { Btn } from './pages/Btn.tsx';
 import { Index } from './pages/Index.tsx';
 import { Public } from './pages/Public.tsx';
 import { Query } from './pages/Query.tsx';
+import { Beautiful } from './pages/dnd/Beautiful.tsx';
 import { HTML5 } from './pages/dnd/HTML5.tsx';
 import { Pointer } from './pages/dnd/Pointer.tsx';
 import { Sortablejs } from './pages/dnd/Sortablejs.tsx';
@@ -21,6 +22,7 @@ reactDom.createRoot(document.getElementById('root') as HTMLElement).render(
                 <Route path='dnd/htmlapi' element={<HTML5 />} />
                 <Route path='dnd/pointer' element={<Pointer />} />
                 <Route path='dnd/sortablejs' element={<Sortablejs />} />
+                <Route path='dnd/beautiful' element={<Beautiful />} />
                 <Route path='query' element={<Query />} />
                 <Route path='public' element={<Public />} />
                 <Route path='*' element={<Navigate to='/' />} />

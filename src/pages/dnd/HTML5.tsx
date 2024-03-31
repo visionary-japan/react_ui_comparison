@@ -1,8 +1,8 @@
 import type React from 'react';
-import { memo, useState } from 'react';
+import { type FC, memo, useState } from 'react';
 import { H1 } from '../../components/heading/H1';
 
-const Component = () => {
+const Component: FC = () => {
     const [isDragging, setIsDragging] = useState(false);
     const [isDroppable, setIsDroppable] = useState(false);
 

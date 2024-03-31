@@ -10,13 +10,16 @@ const Component: FC<Props> = props => {
     const Dnd = () => (
         <ul>
             <li>
-                <Link to='/dnd/pointer'>Pointer</Link>
+                <Link to='/dnd/pointer'>PointerEvents</Link>
             </li>
             <li>
                 <Link to='/dnd/htmlapi'>HTML5 API</Link>
             </li>
             <li>
                 <Link to='/dnd/sortablejs'>Sortable.js</Link>
+            </li>
+            <li>
+                <Link to='/dnd/beautiful'>react-beautiful-dnd</Link>
             </li>
         </ul>
     );
