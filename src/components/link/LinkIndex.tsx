@@ -31,7 +31,7 @@ const Component: FC<Props> = props => {
             );
         default:
             return (
-                <div>
+                <>
                     <ul>
                         <li>
                             <Link to='/'>Index</Link>
@@ -65,7 +65,7 @@ const Component: FC<Props> = props => {
                             </li>
                         </ul>
                     </ul>
-                </div>
+                </>
             );
     }
 };
