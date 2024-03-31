@@ -9,7 +9,7 @@ export interface DragData {
 }
 
 // 型
-type StyleKeys = 'base' | 'dragging' | 'image';
+type StyleKeys = 'base' | 'dragging';
 
 // ドロップ情報
 export interface DropData {

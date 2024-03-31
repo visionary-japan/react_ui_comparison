@@ -12,7 +12,6 @@ const dragStyles = stylex.create({
         borderRadius: '50%',
     },
     dragging: {},
-    image: {},
 });
 
 // ドロップ要素のスタイル

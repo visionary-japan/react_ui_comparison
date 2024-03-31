@@ -18,7 +18,6 @@ const dragStyles = stylex.create({
         },
     },
     dragging: {},
-    image: {},
 });
 
 // ドロップ要素のスタイル

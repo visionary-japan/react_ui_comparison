@@ -12,7 +12,6 @@ const dragStyles = stylex.create({
     dragging: {
         filter: 'drop-shadow(0 0 32px yellow)',
     },
-    image: {},
 });
 
 // ドロップ要素のスタイル

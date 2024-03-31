@@ -9,6 +9,7 @@ const dragStyles = stylex.create({
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'top',
         backgroundSize: 'contain',
+        backgroundImage: `url("/react_ui_comparison/computer_cursor_arrow_white.png")`,
         '::after': {
             content: '',
             backgroundColor: '#ff0000',
@@ -21,12 +22,6 @@ const dragStyles = stylex.create({
         },
     },
     dragging: {},
-    image: {
-        // TODO ファイルから直接情報を引っ張る
-        // ただstaticな情報しか置けないみたい
-        // だからといって引数にこれを置くのも違和感があり頓挫
-        backgroundImage: `url("/react_ui_comparison/computer_cursor_arrow_white.png")`,
-    },
 });
 
 // ドロップ要素のスタイル
