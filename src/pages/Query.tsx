@@ -2,6 +2,7 @@ import * as stylex from '@stylexjs/stylex';
 import { type FC, memo } from 'react';
 import { ButtonVite } from '../components/button/ButtonVite';
 import { useQuery } from '../hooks/useQuery';
+import { H1 } from '../components/heading/H1';
 
 const styles = stylex.create({
     base: {
@@ -16,6 +17,7 @@ const Component: FC = () => {
 
     return (
         <>
+            <H1>Query</H1>
             <ul>
                 <li>str: &quot;{str}&quot;</li>
                 <li>num: {num}</li>

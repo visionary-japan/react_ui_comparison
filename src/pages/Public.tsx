@@ -15,12 +15,12 @@ const Component: FC = () => {
 
     return (
         <>
-            <H1>JS: window.configs</H1>
+            <H1 isLeft>JS: window.configs</H1>
             {windowConfigs &&
                 Object.keys(windowConfigs).map(key => (
                     <div key={key}>{windowConfigs?.[key]?.keyString}</div>
                 ))}
-            <H1>JSON: FETCH</H1>
+            <H1 isLeft>JSON: FETCH</H1>
             {json &&
                 Object.keys(json).map(key =>
                     json?.[key]?.map(val => (

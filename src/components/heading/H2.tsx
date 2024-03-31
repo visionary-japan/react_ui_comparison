@@ -7,13 +7,15 @@ const styles = stylex.create({
         fontSize: '2em',
         lineHeight: 1.5,
         margin: 0,
+    },
+    left: {
         width: '100%',
         textAlign: 'left',
     },
 });
 
-const Component: FC<Props> = ({ children, ...attrs }) => (
-    <h2 {...attrs} {...stylex.props(styles.base)}>
+const Component: FC<Props> = ({ isLeft, children, ...attrs }) => (
+    <h2 {...attrs} {...stylex.props(styles.base, isLeft && styles.left)}>
         {children}
     </h2>
 );

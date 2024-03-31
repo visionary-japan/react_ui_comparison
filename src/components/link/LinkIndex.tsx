@@ -28,7 +28,7 @@ const Component: FC<Props> = props => {
         case '/dnd':
             return (
                 <>
-                    <H1>DnD Index</H1>
+                    <H1>DnD</H1>
                     <Dnd />
                 </>
             );
