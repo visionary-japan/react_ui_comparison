@@ -165,7 +165,6 @@ const Drag: FC<Props> = props => {
                 isDragging && styles.dragging,
                 props.dropData.dragStyles.base,
                 isDragging && props.dropData.dragStyles.dragging,
-                props.dropData.dragStyles.image,
             )}
         />
     );
