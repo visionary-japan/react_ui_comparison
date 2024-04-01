@@ -1,8 +1,8 @@
 import * as stylex from '@stylexjs/stylex';
-import { type FC, memo } from 'react';
+import { type FC, memo, useCallback } from 'react';
 import { ButtonVite } from '../components/button/ButtonVite';
-import { useQuery } from '../hooks/useQuery';
 import { H1 } from '../components/heading/H1';
+import { useQuery } from '../hooks/useQuery';
 
 const styles = stylex.create({
     base: {
@@ -12,8 +12,16 @@ const styles = stylex.create({
     },
 });
 
+const SUB_STR = '1';
+const SUB_NUM = 1;
+
 const Component: FC = () => {
-    const { str, num, onChangeParams } = useQuery();
+    const { str, num, handleChangeParams } = useQuery();
+
+    const removeLastChar = useCallback((str: string, target: string) => {
+        const regex = new RegExp(`${target}(?!.*${target})`);
+        return str.replace(regex, '');
+    }, []);
 
     return (
         <>
@@ -25,37 +33,31 @@ const Component: FC = () => {
             <div {...stylex.props(styles.base)}>
                 <ButtonVite
                     type='button'
-                    onClick={() => {
-                        onChangeParams(str + 1, num);
-                    }}
+                    onClick={() => handleChangeParams(str + SUB_STR, num)}
                 >
-                    str + 1
+                    str + {SUB_STR}
                 </ButtonVite>
                 <ButtonVite
                     type='button'
-                    onClick={() => {
-                        onChangeParams(str.replace(/1(?!.*1)/, ''), num);
-                    }}
+                    onClick={() =>
+                        handleChangeParams(removeLastChar(str, SUB_STR), num)
+                    }
                 >
-                    str - 1
+                    str - {SUB_STR}
                 </ButtonVite>
             </div>
             <div {...stylex.props(styles.base)}>
                 <ButtonVite
                     type='button'
-                    onClick={() => {
-                        onChangeParams(str, num + 1);
-                    }}
+                    onClick={() => handleChangeParams(str, num + SUB_NUM)}
                 >
-                    num + 1
+                    num + {SUB_NUM}
                 </ButtonVite>
                 <ButtonVite
                     type='button'
-                    onClick={() => {
-                        onChangeParams(str, num - 1);
-                    }}
+                    onClick={() => handleChangeParams(str, num - SUB_NUM)}
                 >
-                    num - 1
+                    num - {SUB_NUM}
                 </ButtonVite>
             </div>
         </>

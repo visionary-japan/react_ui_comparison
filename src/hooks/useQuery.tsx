@@ -13,23 +13,26 @@ export function useQuery() {
         [searchParams],
     );
 
-    const castStrToNum = (s: string) => {
+    const castStrToNum = useCallback((s: string) => {
         switch (s) {
             case 'NaN':
-                return NaN;
+                return Number.NaN;
             default:
                 return Number(s);
         }
-    };
+    }, []);
 
     useEffect(() => {
         setStr(getParam('str'));
         setNum(castStrToNum(getParam('num')));
-    }, [getParam]);
+    }, [getParam, castStrToNum]);
 
-    const onChangeParams = (newStr: string, newNum: number) => {
-        setSearchParams({ str: newStr, num: String(newNum) });
-    };
+    const handleChangeParams = useCallback(
+        (newStr: string, newNum: number) => {
+            setSearchParams({ str: newStr, num: String(newNum) });
+        },
+        [setSearchParams],
+    );
 
-    return { str, num, onChangeParams, castStrToNum };
+    return { str, num, castStrToNum, handleChangeParams };
 }
