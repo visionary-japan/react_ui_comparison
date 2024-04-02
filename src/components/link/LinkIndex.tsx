@@ -56,16 +56,18 @@ const Component: FC<Props> = props => {
                             </li>
                         </ul>
                         <ul>
-                            <li>Scroll</li>
-                            <ul>
-                                <li>Normal Scroll</li>
-                                <li>Smooth Scroll</li>
-                            </ul>
-                        </ul>
-                        <ul>
                             <li>
                                 <Link to='/public'>Public</Link>
                             </li>
+                        </ul>
+                        <ul>
+                            <li>Auto Scroll</li>
+                        </ul>
+                        <ul>
+                            <li>Infinite Scroll</li>
+                        </ul>
+                        <ul>
+                            <li>Nav</li>
                         </ul>
                     </ul>
                 </>
