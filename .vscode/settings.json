@@ -1,15 +1,12 @@
 {
     "files.eol": "\n",
-    "editor.defaultFormatter": "biomejs.biome",
+    "editor.defaultFormatter": "biomejs.biome", // https://biomejs.dev/ja/reference/vscode/
     "editor.formatOnSave": true,
-    // TODO 以下の内容をもとに更新する
-    // https://biomejs.dev/ja/reference/vscode/
     "editor.codeActionsOnSave": {
         "quickfix.biome": "explicit", // 保存時の修正をBiomeに任せる
-        "source.organizeImports.biome": "explicit", // インポートの並び替え
-        "source.fixAll.stylelint": "explicit"
+        "source.organizeImports.biome": "explicit", // インポートの並び替え（実験的機能）
+        "source.fixAll.stylelint": "explicit" // BiomeはCSSをfixしないのでstylelintを併用
     },
     "stylelint.validate": ["css", "scss", "less", "postcss"],
-    "biome.enabled": true, // TODO Biomeを適用するのに必要と思い実施したが不要かもしれない
     "biome.rename": true // Biomeがワークスペースのリネームを検知する（実験的機能）
 }
