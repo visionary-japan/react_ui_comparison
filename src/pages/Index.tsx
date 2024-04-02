@@ -28,6 +28,7 @@ const Component: FC = () => {
 
     return (
         <div>
+            <H1>{(import.meta.env.VITE_BASE_PATH as string).toUpperCase()}</H1>
             <DivCustom styleTypes={['flexCenter']}>
                 <Logo
                     url='https://vitejs.dev'
@@ -42,8 +43,7 @@ const Component: FC = () => {
                     styles={reactLogoStyles}
                 />
             </DivCustom>
-            <H1>{(import.meta.env.VITE_BASE_PATH as string).toUpperCase()}</H1>
-            <DivCustom styleTypes={['margin', 'center']}>
+            <DivCustom styleTypes={['center']}>
                 <ButtonVite type='button' onClick={handleClickButton}>
                     count is {count}
                 </ButtonVite>
