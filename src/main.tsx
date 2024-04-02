@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { type FC } from 'react';
 import reactDom from 'react-dom/client';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { LinkIndex } from './components/link/LinkIndex.tsx';
+import { useEnv } from './hooks/useEnv.tsx';
 import './main.css';
 import { Btn } from './pages/Btn.tsx';
 import { Index } from './pages/Index.tsx';
@@ -12,9 +13,11 @@ import { HTML5 } from './pages/dnd/HTML5.tsx';
 import { Pointer } from './pages/dnd/Pointer.tsx';
 import { Sortablejs } from './pages/dnd/Sortablejs.tsx';
 
-reactDom.createRoot(document.getElementById('root') as HTMLElement).render(
-    <React.StrictMode>
-        <BrowserRouter basename={import.meta.env.BASE_URL}>
+const App: FC = () => {
+    const { ROOT_NAME } = useEnv();
+
+    return (
+        <BrowserRouter basename={ROOT_NAME}>
             <Routes>
                 <Route path='/' element={<Index />} />
                 <Route path='btn' element={<Btn />} />
@@ -28,5 +31,11 @@ reactDom.createRoot(document.getElementById('root') as HTMLElement).render(
                 <Route path='*' element={<Navigate to='/' />} />
             </Routes>
         </BrowserRouter>
+    );
+};
+
+reactDom.createRoot(document.getElementById('root') as HTMLElement).render(
+    <React.StrictMode>
+        <App />
     </React.StrictMode>,
 );

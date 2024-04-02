@@ -7,6 +7,7 @@ import { DivCustom } from '../components/div/DivCustom';
 import { H1 } from '../components/heading/H1';
 import { Logo } from '../components/image/Logo';
 import { LinkIndex } from '../components/link/LinkIndex';
+import { useEnv } from '../hooks/useEnv';
 
 const viteLogoStyles = stylex.create({
     img: {
@@ -21,6 +22,7 @@ const reactLogoStyles = stylex.create({
 
 const Component: FC = () => {
     const [count, setCount] = useState<number>(0);
+    const { ROOT_NAME } = useEnv();
 
     const handleClickButton = () => {
         setCount(count => count + 1);
@@ -28,7 +30,7 @@ const Component: FC = () => {
 
     return (
         <div>
-            <H1>{(import.meta.env.VITE_BASE_PATH as string).toUpperCase()}</H1>
+            <H1>{ROOT_NAME.toUpperCase()}</H1>
             <DivCustom styleTypes={['flexCenter']}>
                 <Logo
                     url='https://vitejs.dev'
