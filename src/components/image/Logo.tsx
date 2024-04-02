@@ -9,7 +9,8 @@ interface Props {
     url: string;
     src: string;
     alt: string;
-    styles: { img: StyleXStyles<UserAuthoredStyles> };
+    isSpin: boolean;
+    styles?: StyleXStyles<UserAuthoredStyles>;
 }
 
 const spin = stylex.keyframes({
@@ -31,7 +32,7 @@ const styles = stylex.create({
     },
     img: {
         height: '8em',
-        padding: '4em',
+        padding: '2em',
         transition: 'filter 300ms',
         willChange: 'filter',
     },
@@ -53,7 +54,11 @@ const Component: FC<Props> = props => {
                 rel='noreferrer'
             >
                 <img
-                    {...stylex.props(styles.img, props.styles.img, styles.spin)}
+                    {...stylex.props(
+                        styles.img,
+                        props.isSpin && styles.spin,
+                        props.styles,
+                    )}
                     src={props.src}
                     alt={props.alt}
                 />

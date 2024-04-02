@@ -3,7 +3,7 @@ import stylex from '@stylexjs/stylex';
 import type { UserAuthoredStyles } from '@stylexjs/stylex/lib/StyleXTypes';
 import { type FC, type HTMLAttributes, memo } from 'react';
 
-type TypedStylesKeys = 'center' | 'flexCenter' | 'margin';
+type TypedStylesKeys = 'center' | 'flexCenter' | 'margin' | 'margin2';
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
     styles?: StyleXStyles<UserAuthoredStyles>;
@@ -27,6 +27,9 @@ const typedStyles: Record<
     margin: {
         margin: '1em',
     },
+    margin2: {
+        margin: '2em',
+    },
 });
 
 const getTypedStyles = (
@@ -43,7 +46,7 @@ const getTypedStyles = (
 };
 
 const Component: FC<Props> = ({ styles, styleTypes, children, ...attrs }) => (
-    <div {...attrs} {...stylex.props(styles, getTypedStyles(styleTypes))}>
+    <div {...attrs} {...stylex.props(getTypedStyles(styleTypes), styles)}>
         {children}
     </div>
 );

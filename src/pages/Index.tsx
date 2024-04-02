@@ -9,20 +9,22 @@ import { Logo } from '../components/image/Logo';
 import { LinkIndex } from '../components/link/LinkIndex';
 import { useEnv } from '../hooks/useEnv';
 
-const viteLogoStyles = stylex.create({
-    img: {
+const styles = stylex.create({
+    notProd: {
+        display: 'none',
+    },
+    vite: {
         filter: { ':hover': 'drop-shadow(0 0 2em #646cffaa)' },
     },
-});
-const reactLogoStyles = stylex.create({
-    img: {
+    react: {
         filter: { ':hover': 'drop-shadow(0 0 2em #61dafbaa)' },
     },
 });
 
 const Component: FC = () => {
-    const [count, setCount] = useState<number>(0);
-    const { ROOT_NAME } = useEnv();
+    const { ROOT_NAME, ANY_NUMBER, IS_PROD } = useEnv();
+
+    const [count, setCount] = useState<number>(ANY_NUMBER);
 
     const handleClickButton = () => {
         setCount(count => count + 1);
@@ -31,21 +33,26 @@ const Component: FC = () => {
     return (
         <div>
             <H1>{ROOT_NAME.toUpperCase()}</H1>
-            <DivCustom styleTypes={['flexCenter']}>
+            <DivCustom
+                styleTypes={['flexCenter']}
+                styles={!IS_PROD && styles.notProd}
+            >
                 <Logo
                     url='https://vitejs.dev'
                     src={logoVite}
                     alt='Vite Logo'
-                    styles={viteLogoStyles}
+                    styles={styles.vite}
+                    isSpin
                 />
                 <Logo
                     url='https://react.dev'
                     src={logoReact}
                     alt='React Logo'
-                    styles={reactLogoStyles}
+                    styles={styles.react}
+                    isSpin
                 />
             </DivCustom>
-            <DivCustom styleTypes={['center']}>
+            <DivCustom styleTypes={['center', 'margin2']}>
                 <ButtonVite type='button' onClick={handleClickButton}>
                     count is {count}
                 </ButtonVite>

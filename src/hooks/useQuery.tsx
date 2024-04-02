@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import { castStrToNum } from '../utils/castStrToNum';
 
 export function useQuery() {
     const [searchParams, setSearchParams] = useSearchParams();
@@ -13,19 +14,10 @@ export function useQuery() {
         [searchParams],
     );
 
-    const castStrToNum = useCallback((s: string) => {
-        switch (s) {
-            case 'NaN':
-                return Number.NaN;
-            default:
-                return Number(s);
-        }
-    }, []);
-
     useEffect(() => {
         setStr(getParam('str'));
         setNum(castStrToNum(getParam('num')));
-    }, [getParam, castStrToNum]);
+    }, [getParam]);
 
     const handleChangeParams = useCallback(
         (newStr: string, newNum: number) => {
