@@ -15,6 +15,7 @@ const styles = stylex.create({
             '@media (prefers-color-scheme: dark)': '#1a1a1a',
             '@media (prefers-color-scheme: light)': '#f9f9f9',
         },
+        outline: 'none', // デフォルトのスタイル対策
         borderWidth: 1,
         borderStyle: 'solid',
         borderColor: {
