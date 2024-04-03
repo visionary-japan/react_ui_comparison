@@ -1,11 +1,14 @@
 import * as stylex from '@stylexjs/stylex';
-import { type ButtonHTMLAttributes, type FC, memo } from 'react';
+import type { StyleXStyles } from '@stylexjs/stylex';
+import type { UserAuthoredStyles } from '@stylexjs/stylex/lib/StyleXTypes';
+import { type ButtonHTMLAttributes, forwardRef, memo } from 'react';
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
     size?: 'small' | 'medium' | 'large';
+    styles?: StyleXStyles<UserAuthoredStyles>;
 }
 
-const styles = stylex.create({
+const styls = stylex.create({
     base: {
         fontFamily: 'inherit',
         color: '#646cff',
@@ -51,15 +54,17 @@ const sizes = stylex.create({
     },
 });
 
-const Component: FC<Props> = ({
-    type = 'button',
-    size = 'medium',
-    children,
-    ...attrs
-}) => (
-    <button type={type} {...stylex.props(styles.base, sizes[size])} {...attrs}>
-        {children}
-    </button>
+const Component = forwardRef<HTMLButtonElement, Props>(
+    ({ type = 'button', size = 'medium', children, styles, ...attrs }, ref) => (
+        <button
+            ref={ref}
+            type={type}
+            {...stylex.props(styls.base, sizes[size], styles)}
+            {...attrs}
+        >
+            {children}
+        </button>
+    ),
 );
 
 export const ButtonVite = memo(Component);

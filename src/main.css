@@ -42,7 +42,10 @@ img {
 
 #root {
   display: grid;
-  place-items: center;
+  justify-content: center;
+  width: 100svw;
+  height: 100svh;
+  vertical-align: top;
 }
 
 @media (prefers-color-scheme: light) {

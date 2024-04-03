@@ -6,16 +6,7 @@ const dragStyles = stylex.create({
     base: {
         top: 300,
         left: '60%',
-        '::after': {
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            zIndex: -1,
-            width: '100%',
-            height: '100%',
-            content: '',
-            backgroundColor: 'blue',
-        },
+        backgroundColor: 'blue',
     },
     dragging: {},
 });

@@ -8,6 +8,7 @@ import { Btn } from './pages/Btn.tsx';
 import { Index } from './pages/Index.tsx';
 import { Public } from './pages/Public.tsx';
 import { Query } from './pages/Query.tsx';
+import { Scroll } from './pages/Scroll.tsx';
 import { Beautiful } from './pages/dnd/Beautiful.tsx';
 import { HTML5 } from './pages/dnd/HTML5.tsx';
 import { Pointer } from './pages/dnd/Pointer.tsx';
@@ -28,6 +29,7 @@ const App: FC = () => {
                 <Route path='dnd/beautiful' element={<Beautiful />} />
                 <Route path='query' element={<Query />} />
                 <Route path='public' element={<Public />} />
+                <Route path='scroll' element={<Scroll />} />
                 <Route path='*' element={<Navigate to='/' />} />
             </Routes>
         </BrowserRouter>

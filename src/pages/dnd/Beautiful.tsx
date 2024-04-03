@@ -5,6 +5,7 @@ import {
     type DropResult,
     Droppable,
 } from 'react-beautiful-dnd';
+import { DivCustom } from '../../components/div/DivCustom';
 import { H1 } from '../../components/heading/H1';
 
 interface QuoteType {
@@ -120,19 +121,21 @@ const Component: FC = () => {
                     https://codesandbox.io/p/sandbox/zqwz5n5p9x?file=%2Fsrc%2Findex.js%3A3%2C38
                 </a>
             </p>
-            <DragDropContext onDragEnd={onDragEnd}>
-                <Droppable droppableId='list'>
-                    {provided => (
-                        <div
-                            ref={provided.innerRef}
-                            {...provided.droppableProps}
-                        >
-                            <QuoteList quotes={state.quotes} />
-                            {provided.placeholder}
-                        </div>
-                    )}
-                </Droppable>
-            </DragDropContext>
+            <DivCustom styleTypes={['center', 'margin']}>
+                <DragDropContext onDragEnd={onDragEnd}>
+                    <Droppable droppableId='list'>
+                        {provided => (
+                            <div
+                                ref={provided.innerRef}
+                                {...provided.droppableProps}
+                            >
+                                <QuoteList quotes={state.quotes} />
+                                {provided.placeholder}
+                            </div>
+                        )}
+                    </Droppable>
+                </DragDropContext>
+            </DivCustom>
         </>
     );
 };

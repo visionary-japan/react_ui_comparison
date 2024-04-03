@@ -1,9 +1,16 @@
 import type { StyleXStyles } from '@stylexjs/stylex';
 import stylex from '@stylexjs/stylex';
 import type { UserAuthoredStyles } from '@stylexjs/stylex/lib/StyleXTypes';
-import { type FC, type HTMLAttributes, memo } from 'react';
+import { type HTMLAttributes, forwardRef, memo } from 'react';
 
-type TypedStylesKeys = 'center' | 'flexCenter' | 'margin' | 'margin2';
+type TypedStylesKeys =
+    | 'center'
+    | 'flexCenter'
+    | 'flexStart'
+    | 'flexColumn'
+    | 'gap'
+    | 'margin'
+    | 'margin2';
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
     styles?: StyleXStyles<UserAuthoredStyles>;
@@ -24,6 +31,20 @@ const typedStyles: Record<
         justifyContent: 'center',
         alignItems: 'center',
     },
+    flexStart: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'start',
+    },
+    flexColumn: {
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    gap: {
+        gap: '1em',
+    },
     margin: {
         margin: '1em',
     },
@@ -34,8 +55,8 @@ const typedStyles: Record<
 
 const getTypedStyles = (
     styleTypes?: TypedStylesKeys[],
-): StyleXStyles<UserAuthoredStyles> | undefined => {
-    return styleTypes?.reduce((accStyles, currentType) => {
+): StyleXStyles<UserAuthoredStyles> | undefined =>
+    styleTypes?.reduce((accStyles, currentType) => {
         const styleToAdd = typedStyles[currentType];
         if (styleToAdd) {
             // Avoid the use of spread (`...`) syntax on accumulators.
@@ -43,12 +64,17 @@ const getTypedStyles = (
         }
         return accStyles;
     }, {});
-};
 
-const Component: FC<Props> = ({ styles, styleTypes, children, ...attrs }) => (
-    <div {...attrs} {...stylex.props(getTypedStyles(styleTypes), styles)}>
-        {children}
-    </div>
+const Component = forwardRef<HTMLDivElement, Props>(
+    ({ styles, styleTypes, children, ...attrs }, ref) => (
+        <div
+            ref={ref}
+            {...attrs}
+            {...stylex.props(getTypedStyles(styleTypes), styles)}
+        >
+            {children}
+        </div>
+    ),
 );
 
 export const DivCustom = memo(Component);
