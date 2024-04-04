@@ -27,7 +27,7 @@ const Component: FC = () => {
         const topMax = window.innerHeight;
         const topNow = window.scrollY;
         const topSub = topMax / 4;
-        return topNow >= topMax - 1 ? 0 : Math.min(topNow + topSub, topMax);
+        return topNow >= topMax - 2 ? 0 : Math.min(topNow + topSub, topMax);
     }, []);
 
     const scrollWindowNormal = useCallback(() => {

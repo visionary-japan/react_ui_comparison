@@ -26,6 +26,6 @@ export const stylesCommon = stylex.create({
         writingMode: 'vertical-rl',
         textAlign: 'center',
         height: '100%',
-        marginLeft: '0.5em',
+        marginLeft: '0.125em',
     },
 });

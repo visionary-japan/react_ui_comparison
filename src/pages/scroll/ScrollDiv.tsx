@@ -15,8 +15,8 @@ const styles = stylex.create({
         borderWidth: 2,
         borderColor: 'lightgray',
         textAlign: 'center',
-        width: '30svw',
-        height: '30svw',
+        width: '40svh',
+        height: '40svh',
         margin: '1em',
         overflow: 'auto',
         '::-webkit-scrollbar': {
@@ -25,14 +25,14 @@ const styles = stylex.create({
         display: 'flex',
     },
     wrapsDiv: {
-        height: '90svw',
-        width: '30svw',
+        height: '80svh',
+        width: '40svh',
         background: 'linear-gradient(black, white)',
     },
     divBtns: {
         position: 'sticky',
-        top: '15svw',
-        left: '15svw',
+        top: '20svh',
+        left: '20svh',
         transform: 'translate(-50%, -50%)',
     },
 });
@@ -55,7 +55,7 @@ const Component: FC = () => {
         const topMax = current.scrollHeight - current.clientHeight;
         const topNow = current.scrollTop;
         const topSub = topMax / 4;
-        return topNow >= topMax - 1 ? 0 : Math.min(topNow + topSub, topMax);
+        return topNow >= topMax - 2 ? 0 : Math.min(topNow + topSub, topMax);
     }, []);
 
     //
