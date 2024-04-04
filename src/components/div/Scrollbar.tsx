@@ -19,7 +19,7 @@ interface Props {
     hasButton?: boolean;
 }
 
-const SCROLLBAR_WIDTH = 16;
+const SCROLLBAR_WIDTH = 8;
 const SCROLLBAR_MARGIN = 1;
 const SCROLL_SUB = 300;
 

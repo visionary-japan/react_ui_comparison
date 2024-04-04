@@ -8,11 +8,13 @@ import { Btn } from './pages/Btn.tsx';
 import { Index } from './pages/Index.tsx';
 import { Public } from './pages/Public.tsx';
 import { Query } from './pages/Query.tsx';
-import { Scroll } from './pages/Scroll.tsx';
 import { Beautiful } from './pages/dnd/Beautiful.tsx';
 import { HTML5 } from './pages/dnd/HTML5.tsx';
 import { Pointer } from './pages/dnd/Pointer.tsx';
 import { Sortablejs } from './pages/dnd/Sortablejs.tsx';
+import { ScrollCss } from './pages/scroll/ScrollCss.tsx';
+import { ScrollDiv } from './pages/scroll/ScrollDiv.tsx';
+import { Scroll } from './pages/scroll/Scroll.tsx';
 
 const App: FC = () => {
     const { ROOT_NAME } = useEnv();
@@ -30,6 +32,8 @@ const App: FC = () => {
                 <Route path='query' element={<Query />} />
                 <Route path='public' element={<Public />} />
                 <Route path='scroll' element={<Scroll />} />
+                <Route path='scrollDiv' element={<ScrollDiv />} />
+                <Route path='scrollCss' element={<ScrollCss />} />
                 <Route path='*' element={<Navigate to='/' />} />
             </Routes>
         </BrowserRouter>

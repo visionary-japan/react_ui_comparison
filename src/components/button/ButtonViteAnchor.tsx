@@ -1,25 +1,24 @@
 import * as stylex from '@stylexjs/stylex';
 import type { StyleXStyles } from '@stylexjs/stylex';
 import type { UserAuthoredStyles } from '@stylexjs/stylex/lib/StyleXTypes';
-import { type ButtonHTMLAttributes, forwardRef, memo } from 'react';
+import { type AnchorHTMLAttributes, forwardRef, memo } from 'react';
 import { sizes, styls } from './buttonViteStyle';
 
-interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface Props extends AnchorHTMLAttributes<HTMLAnchorElement> {
     size?: 'small' | 'medium' | 'large';
     styles?: StyleXStyles<UserAuthoredStyles>;
 }
 
-const Component = forwardRef<HTMLButtonElement, Props>(
-    ({ type = 'button', size = 'medium', styles, children, ...attrs }, ref) => (
-        <button
+const Component = forwardRef<HTMLAnchorElement, Props>(
+    ({ size = 'medium', styles, children, ...attrs }, ref) => (
+        <a
             ref={ref}
-            type={type}
             {...stylex.props(styls.base, sizes[size], styles)}
             {...attrs}
         >
             {children}
-        </button>
+        </a>
     ),
 );
 
-export const ButtonVite = memo(Component);
+export const ButtonViteAnchor = memo(Component);

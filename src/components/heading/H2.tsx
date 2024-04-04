@@ -14,8 +14,11 @@ const styles = stylex.create({
     },
 });
 
-const Component: FC<Props> = ({ isLeft, children, ...attrs }) => (
-    <h2 {...attrs} {...stylex.props(styles.base, isLeft && styles.left)}>
+const Component: FC<Props> = ({ isLeft, children, propsStyles, ...attrs }) => (
+    <h2
+        {...attrs}
+        {...stylex.props(styles.base, isLeft && styles.left, propsStyles)}
+    >
         {children}
     </h2>
 );
