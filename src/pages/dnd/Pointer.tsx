@@ -7,7 +7,7 @@ import {
     PointerDrop,
 } from '../../components/dnd/PointerDrop.tsx';
 import { H1 } from '../../components/heading/H1.tsx';
-import { useResizeObserver } from '../../hooks/useDivResizeObserver.tsx';
+import { useObserverResize } from '../../hooks/useObserverResize.tsx';
 import { dropDatas } from './config/configs.ts';
 import type { DndKeys, DragData } from './config/index';
 
@@ -60,7 +60,7 @@ const Component: FC = () => {
     }, []);
 
     const ref = useRef<HTMLDivElement>(null);
-    useResizeObserver(ref, handleResize);
+    useObserverResize(ref, handleResize);
 
     return (
         <div>

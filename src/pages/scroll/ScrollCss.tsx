@@ -1,46 +1,12 @@
 import stylex from '@stylexjs/stylex';
 import { type FC, memo } from 'react';
 import { ButtonViteAnchor } from '../../components/button/ButtonViteAnchor';
-import { H1 } from '../../components/heading/H1';
+import { DivScrollableSection } from '../../components/div/DivScrollableSection';
+import { H2 } from '../../components/heading/H2';
+import { H3 } from '../../components/heading/H3';
 import { stylesCommon } from './styles';
 
 const styles = stylex.create({
-    container: {
-        overflowY: 'scroll',
-        overscrollBehavior: 'none',
-        scrollBehavior: 'smooth',
-        scrollSnapType: 'y mandatory',
-        height: '100lvh',
-        width: '50svw',
-        marginLeft: -160,
-        borderTopLeftRadius: 8,
-        borderBottomLeftRadius: 8,
-        '::-webkit-scrollbar': {
-            width: 8,
-        },
-        '::-webkit-scrollbar-track': {
-            backgroundColor: '#f1f1f1',
-            borderTopRightRadius: 8,
-            borderBottomRightRadius: 8,
-        },
-        '::-webkit-scrollbar-thumb': {
-            backgroundColor: '#888',
-            borderTopRightRadius: 8,
-            borderBottomRightRadius: 8,
-        },
-        '::-webkit-scrollbar-thumb:hover': {
-            backgroundColor: '#555',
-        },
-    },
-    section: {
-        height: '100lvh',
-        scrollSnapAlign: 'start',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        fontSize: '24px',
-        color: 'white',
-    },
     section1: {
         backgroundColor: '#ff6b6b',
     },
@@ -73,49 +39,62 @@ const styles = stylex.create({
 const Component: FC = () => {
     return (
         <>
-            <div {...stylex.props(stylesCommon.wrap)}>
-                <H1 propsStyles={stylesCommon.h1}>Scroll CSS</H1>
-                <div {...stylex.props(styles.container)}>
-                    <div {...stylex.props(styles.section, styles.section1)}>
-                        <h1 id='section1'>Section 1</h1>
-                    </div>
-                    <div {...stylex.props(styles.section, styles.section2)}>
-                        <h1 id='section2'>Section 2</h1>
-                    </div>
-                    <div {...stylex.props(styles.section, styles.section3)}>
-                        <h1 id='section3'>Section 3</h1>
-                    </div>
-                    <div {...stylex.props(styles.section, styles.section4)}>
-                        <h1 id='section4'>Section 4</h1>
-                    </div>
-                </div>
+            <DivScrollableSection
+                sections={[
+                    {
+                        id: 'section1',
+                        children: <H3 id='section1'>Section 1</H3>,
+                        styles: styles.section1,
+                    },
+                    {
+                        id: 'section2',
+                        children: <H3 id='section2'>Section 2</H3>,
+                        styles: styles.section2,
+                    },
+                    {
+                        id: 'section3',
+                        children: <H3 id='section3'>Section 3</H3>,
+                        styles: styles.section3,
+                    },
+                    {
+                        id: 'section4',
+                        children: <H3 id='section4'>Section 4</H3>,
+                        styles: styles.section4,
+                    },
+                ]}
+            >
+                <H2 propsStyles={stylesCommon.h2}>With CSS</H2>
                 <div {...stylex.props(styles.btnWrap)}>
                     <ButtonViteAnchor
+                        size='small'
                         href='#section1'
                         styles={{ ...styles.btn }}
                     >
                         To Section 1
                     </ButtonViteAnchor>
                     <ButtonViteAnchor
+                        size='small'
                         href='#section2'
                         styles={{ ...styles.btn }}
                     >
                         To Section 2
                     </ButtonViteAnchor>
                     <ButtonViteAnchor
+                        size='small'
                         href='#section3'
                         styles={{ ...styles.btn }}
                     >
                         To Section 3
                     </ButtonViteAnchor>
                     <ButtonViteAnchor
+                        size='small'
                         href='#section4'
                         styles={{ ...styles.btn }}
                     >
                         To Section 4
                     </ButtonViteAnchor>
                 </div>
-            </div>
+            </DivScrollableSection>
         </>
     );
 };

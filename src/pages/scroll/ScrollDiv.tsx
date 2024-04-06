@@ -1,35 +1,20 @@
 import stylex from '@stylexjs/stylex';
 import { type FC, memo, useCallback, useRef } from 'react';
+import type { RefHandle } from '../../@types/scrollable';
 import { ButtonVite } from '../../components/button/ButtonVite';
 import { DivCustom } from '../../components/div/DivCustom';
-import { Scrollbar } from '../../components/div/Scrollbar';
-import { H1 } from '../../components/heading/H1';
+import { DivScrollable } from '../../components/div/DivScrollable';
+import { H2 } from '../../components/heading/H2';
 import { useScrollSmooth } from '../../hooks/useScrollSmooth';
 import { stylesCommon } from './styles';
 
 const styles = stylex.create({
-    wraps: {
-        position: 'relative',
-        borderRadius: 4,
-        borderStyle: 'solid',
-        borderWidth: 2,
-        borderColor: 'lightgray',
-        textAlign: 'center',
-        width: '40svh',
-        height: '40svh',
-        margin: '1em',
-        overflow: 'auto',
-        '::-webkit-scrollbar': {
-            display: 'none',
-        },
-        display: 'flex',
-    },
-    wrapsDiv: {
+    child: {
         height: '80svh',
         width: '40svh',
-        background: 'linear-gradient(black, white)',
+        background: 'linear-gradient(red, blue)',
     },
-    divBtns: {
+    button: {
         position: 'sticky',
         top: '20svh',
         left: '20svh',
@@ -39,13 +24,10 @@ const styles = stylex.create({
 
 const Component: FC = () => {
     // ref
-    // 通常スクロール
-    const refDivNormal = useRef<HTMLDivElement>(null);
-    const refDivNormalDiv = useRef<HTMLDivElement>(null);
+    // ノーマルスクロール
+    const refNormal = useRef<RefHandle>(null);
     // スムーズスクロール
-    const refDivSmooth = useRef<HTMLDivElement>(null);
-    const refDivSmoothDiv = useRef<HTMLDivElement>(null);
-    const refDivTarget = useRef<HTMLDivElement>(null);
+    const refSmooth = useRef<RefHandle>(null);
 
     // スムーズスクロールメソッドを取得
     const { scrollSmooth } = useScrollSmooth();
@@ -60,60 +42,48 @@ const Component: FC = () => {
 
     //
     const scrollDivNormal = useCallback(() => {
-        if (!refDivNormal.current) return;
-        refDivNormal.current.scrollTo(0, getNewTopDiv(refDivNormal.current));
+        if (!refNormal.current?.refParent) return;
+        refNormal.current.refParent.scrollTo(
+            0,
+            getNewTopDiv(refNormal.current.refParent),
+        );
     }, [getNewTopDiv]);
 
     //
     const scrollDivSmooth = useCallback(() => {
-        if (!refDivSmooth.current) return;
+        if (!(refSmooth.current?.refParent && refSmooth.current?.refTarget))
+            return;
         scrollSmooth(
-            refDivTarget,
-            getNewTopDiv(refDivSmooth.current),
-            'div-wrap',
+            refSmooth.current.refTarget,
+            getNewTopDiv(refSmooth.current.refParent),
+            refSmooth.current.refParent.id,
         );
     }, [getNewTopDiv, scrollSmooth]);
 
     return (
         <DivCustom styles={stylesCommon.wrap}>
-            <H1 propsStyles={stylesCommon.h1}>Scroll Div</H1>
+            <H2 propsStyles={stylesCommon.h2}>With JS</H2>
             {/* 通常スクロール */}
-            <DivCustom ref={refDivNormal} styles={styles.wraps}>
-                <DivCustom ref={refDivNormalDiv} styles={styles.wrapsDiv}>
-                    <ButtonVite
-                        styles={styles.divBtns}
-                        onClick={scrollDivNormal}
-                    >
-                        Normal Scroll
-                    </ButtonVite>
-                </DivCustom>
-                <Scrollbar
-                    refParent={refDivNormal}
-                    refChild={refDivNormalDiv}
-                />
-            </DivCustom>
+            <DivScrollable
+                ref={refNormal}
+                id='normal'
+                stylesChild={styles.child}
+            >
+                <ButtonVite styles={styles.button} onClick={scrollDivNormal}>
+                    Normal Scroll
+                </ButtonVite>
+            </DivScrollable>
             {/* スムーススクロール */}
-            <DivCustom ref={refDivSmooth} id='div-wrap' styles={styles.wraps}>
-                <DivCustom ref={refDivSmoothDiv} styles={styles.wrapsDiv}>
-                    <ButtonVite
-                        styles={styles.divBtns}
-                        onClick={scrollDivSmooth}
-                    >
-                        Smooth Scroll
-                    </ButtonVite>
-                    <div
-                        ref={refDivTarget}
-                        id='div-target'
-                        {...stylex.props(stylesCommon.target)}
-                    />
-                </DivCustom>
-                <Scrollbar
-                    refParent={refDivSmooth}
-                    refChild={refDivSmoothDiv}
-                    refTarget={refDivTarget}
-                    hasButton
-                />
-            </DivCustom>
+            <DivScrollable
+                ref={refSmooth}
+                id='smooth'
+                stylesChild={styles.child}
+                hasButton
+            >
+                <ButtonVite styles={styles.button} onClick={scrollDivSmooth}>
+                    Smooth Scroll
+                </ButtonVite>
+            </DivScrollable>
         </DivCustom>
     );
 };

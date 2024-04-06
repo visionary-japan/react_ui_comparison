@@ -1,6 +1,6 @@
 import { type RefObject, useEffect } from 'react';
 
-export function useResizeObserver<T extends Element>(
+export function useObserverResize<T extends Element>(
     ref: RefObject<T>,
     callback: ResizeObserverCallback,
 ) {

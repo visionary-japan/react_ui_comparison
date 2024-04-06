@@ -4,7 +4,7 @@ import type { Props } from '.';
 
 const styles = stylex.create({
     base: {
-        fontSize: '2em',
+        fontSize: '3em',
         lineHeight: 1.5,
         margin: 0,
     },
