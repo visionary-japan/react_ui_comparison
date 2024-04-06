@@ -1,21 +1,37 @@
 import stylex from '@stylexjs/stylex';
 import type { StyleXStyles } from '@stylexjs/stylex';
 import type { UserAuthoredStyles } from '@stylexjs/stylex/lib/StyleXTypes';
-import { type FC, type HTMLAttributes, type ReactNode, memo } from 'react';
-import { stylesCommon } from './styles';
+import { type FC, type ReactNode, memo } from 'react';
 
-interface Section {
-    id: string;
-    children: ReactNode;
+interface Common {
     styles?: StyleXStyles<UserAuthoredStyles>;
 }
 
-interface Props extends HTMLAttributes<HTMLDivElement> {
-    styles?: StyleXStyles<UserAuthoredStyles>;
+// TODO ContainerとWrapperの違いがわかりにくい
+interface Container extends Common {}
+interface Wrapper extends Common {}
+interface Section extends Common {
+    id: string;
+    children: ReactNode;
+}
+
+interface Props {
+    wrapper?: Wrapper;
+    container?: Container;
     sections: Section[];
+    children?: ReactNode;
 }
 
 const styles = stylex.create({
+    wrapper: {
+        width: '100dvw',
+        height: '100lvh',
+        position: 'relative',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        flexWrap: 'wrap',
+    },
     container: {
         overflowY: 'scroll',
         overscrollBehavior: 'none',
@@ -23,7 +39,6 @@ const styles = stylex.create({
         scrollSnapType: 'y mandatory',
         height: '100lvh',
         width: '50lvw',
-        marginLeft: -160,
         borderTopLeftRadius: 8,
         borderBottomLeftRadius: 8,
         '::-webkit-scrollbar': {
@@ -54,20 +69,17 @@ const styles = stylex.create({
     },
 });
 
-const Component: FC<Props> = ({
-    sections,
-    styles: propsStyles,
-    children,
-    ...attrs
-}) => {
+const Component: FC<Props> = props => {
     // セクションがないなら表示しない
-    if (sections.length === 0) return <></>;
+    if (props.sections.length === 0) return <></>;
 
     return (
         <>
-            <div {...attrs} {...stylex.props(stylesCommon.wrap, propsStyles)}>
-                <div {...stylex.props(styles.container)}>
-                    {sections.map(section => (
+            <div {...stylex.props(styles.wrapper, props.wrapper?.styles)}>
+                <div
+                    {...stylex.props(styles.container, props.container?.styles)}
+                >
+                    {props.sections.map(section => (
                         <div
                             key={section.id}
                             {...stylex.props(styles.section, section.styles)}
@@ -76,7 +88,7 @@ const Component: FC<Props> = ({
                         </div>
                     ))}
                 </div>
-                {children}
+                {props.children}
             </div>
         </>
     );

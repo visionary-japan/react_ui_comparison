@@ -54,7 +54,7 @@ const styles = stylex.create({
         left: 0,
         width: 4,
         height: 4,
-        backgroundColor: 'green',
+        backgroundColor: 'black',
     },
     wrap: {
         position: 'sticky',
@@ -337,7 +337,7 @@ const Component = forwardRef<RefHandle, Props>(
             if (!refScrollbar.current) return;
             const { clientHeight: heightScrollbar } = refScrollbar.current;
             setCanUp(thumbTop > 0);
-            setCanDown(thumbTop < heightScrollbar - thumbHeight);
+            setCanDown(thumbTop < heightScrollbar - thumbHeight - 1);
         }, [thumbHeight, thumbTop]);
 
         return (

@@ -9,6 +9,15 @@ import { useScrollSmooth } from '../../hooks/useScrollSmooth';
 import { stylesCommon } from './styles';
 
 const styles = stylex.create({
+    wrapper: {
+        width: '100dvw',
+        height: '100lvh',
+        position: 'relative',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        flexWrap: 'wrap',
+    },
     child: {
         height: '80svh',
         width: '40svh',
@@ -61,7 +70,7 @@ const Component: FC = () => {
     }, [getNewTopDiv, scrollSmooth]);
 
     return (
-        <DivCustom styles={stylesCommon.wrap}>
+        <DivCustom styles={styles.wrapper}>
             <H2 propsStyles={stylesCommon.h2}>With JS</H2>
             {/* 通常スクロール */}
             <DivScrollable

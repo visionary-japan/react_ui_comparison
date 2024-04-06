@@ -7,6 +7,9 @@ import { H3 } from '../../components/heading/H3';
 import { stylesCommon } from './styles';
 
 const styles = stylex.create({
+    container: {
+        marginLeft: -160,
+    },
     section1: {
         backgroundColor: '#ff6b6b',
     },
@@ -62,6 +65,7 @@ const Component: FC = () => {
                         styles: styles.section4,
                     },
                 ]}
+                container={{ styles: styles.container }}
             >
                 <H2 propsStyles={stylesCommon.h2}>With CSS</H2>
                 <div {...stylex.props(styles.btnWrap)}>

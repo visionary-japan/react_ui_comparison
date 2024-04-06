@@ -6,7 +6,6 @@ import { H1 } from '../../components/heading/H1';
 import { useScrollSmooth } from '../../hooks/useScrollSmooth';
 import { ScrollCss } from './ScrollCss';
 import { ScrollDiv } from './ScrollDiv';
-import { stylesCommon } from './styles';
 
 const styles = stylex.create({
     wrap: {
@@ -18,6 +17,14 @@ const styles = stylex.create({
         left: '50%',
         top: 0,
         transform: 'translateX(-50%)',
+    },
+    target: {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        width: 4,
+        height: 4,
+        backgroundColor: 'red',
     },
     fixed: {
         position: 'fixed',
@@ -58,7 +65,7 @@ const Component: FC = () => {
             <div
                 ref={refWindowTarget}
                 id='window-target'
-                {...stylex.props(stylesCommon.target)}
+                {...stylex.props(styles.target)}
             />
             <DivCustom
                 styleTypes={['flexColumn', 'gap', 'margin']}
