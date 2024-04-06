@@ -9,7 +9,7 @@ const dragStyles = stylex.create({
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'top',
         backgroundSize: 'contain',
-        backgroundImage: `url("/react_ui_comparison/computer_cursor_arrow_white.png")`,
+        backgroundImage: `url("/react_ui_comparison/04_hotspot.png")`,
         '::after': {
             content: '',
             backgroundColor: '#ff0000',

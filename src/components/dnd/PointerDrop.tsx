@@ -19,6 +19,7 @@ const styles = stylex.create({
         borderStyle: 'dashed',
         borderColor: '#aaaaaa',
         willChange: 'border-color',
+        transition: 'border-color 500ms ease-out',
     },
 });
 

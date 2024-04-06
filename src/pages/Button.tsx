@@ -70,4 +70,4 @@ const Component: FC = () => {
     );
 };
 
-export const Btn = memo(Component);
+export const Button = memo(Component);

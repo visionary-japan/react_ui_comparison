@@ -4,7 +4,7 @@ import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { LinkIndex } from './components/link/LinkIndex.tsx';
 import { useEnv } from './hooks/useEnv.tsx';
 import './main.css';
-import { Btn } from './pages/Btn.tsx';
+import { Button } from './pages/Button.tsx';
 import { Index } from './pages/Index.tsx';
 import { Public } from './pages/Public.tsx';
 import { Query } from './pages/Query.tsx';
@@ -23,7 +23,7 @@ const App: FC = () => {
         <BrowserRouter basename={ROOT_NAME}>
             <Routes>
                 <Route path='/' element={<Index />} />
-                <Route path='btn' element={<Btn />} />
+                <Route path='btn' element={<Button />} />
                 <Route path='dnd' element={<LinkIndex path='/dnd' />} />
                 <Route path='dnd/htmlapi' element={<HTML5 />} />
                 <Route path='dnd/pointer' element={<Pointer />} />
