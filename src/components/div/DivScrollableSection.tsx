@@ -65,7 +65,6 @@ const styles = stylex.create({
         justifyContent: 'center',
         alignItems: 'center',
         fontSize: '24px',
-        color: 'white',
     },
 });
 

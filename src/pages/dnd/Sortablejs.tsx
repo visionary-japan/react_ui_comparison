@@ -23,7 +23,6 @@ const styles = stylex.create({
         minWidth: 180,
         padding: '10px 15px',
         margin: 'auto',
-        color: 'white',
         cursor: 'pointer',
         background: 'rgb(71 119 214)',
         borderRadius: 6,
