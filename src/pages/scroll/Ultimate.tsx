@@ -34,16 +34,20 @@ const styles = stylex.create({
     },
 });
 
-const Component: FC = () => {
-    const [page, setPage] = useState<string>('');
+const arr = ['1', '2', '3', '4', '5', '6', '7', '8', ''];
 
-    const handleSetPage = (str: string) => {
-        setPage(str);
+const Component: FC = () => {
+    const [pageIdx, setPageIdx] = useState<number>(0);
+
+    const handleSetPage = (idx: number) => {
+        setPageIdx(idx);
     };
 
     return (
         <DivCustom styles={styles.wrapper}>
-            <H2 propsStyles={stylesCommon.h2}>{`Page: ${page}`}</H2>
+            <H2
+                propsStyles={stylesCommon.h2}
+            >{`Page: "${arr[pageIdx]}" (${pageIdx})`}</H2>
             {/*  */}
             <DivScrollable
                 isSnap

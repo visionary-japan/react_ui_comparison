@@ -23,7 +23,7 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
     isAnimate?: boolean;
     stylesParent?: StyleXStyles<UserAuthoredStyles>;
     stylesScroll?: StyleXStyles<UserAuthoredStyles>;
-    onSetPage?: (str: string) => void;
+    onSetPage?: (idx: number) => void;
 }
 
 const styles = stylex.create({
@@ -152,30 +152,31 @@ const Component = forwardRef<HTMLDivElement, Props>(
 
         const handleScroll = (e: UIEvent) => {
             const target = e.target as HTMLDivElement;
+            const targetRect = target.getBoundingClientRect();
             const children = target.children;
             let maxVisibleArea = 0;
-            let mostVisibleChild = null;
+            let mostVisibleIndex: number | null = null;
             //
             for (let i = 0; i < children.length; i++) {
                 const child = children[i] as HTMLDivElement;
                 const rect = child.getBoundingClientRect();
                 const visibleWidth =
-                    Math.min(rect.right, target.clientWidth) -
-                    Math.max(rect.left, 0);
+                    Math.min(rect.right, targetRect.right) -
+                    Math.max(rect.left, targetRect.left);
                 const visibleHeight =
-                    Math.min(rect.bottom, target.clientHeight) -
-                    Math.max(rect.top, 0);
+                    Math.min(rect.bottom, targetRect.bottom) -
+                    Math.max(rect.top, targetRect.top);
                 const visibleArea =
                     Math.max(0, visibleWidth) * Math.max(0, visibleHeight);
 
                 if (visibleArea > maxVisibleArea) {
                     maxVisibleArea = visibleArea;
-                    mostVisibleChild = child;
+                    mostVisibleIndex = i;
                 }
             }
             // 最も表面積のある子要素がないならキャンセル
-            if (!mostVisibleChild) return;
-            onSetPage?.(mostVisibleChild.textContent as string);
+            if (mostVisibleIndex === null) return;
+            onSetPage?.(mostVisibleIndex);
         };
 
         return (
