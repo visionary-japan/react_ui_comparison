@@ -81,8 +81,12 @@ const Component: FC = () => {
                 styleTypes={['flexColumn', 'gap', 'margin']}
                 styles={styles.btns}
             >
-                <ButtonVite onClick={refScroll.current?.back}>Back</ButtonVite>
-                <ButtonVite onClick={refScroll.current?.next}>Next</ButtonVite>
+                <ButtonVite onClick={() => refScroll.current?.back()}>
+                    Back
+                </ButtonVite>
+                <ButtonVite onClick={() => refScroll.current?.next()}>
+                    Next
+                </ButtonVite>
             </DivCustom>
         </DivCustom>
     );
