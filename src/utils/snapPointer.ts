@@ -2,7 +2,7 @@ import type { PointerEvent } from 'react';
 import type { Coordinate } from '../@types';
 import { getChildOffsets } from './getChildOffsets';
 import { getClosestCoordinate } from './getClosestCoordinate';
-import { scrollAnimate } from './scrollAnimate';
+import { snap } from './snap';
 
 export const snapPointer = (
     e: PointerEvent<HTMLDivElement>,
@@ -30,11 +30,5 @@ export const snapPointer = (
     const offsets: Coordinate[] = getChildOffsets(target);
     const closest = getClosestCoordinate(adjusted, offsets);
     // フラグによりアニメーションか瞬間移動か分岐
-    if (isAnimate) {
-        const { animateScroll } = scrollAnimate();
-        animateScroll(target, closest);
-    } else {
-        target.scrollLeft = closest.x;
-        target.scrollTop = closest.y;
-    }
+    snap(target, closest, isAnimate);
 };

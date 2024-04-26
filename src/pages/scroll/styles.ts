@@ -10,6 +10,6 @@ export const stylesCommon = stylex.create({
         textAlign: 'center',
         height: '100%',
         lineHeight: 1,
-        marginLeft: '0.25em',
+        marginLeft: '0.5em',
     },
 });

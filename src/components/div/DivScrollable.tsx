@@ -8,14 +8,17 @@ import {
     type UIEvent,
     forwardRef,
     memo,
-    useEffect,
+    useImperativeHandle,
     useRef,
 } from 'react';
 import type { Coordinate } from '../../@types/index';
 import { useEventKeydown } from '../../hooks/useEventKeydown';
 import { useEventWheel } from '../../hooks/useEventWheel';
+import type { ScrollMethods } from '../../pages/scroll/Ultimate';
+import { getMostVisibleIndex } from '../../utils/getMostVisibleIndex';
 import { scrollAnimate } from '../../utils/scrollAnimate';
 import { snapPointer } from '../../utils/snapPointer';
+import { snapToElement } from '../../utils/snapToElement';
 import { snapWheel } from '../../utils/snapWheel';
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
@@ -43,7 +46,7 @@ const styles = stylex.create({
 const initCoordinate = { x: 0, y: 0 };
 let isDragging = false;
 
-const Component = forwardRef<HTMLDivElement, Props>(
+const Component = forwardRef<ScrollMethods, Props>(
     (
         {
             isSnap,
@@ -58,16 +61,6 @@ const Component = forwardRef<HTMLDivElement, Props>(
     ) => {
         // Ref: スクロール要素
         const refScroll = useRef<HTMLDivElement>(null);
-
-        // スクロール要素Refの受取
-        useEffect(() => {
-            if (!ref) return;
-            if (typeof ref === 'function') {
-                ref(refScroll.current);
-            } else {
-                ref.current = refScroll.current;
-            }
-        }, [ref]);
 
         // Ref: ドラッグ関連
         const dragOffset = useRef<Coordinate>(initCoordinate); // ドラッグ開始時のポインター位置
@@ -141,8 +134,33 @@ const Component = forwardRef<HTMLDivElement, Props>(
             },
         );
 
+        const move = (sub: number) => {
+            if (!refScroll.current) return;
+            const currentIndex = getMostVisibleIndex(refScroll.current);
+            if (currentIndex === null) return;
+            const targetIndex = currentIndex + sub;
+            if (
+                targetIndex < 0 ||
+                refScroll.current.children.length - 1 < targetIndex
+            )
+                return;
+            const targetChild = refScroll.current.children[
+                targetIndex
+            ] as HTMLElement;
+            snapToElement(refScroll.current, targetChild, isAnimate);
+        };
+        const back = () => {
+            move(-1);
+        };
+        const next = () => {
+            move(1);
+        };
+
         useEventKeydown([
-            { key: 'ArrowLeft', callback: () => console.log('!') },
+            { key: 'ArrowLeft', callback: back },
+            { key: 'ArrowUp', callback: back },
+            { key: 'ArrowRight', callback: next },
+            { key: 'ArrowDown', callback: next },
         ]);
 
         const handleMouseDown = (e: MouseEvent<HTMLDivElement>) => {
@@ -151,33 +169,20 @@ const Component = forwardRef<HTMLDivElement, Props>(
         };
 
         const handleScroll = (e: UIEvent) => {
-            const target = e.target as HTMLDivElement;
-            const rectTarget = target.getBoundingClientRect();
-            const children = target.children;
-            let maxVisibleArea = 0;
-            let mostVisibleIndex: number | null = null;
-            //
-            for (let i = 0; i < children.length; i++) {
-                const child = children[i] as HTMLDivElement;
-                const rectChild = child.getBoundingClientRect();
-                const visibleWidth =
-                    Math.min(rectChild.right, rectTarget.right) -
-                    Math.max(rectChild.left, rectTarget.left);
-                const visibleHeight =
-                    Math.min(rectChild.bottom, rectTarget.bottom) -
-                    Math.max(rectChild.top, rectTarget.top);
-                const visibleArea =
-                    Math.max(0, visibleWidth) * Math.max(0, visibleHeight);
-
-                if (visibleArea > maxVisibleArea) {
-                    maxVisibleArea = visibleArea;
-                    mostVisibleIndex = i;
-                }
-            }
-            // 最も表面積のある子要素がないならキャンセル
+            // 最も表示面積の多い子要素のインデックスを取得
+            const mostVisibleIndex = getMostVisibleIndex(
+                e.target as HTMLElement,
+            );
+            // インデックスがないならキャンセル
             if (mostVisibleIndex === null) return;
             onSetPage?.(mostVisibleIndex);
         };
+
+        useImperativeHandle(ref, () => ({
+            refScroll: refScroll.current,
+            back,
+            next,
+        }));
 
         return (
             <div {...attrs} {...stylex.props(styles.parent, stylesParent)}>
@@ -190,7 +195,7 @@ const Component = forwardRef<HTMLDivElement, Props>(
                     onPointerUp={handlePointerUp}
                     onMouseDown={handleMouseDown}
                     onScroll={handleScroll}
-                    onAuxClick={e => e.preventDefault()}
+                    onAuxClick={e => e.preventDefault()} // 左クリック以外を無効化
                 >
                     {/* 子要素 */}
                     {children}

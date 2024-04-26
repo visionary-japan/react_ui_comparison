@@ -1,5 +1,6 @@
 import stylex from '@stylexjs/stylex';
-import { type FC, memo, useState } from 'react';
+import { type FC, memo, useRef, useState } from 'react';
+import { ButtonVite } from '../../components/button/ButtonVite';
 import { DivCustom } from '../../components/div/DivCustom';
 import { DivScrollable } from '../../components/div/DivScrollable';
 import { H2 } from '../../components/heading/H2';
@@ -32,11 +33,24 @@ const styles = stylex.create({
         height: '80dvh',
         background: 'radial-gradient(#ff000033, #0000ff33)',
     },
+    btns: {
+        position: 'absolute',
+        right: 0,
+        top: 0,
+    },
 });
 
 const arr = ['1', '2', '3', '4', '5', '6', '7', '8', ''];
 
+export interface ScrollMethods {
+    refScroll: HTMLDivElement | null;
+    back: () => void;
+    next: () => void;
+}
+
 const Component: FC = () => {
+    const refScroll = useRef<ScrollMethods>(null);
+
     const [pageIdx, setPageIdx] = useState<number>(0);
 
     const handleSetPage = (idx: number) => {
@@ -50,6 +64,7 @@ const Component: FC = () => {
             >{`Page: "${arr[pageIdx]}" (${pageIdx})`}</H2>
             {/*  */}
             <DivScrollable
+                ref={refScroll}
                 isSnap
                 isAnimate
                 stylesParent={styles.parent}
@@ -62,6 +77,13 @@ const Component: FC = () => {
                     </div>
                 ))}
             </DivScrollable>
+            <DivCustom
+                styleTypes={['flexColumn', 'gap', 'margin']}
+                styles={styles.btns}
+            >
+                <ButtonVite onClick={refScroll.current?.back}>Back</ButtonVite>
+                <ButtonVite onClick={refScroll.current?.next}>Next</ButtonVite>
+            </DivCustom>
         </DivCustom>
     );
 };
