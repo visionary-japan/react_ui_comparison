@@ -3,7 +3,7 @@ import { type FC, memo, useCallback, useRef } from 'react';
 import type { RefHandle } from '../../@types/scrollable';
 import { ButtonVite } from '../../components/button/ButtonVite';
 import { DivCustom } from '../../components/div/DivCustom';
-import { DivScrollable } from '../../components/div/DivScrollable';
+import { DivScrollbar } from '../../components/div/DivScrollbar';
 import { H2 } from '../../components/heading/H2';
 import { useScrollSmooth } from '../../hooks/useScrollSmooth';
 import { stylesCommon } from './styles';
@@ -73,7 +73,7 @@ const Component: FC = () => {
         <DivCustom styles={styles.wrapper}>
             <H2 propsStyles={stylesCommon.h2}>With JS</H2>
             {/* 通常スクロール */}
-            <DivScrollable
+            <DivScrollbar
                 ref={refNormal}
                 id='normal'
                 stylesChild={styles.child}
@@ -81,9 +81,9 @@ const Component: FC = () => {
                 <ButtonVite styles={styles.button} onClick={scrollDivNormal}>
                     Normal Scroll
                 </ButtonVite>
-            </DivScrollable>
+            </DivScrollbar>
             {/* スムーススクロール */}
-            <DivScrollable
+            <DivScrollbar
                 ref={refSmooth}
                 id='smooth'
                 stylesChild={styles.child}
@@ -92,7 +92,7 @@ const Component: FC = () => {
                 <ButtonVite styles={styles.button} onClick={scrollDivSmooth}>
                     Smooth Scroll
                 </ButtonVite>
-            </DivScrollable>
+            </DivScrollbar>
         </DivCustom>
     );
 };

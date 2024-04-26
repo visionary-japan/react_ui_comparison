@@ -6,6 +6,7 @@ import { H1 } from '../../components/heading/H1';
 import { useScrollSmooth } from '../../hooks/useScrollSmooth';
 import { ScrollCss } from './ScrollCss';
 import { ScrollDiv } from './ScrollDiv';
+import { Ultimate } from './Ultimate';
 
 const styles = stylex.create({
     wrap: {
@@ -57,6 +58,8 @@ const Component: FC = () => {
         <DivCustom styles={styles.wrap}>
             {/* タイトル */}
             <H1 propsStyles={styles.h1}>Scroll</H1>
+            {/* Ultimate */}
+            <Ultimate />
             {/* Divスクロール */}
             <ScrollDiv />
             {/* CSSスクロール */}
