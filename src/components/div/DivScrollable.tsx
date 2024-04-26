@@ -5,6 +5,7 @@ import {
     type HTMLAttributes,
     type MouseEvent,
     type PointerEvent,
+    type UIEvent,
     forwardRef,
     memo,
     useEffect,
@@ -16,11 +17,13 @@ import { useEventWheel } from '../../hooks/useEventWheel';
 import { scrollAnimate } from '../../utils/scrollAnimate';
 import { snapPointer } from '../../utils/snapPointer';
 import { snapWheel } from '../../utils/snapWheel';
+
 interface Props extends HTMLAttributes<HTMLDivElement> {
     isSnap?: boolean;
     isAnimate?: boolean;
     stylesParent?: StyleXStyles<UserAuthoredStyles>;
     stylesScroll?: StyleXStyles<UserAuthoredStyles>;
+    onSetPage?: (str: string) => void;
 }
 
 const styles = stylex.create({
@@ -42,7 +45,15 @@ let isDragging = false;
 
 const Component = forwardRef<HTMLDivElement, Props>(
     (
-        { isSnap, isAnimate, stylesParent, stylesScroll, children, ...attrs },
+        {
+            isSnap,
+            isAnimate,
+            stylesParent,
+            stylesScroll,
+            onSetPage,
+            children,
+            ...attrs
+        },
         ref,
     ) => {
         // Ref: スクロール要素
@@ -139,6 +150,34 @@ const Component = forwardRef<HTMLDivElement, Props>(
             if (e.button === 1) return e.preventDefault();
         };
 
+        const handleScroll = (e: UIEvent) => {
+            const target = e.target as HTMLDivElement;
+            const children = target.children;
+            let maxVisibleArea = 0;
+            let mostVisibleChild = null;
+            //
+            for (let i = 0; i < children.length; i++) {
+                const child = children[i] as HTMLDivElement;
+                const rect = child.getBoundingClientRect();
+                const visibleWidth =
+                    Math.min(rect.right, target.clientWidth) -
+                    Math.max(rect.left, 0);
+                const visibleHeight =
+                    Math.min(rect.bottom, target.clientHeight) -
+                    Math.max(rect.top, 0);
+                const visibleArea =
+                    Math.max(0, visibleWidth) * Math.max(0, visibleHeight);
+
+                if (visibleArea > maxVisibleArea) {
+                    maxVisibleArea = visibleArea;
+                    mostVisibleChild = child;
+                }
+            }
+            // 最も表面積のある子要素がないならキャンセル
+            if (!mostVisibleChild) return;
+            onSetPage?.(mostVisibleChild.textContent as string);
+        };
+
         return (
             <div {...attrs} {...stylex.props(styles.parent, stylesParent)}>
                 {/* スクロール対象 */}
@@ -149,6 +188,8 @@ const Component = forwardRef<HTMLDivElement, Props>(
                     onPointerMove={handlePointerMove}
                     onPointerUp={handlePointerUp}
                     onMouseDown={handleMouseDown}
+                    onScroll={handleScroll}
+                    onAuxClick={e => e.preventDefault()}
                 >
                     {/* 子要素 */}
                     {children}

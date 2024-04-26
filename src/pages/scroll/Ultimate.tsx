@@ -1,5 +1,5 @@
 import stylex from '@stylexjs/stylex';
-import { type FC, memo } from 'react';
+import { type FC, memo, useState } from 'react';
 import { DivCustom } from '../../components/div/DivCustom';
 import { DivScrollable } from '../../components/div/DivScrollable';
 import { H2 } from '../../components/heading/H2';
@@ -35,15 +35,22 @@ const styles = stylex.create({
 });
 
 const Component: FC = () => {
+    const [page, setPage] = useState<string>('');
+
+    const handleSetPage = (str: string) => {
+        setPage(str);
+    };
+
     return (
         <DivCustom styles={styles.wrapper}>
-            <H2 propsStyles={stylesCommon.h2}>Ultimate</H2>
+            <H2 propsStyles={stylesCommon.h2}>{`Page: ${page}`}</H2>
             {/*  */}
             <DivScrollable
                 isSnap
                 isAnimate
                 stylesParent={styles.parent}
                 stylesScroll={styles.scroll}
+                onSetPage={handleSetPage}
             >
                 <div {...stylex.props(styles.child)}>1</div>
                 <div {...stylex.props(styles.child)}>2</div>
