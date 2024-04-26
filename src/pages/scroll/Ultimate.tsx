@@ -56,15 +56,11 @@ const Component: FC = () => {
                 stylesScroll={styles.scroll}
                 onSetPage={handleSetPage}
             >
-                <div {...stylex.props(styles.child)}>1</div>
-                <div {...stylex.props(styles.child)}>2</div>
-                <div {...stylex.props(styles.child)}>3</div>
-                <div {...stylex.props(styles.child)}>4</div>
-                <div {...stylex.props(styles.child)}>5</div>
-                <div {...stylex.props(styles.child)}>6</div>
-                <div {...stylex.props(styles.child)}>7</div>
-                <div {...stylex.props(styles.child)}>8</div>
-                <div {...stylex.props(styles.child)}>9</div>
+                {arr.map(v => (
+                    <div key={v} {...stylex.props(styles.child)}>
+                        {v}
+                    </div>
+                ))}
             </DivScrollable>
         </DivCustom>
     );

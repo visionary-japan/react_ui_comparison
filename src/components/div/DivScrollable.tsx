@@ -152,20 +152,20 @@ const Component = forwardRef<HTMLDivElement, Props>(
 
         const handleScroll = (e: UIEvent) => {
             const target = e.target as HTMLDivElement;
-            const targetRect = target.getBoundingClientRect();
+            const rectTarget = target.getBoundingClientRect();
             const children = target.children;
             let maxVisibleArea = 0;
             let mostVisibleIndex: number | null = null;
             //
             for (let i = 0; i < children.length; i++) {
                 const child = children[i] as HTMLDivElement;
-                const rect = child.getBoundingClientRect();
+                const rectChild = child.getBoundingClientRect();
                 const visibleWidth =
-                    Math.min(rect.right, targetRect.right) -
-                    Math.max(rect.left, targetRect.left);
+                    Math.min(rectChild.right, rectTarget.right) -
+                    Math.max(rectChild.left, rectTarget.left);
                 const visibleHeight =
-                    Math.min(rect.bottom, targetRect.bottom) -
-                    Math.max(rect.top, targetRect.top);
+                    Math.min(rectChild.bottom, rectTarget.bottom) -
+                    Math.max(rectChild.top, rectTarget.top);
                 const visibleArea =
                     Math.max(0, visibleWidth) * Math.max(0, visibleHeight);
 
