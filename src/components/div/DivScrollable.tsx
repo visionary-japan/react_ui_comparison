@@ -3,6 +3,7 @@ import type { StyleXStyles } from '@stylexjs/stylex';
 import type { UserAuthoredStyles } from '@stylexjs/stylex/lib/StyleXTypes';
 import {
     type HTMLAttributes,
+    type MouseEvent,
     type PointerEvent,
     forwardRef,
     memo,
@@ -133,6 +134,11 @@ const Component = forwardRef<HTMLDivElement, Props>(
             { key: 'ArrowLeft', callback: () => console.log('!') },
         ]);
 
+        const handleMouseDown = (e: MouseEvent<HTMLDivElement>) => {
+            // ホイールクリックを無効化
+            if (e.button === 1) return e.preventDefault();
+        };
+
         return (
             <div {...attrs} {...stylex.props(styles.parent, stylesParent)}>
                 {/* スクロール対象 */}
@@ -142,6 +148,7 @@ const Component = forwardRef<HTMLDivElement, Props>(
                     onPointerDown={handlePointerDown}
                     onPointerMove={handlePointerMove}
                     onPointerUp={handlePointerUp}
+                    onMouseDown={handleMouseDown}
                 >
                     {/* 子要素 */}
                     {children}
