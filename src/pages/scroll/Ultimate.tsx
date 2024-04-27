@@ -1,5 +1,12 @@
 import stylex from '@stylexjs/stylex';
-import { type FC, type KeyboardEvent, memo, useRef, useState } from 'react';
+import {
+    type FC,
+    type KeyboardEvent,
+    memo,
+    useMemo,
+    useRef,
+    useState,
+} from 'react';
 import { ButtonVite } from '../../components/button/ButtonVite';
 import { DivCustom } from '../../components/div/DivCustom';
 import { DivScrollable } from '../../components/div/DivScrollable';
@@ -46,6 +53,7 @@ const arr = [
     ['1', '2', '3', '4', '5', '6', '7', '8', ''],
     ['9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20'],
 ];
+const chapIdxMax = arr.length - 1;
 
 export interface RefScroll {
     refScroll: HTMLDivElement | null;
@@ -62,8 +70,38 @@ const Component: FC = () => {
     // State: Text
     const [pageTxt, setPageTxt] = useState<string>('');
 
+    // Memo
+    const pageIdxMax = useMemo(() => arr[chapIdx].length - 1, [chapIdx]);
+
+    // callback
+    // back
+    const handleBack = () => {
+        if (pageIdx > 0) {
+            refScroll.current?.back();
+        } else {
+            const newChapIdx = chapIdx - 1;
+            if (newChapIdx > 0) return;
+            const newPageIdx = arr[newChapIdx].length - 1;
+            if (!refScroll.current?.refScroll) return;
+            setChapIdx(newChapIdx);
+            snapToIndex(refScroll.current.refScroll, newPageIdx, false);
+        }
+    };
+    // next
+    const handleNext = () => {
+        if (pageIdx >= pageIdxMax) {
+            const newChapIdx = chapIdx + 1;
+            if (newChapIdx > chapIdxMax) return;
+            if (!refScroll.current?.refScroll) return;
+            setChapIdx(newChapIdx);
+            snapToIndex(refScroll.current.refScroll, 0, false);
+        } else {
+            refScroll.current?.next();
+        }
+    };
+
     // Function: Keydown
-    const handleKeydown = (e: KeyboardEvent<HTMLDivElement>) => {
+    const handleKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
         if (e.nativeEvent.isComposing || e.key !== 'Enter' || !pageTxt) return;
         const [newChapIdx, newPageIdx] = findIndexes(pageTxt, arr);
         if (newChapIdx === undefined || newPageIdx === undefined) return;
@@ -102,10 +140,16 @@ const Component: FC = () => {
                 styleTypes={['flexColumn', 'gap', 'margin']}
                 styles={styles.btns}
             >
-                <ButtonVite onClick={() => refScroll.current?.back()}>
+                <ButtonVite
+                    disabled={chapIdx === 0 && pageIdx === 0}
+                    onClick={handleBack}
+                >
                     Back
                 </ButtonVite>
-                <ButtonVite onClick={() => refScroll.current?.next()}>
+                <ButtonVite
+                    disabled={chapIdx >= chapIdxMax && pageIdx >= pageIdxMax}
+                    onClick={handleNext}
+                >
                     Next
                 </ButtonVite>
                 <ButtonVite
@@ -122,7 +166,7 @@ const Component: FC = () => {
                     aria-label='chapter'
                     value={pageTxt}
                     onChange={e => setPageTxt(e.target.value)}
-                    onKeyDown={handleKeydown}
+                    onKeyDown={handleKeyDown}
                 />
             </DivCustom>
         </DivCustom>

@@ -1,29 +1,24 @@
-import { type FC, memo, useEffect, useState } from 'react';
+import { type FC, memo } from 'react';
 import type { JsonConfigs } from '../@types';
 import { H1 } from '../components/heading/H1';
 
+const configsWindow = window.configs;
+const configsJson: JsonConfigs = await fetch('./json/config.json').then(res =>
+    res.json(),
+);
+
 const Component: FC = () => {
-    const windowConfigs = window.configs;
-    const [json, setJson] = useState<JsonConfigs | null>(null);
-
-    useEffect(() => {
-        fetch('./json/config.json')
-            .then(response => response.json())
-            .then((val: JsonConfigs) => setJson(val))
-            .catch(error => console.error('フェッチ失敗', error));
-    }, []);
-
     return (
         <>
             <H1 isLeft>JS: window.configs</H1>
-            {windowConfigs &&
-                Object.keys(windowConfigs).map(key => (
-                    <div key={key}>{windowConfigs?.[key]?.keyString}</div>
+            {configsWindow &&
+                Object.keys(configsWindow).map(key => (
+                    <div key={key}>{configsWindow?.[key]?.keyString}</div>
                 ))}
             <H1 isLeft>JSON: FETCH</H1>
-            {json &&
-                Object.keys(json).map(key =>
-                    json?.[key]?.map(val => (
+            {configsJson &&
+                Object.keys(configsJson).map(key =>
+                    configsJson?.[key]?.map(val => (
                         <div key={`${key}-${val.keyString}`}>
                             {val.keyString}
                         </div>

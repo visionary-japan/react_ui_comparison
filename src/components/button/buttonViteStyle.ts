@@ -24,6 +24,14 @@ export const styls = stylex.create({
         borderRadius: 8,
         transition: 'border-color 0.25s',
         willChange: 'border-color',
+        pointerEvents: {
+            default: 'auto',
+            ':disabled': 'none',
+        },
+        filter: {
+            default: 'auto',
+            ':disabled': 'brightness(0.5)',
+        },
     },
 });
 
