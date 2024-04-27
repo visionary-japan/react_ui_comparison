@@ -14,11 +14,11 @@ import {
 import type { Coordinate } from '../../@types/index';
 import { useEventKeydown } from '../../hooks/useEventKeydown';
 import { useEventWheel } from '../../hooks/useEventWheel';
-import type { ScrollMethods } from '../../pages/scroll/Ultimate';
+import type { RefScroll } from '../../pages/scroll/Ultimate';
 import { getMostVisibleIndex } from '../../utils/getMostVisibleIndex';
 import { scrollAnimate } from '../../utils/scrollAnimate';
 import { snapPointer } from '../../utils/snapPointer';
-import { snapToElement } from '../../utils/snapToElement';
+import { snapToIndex } from '../../utils/snapToIndex';
 import { snapWheel } from '../../utils/snapWheel';
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
@@ -26,6 +26,7 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
     isAnimate?: boolean;
     stylesParent?: StyleXStyles<UserAuthoredStyles>;
     stylesScroll?: StyleXStyles<UserAuthoredStyles>;
+    onSetChap?: (idx: number) => void;
     onSetPage?: (idx: number) => void;
 }
 
@@ -46,7 +47,7 @@ const styles = stylex.create({
 const initCoordinate = { x: 0, y: 0 };
 let isDragging = false;
 
-const Component = forwardRef<ScrollMethods, Props>(
+const Component = forwardRef<RefScroll, Props>(
     (
         {
             isSnap,
@@ -54,6 +55,7 @@ const Component = forwardRef<ScrollMethods, Props>(
             stylesParent,
             stylesScroll,
             onSetPage,
+            onSetChap,
             children,
             ...attrs
         },
@@ -144,10 +146,7 @@ const Component = forwardRef<ScrollMethods, Props>(
                 refScroll.current.children.length - 1 < targetIndex
             )
                 return;
-            const targetChild = refScroll.current.children[
-                targetIndex
-            ] as HTMLElement;
-            snapToElement(refScroll.current, targetChild, isAnimate);
+            snapToIndex(refScroll.current, targetIndex, isAnimate);
         };
         const back = () => {
             move(-1);

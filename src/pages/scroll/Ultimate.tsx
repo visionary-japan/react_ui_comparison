@@ -1,9 +1,11 @@
 import stylex from '@stylexjs/stylex';
-import { type FC, memo, useRef, useState } from 'react';
+import { type FC, type KeyboardEvent, memo, useRef, useState } from 'react';
 import { ButtonVite } from '../../components/button/ButtonVite';
 import { DivCustom } from '../../components/div/DivCustom';
 import { DivScrollable } from '../../components/div/DivScrollable';
 import { H2 } from '../../components/heading/H2';
+import { findIndexes } from '../../utils/findIndexes';
+import { snapToIndex } from '../../utils/snapToIndex';
 import { stylesCommon } from './styles';
 
 const styles = stylex.create({
@@ -40,28 +42,46 @@ const styles = stylex.create({
     },
 });
 
-const arr = ['1', '2', '3', '4', '5', '6', '7', '8', ''];
+const arr = [
+    ['1', '2', '3', '4', '5', '6', '7', '8', ''],
+    ['9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20'],
+];
 
-export interface ScrollMethods {
+export interface RefScroll {
     refScroll: HTMLDivElement | null;
     back: () => void;
     next: () => void;
 }
 
 const Component: FC = () => {
-    const refScroll = useRef<ScrollMethods>(null);
+    const refScroll = useRef<RefScroll>(null);
 
+    // State: Index
+    const [chapIdx, setChapIdx] = useState<number>(0);
     const [pageIdx, setPageIdx] = useState<number>(0);
+    // State: Text
+    const [pageTxt, setPageTxt] = useState<string>('');
 
-    const handleSetPage = (idx: number) => {
-        setPageIdx(idx);
+    // Function: Keydown
+    const handleKeydown = (e: KeyboardEvent<HTMLDivElement>) => {
+        if (e.nativeEvent.isComposing || e.key !== 'Enter' || !pageTxt) return;
+        const [newChapIdx, newPageIdx] = findIndexes(pageTxt, arr);
+        if (newChapIdx === undefined || newPageIdx === undefined) return;
+        if (newChapIdx === chapIdx) {
+            if (!refScroll.current?.refScroll) return;
+            snapToIndex(refScroll.current.refScroll, newPageIdx, true);
+        } else {
+            setChapIdx(newChapIdx);
+            if (!refScroll.current?.refScroll) return;
+            snapToIndex(refScroll.current.refScroll, newPageIdx, false);
+        }
     };
 
     return (
         <DivCustom styles={styles.wrapper}>
             <H2
                 propsStyles={stylesCommon.h2}
-            >{`Page: "${arr[pageIdx]}" (${pageIdx})`}</H2>
+            >{`Page: "${arr[chapIdx][pageIdx]}" (${chapIdx}, ${pageIdx})`}</H2>
             {/*  */}
             <DivScrollable
                 ref={refScroll}
@@ -69,9 +89,10 @@ const Component: FC = () => {
                 isAnimate
                 stylesParent={styles.parent}
                 stylesScroll={styles.scroll}
-                onSetPage={handleSetPage}
+                onSetChap={setChapIdx}
+                onSetPage={setPageIdx}
             >
-                {arr.map(v => (
+                {arr[chapIdx].map(v => (
                     <div key={v} {...stylex.props(styles.child)}>
                         {v}
                     </div>
@@ -87,6 +108,22 @@ const Component: FC = () => {
                 <ButtonVite onClick={() => refScroll.current?.next()}>
                     Next
                 </ButtonVite>
+                <ButtonVite
+                    onClick={() =>
+                        setChapIdx(prev =>
+                            prev >= arr.length - 1 ? 0 : prev + 1,
+                        )
+                    }
+                >
+                    Chap
+                </ButtonVite>
+                <input
+                    name='chapter'
+                    aria-label='chapter'
+                    value={pageTxt}
+                    onChange={e => setPageTxt(e.target.value)}
+                    onKeyDown={handleKeydown}
+                />
             </DivCustom>
         </DivCustom>
     );

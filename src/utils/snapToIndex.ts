@@ -2,16 +2,16 @@ import type { Coordinate } from '../@types';
 import { getChildOffset } from './getChildOffset';
 import { snap } from './snap';
 
-export const snapToElement = (
+export const snapToIndex = (
     target: HTMLDivElement,
-    element: HTMLElement,
+    idx: number,
     isAnimate: boolean | undefined,
 ) => {
     //
     const offset: Coordinate = getChildOffset(
         target,
         target.getBoundingClientRect(),
-        element.getBoundingClientRect(),
+        target.children[idx].getBoundingClientRect(),
     );
     snap(target, offset, isAnimate);
 };
