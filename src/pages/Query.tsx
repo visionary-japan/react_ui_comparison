@@ -1,4 +1,4 @@
-import * as stylex from '@stylexjs/stylex';
+import stylex from '@stylexjs/stylex';
 import { type FC, memo, useCallback } from 'react';
 import { ButtonVite } from '../components/button/ButtonVite';
 import { H1 } from '../components/heading/H1';

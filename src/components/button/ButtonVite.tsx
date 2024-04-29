@@ -1,4 +1,4 @@
-import * as stylex from '@stylexjs/stylex';
+import stylex from '@stylexjs/stylex';
 import type { StyleXStyles } from '@stylexjs/stylex';
 import type { UserAuthoredStyles } from '@stylexjs/stylex/lib/StyleXTypes';
 import { type ButtonHTMLAttributes, forwardRef, memo } from 'react';

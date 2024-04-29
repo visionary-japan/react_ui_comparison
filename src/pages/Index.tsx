@@ -7,7 +7,7 @@ import { DivCustom } from '../components/div/DivCustom';
 import { H1 } from '../components/heading/H1';
 import { Logo } from '../components/image/Logo';
 import { LinkIndex } from '../components/link/LinkIndex';
-import { useEnv } from '../hooks/useEnv';
+import { getEnv } from '../utils/getEnv';
 
 const styles = stylex.create({
     notProd: {
@@ -21,10 +21,10 @@ const styles = stylex.create({
     },
 });
 
-const Component: FC = () => {
-    const { ROOT_NAME, ANY_NUMBER, IS_PROD } = useEnv();
+const { rootName, anyNumber, isProd } = getEnv();
 
-    const [count, setCount] = useState<number>(ANY_NUMBER);
+const Component: FC = () => {
+    const [count, setCount] = useState<number>(anyNumber);
 
     const handleClickButton = () => {
         setCount(count => count + 1);
@@ -32,24 +32,24 @@ const Component: FC = () => {
 
     return (
         <div>
-            <H1>{ROOT_NAME.toUpperCase()}</H1>
+            <H1>{rootName.toUpperCase()}</H1>
             <DivCustom
                 styleTypes={['flexCenter']}
-                styles={!IS_PROD && styles.notProd}
+                styles={!isProd && styles.notProd}
             >
                 <Logo
                     url='https://vitejs.dev'
                     src={logoVite}
                     alt='Vite Logo'
                     styles={styles.vite}
-                    isSpin
+                    isSpin={true}
                 />
                 <Logo
                     url='https://react.dev'
                     src={logoReact}
                     alt='React Logo'
                     styles={styles.react}
-                    isSpin
+                    isSpin={true}
                 />
             </DivCustom>
             <DivCustom styleTypes={['center', 'margin2']}>

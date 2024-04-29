@@ -35,10 +35,6 @@ export default {
 }
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
-
 ---
 
 # 環境構築
@@ -49,8 +45,6 @@ export default {
 
 ### 拡張機能
 
-#### 必須
-
 `.vscode\extensions.json`
 
 - JavaScript and TypeScript Nightly
@@ -58,9 +52,13 @@ export default {
 
 ## 起動
 
+以下のコマンドでローカル起動できる。
+
 ```
 npm run dev
 ```
+
+以下のコマンドで `dist` ディレクトリにビルド内容が出力される。
 
 ```
 num run build

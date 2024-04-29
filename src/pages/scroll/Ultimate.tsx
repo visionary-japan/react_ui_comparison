@@ -123,8 +123,8 @@ const Component: FC = () => {
             {/*  */}
             <DivScrollable
                 ref={refScroll}
-                isSnap
-                isAnimate
+                isSnap={true}
+                isAnimate={true}
                 stylesParent={styles.parent}
                 stylesScroll={styles.scroll}
                 onSetChap={setChapIdx}

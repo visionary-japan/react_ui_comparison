@@ -33,7 +33,7 @@ const Component: FC = () => {
                 <DivCustom styleTypes={['margin']}>
                     <H3>aタグとして振る舞う</H3>
                     <DivCustom styleTypes={['margin']}>
-                        <ButtonZenn variant='primary' asChild>
+                        <ButtonZenn variant='primary' asChild={true}>
                             <a href='./btn'>Btn</a>
                         </ButtonZenn>
                     </DivCustom>
@@ -42,7 +42,7 @@ const Component: FC = () => {
                 <DivCustom styleTypes={['margin']}>
                     <H3>Linkとして振る舞う</H3>
                     <DivCustom styleTypes={['margin']}>
-                        <ButtonZenn variant='primary' asChild>
+                        <ButtonZenn variant='primary' asChild={true}>
                             <Link to=''>Btn</Link>
                         </ButtonZenn>
                     </DivCustom>
@@ -51,7 +51,7 @@ const Component: FC = () => {
                 <DivCustom styleTypes={['margin']}>
                     <H3>イチオシ挙動</H3>
                     <DivCustom styleTypes={['margin']}>
-                        <ButtonZenn disabled asChild>
+                        <ButtonZenn disabled={true} asChild={true}>
                             <a href='dnd'>Dnd</a>
                         </ButtonZenn>
                     </DivCustom>

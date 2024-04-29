@@ -1,5 +1,5 @@
 import stylex from '@stylexjs/stylex';
-import React, { type FC, memo } from 'react';
+import { type FC, memo, useState } from 'react';
 import { ReactSortable } from 'react-sortablejs';
 import { H1 } from '../../components/heading/H1';
 
@@ -34,7 +34,7 @@ const styles = stylex.create({
 });
 
 const Component: FC = () => {
-    const [list, setList] = React.useState(draggableList);
+    const [list, setList] = useState(draggableList);
 
     return (
         <>
