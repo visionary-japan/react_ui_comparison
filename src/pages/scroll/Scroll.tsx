@@ -40,10 +40,20 @@ const Component: FC = () => {
     const { scrollSmooth } = useScrollSmooth();
 
     const getNewTopWindow = useCallback(() => {
-        const topMax = window.innerHeight;
+        // ドキュメント要素の情報を取得
+        const heightScroll = document.documentElement.scrollHeight;
+        const heightWindow = document.documentElement.clientHeight;
+        // 現在のスクロール値を取得
         const topNow = window.scrollY;
-        const topSub = topMax / 4;
-        return topNow >= topMax - 2 ? 0 : Math.min(topNow + topSub, topMax);
+        // 計算用の値を算出
+        const topSub = heightScroll / 3; // 要素はいま3つ
+        const topMax = heightScroll - topSub; // スクロール可能な幅を算出
+        const isNextNearTopMax = topNow + topSub > topMax - 2; // 誤差は2pxとする
+        return Math.round(topNow) >= Math.round(topMax) - 1
+            ? 0
+            : isNextNearTopMax
+              ? heightScroll - heightWindow
+              : Math.round(topNow + topSub);
     }, []);
 
     const scrollWindowNormal = useCallback(() => {

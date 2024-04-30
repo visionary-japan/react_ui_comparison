@@ -87,7 +87,7 @@ const Component: FC = () => {
                 ref={refSmooth}
                 id='smooth'
                 stylesChild={styles.child}
-                hasButton
+                hasButton={true}
             >
                 <ButtonVite styles={styles.button} onClick={scrollDivSmooth}>
                     Smooth Scroll
