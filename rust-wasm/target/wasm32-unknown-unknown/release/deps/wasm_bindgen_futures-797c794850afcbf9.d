@@ -1,0 +1,9 @@
+C:\Users\darks\OneDrive\Documents\react_ui_comparison\rust-wasm\target\wasm32-unknown-unknown\release\deps\libwasm_bindgen_futures-797c794850afcbf9.rmeta: C:\Users\darks\.cargo\registry\src\index.crates.io-6f17d22bba15001f\wasm-bindgen-futures-0.4.45\src/lib.rs C:\Users\darks\.cargo\registry\src\index.crates.io-6f17d22bba15001f\wasm-bindgen-futures-0.4.45\src\queue.rs C:\Users\darks\.cargo\registry\src\index.crates.io-6f17d22bba15001f\wasm-bindgen-futures-0.4.45\src\task\singlethread.rs
+
+C:\Users\darks\OneDrive\Documents\react_ui_comparison\rust-wasm\target\wasm32-unknown-unknown\release\deps\libwasm_bindgen_futures-797c794850afcbf9.rlib: C:\Users\darks\.cargo\registry\src\index.crates.io-6f17d22bba15001f\wasm-bindgen-futures-0.4.45\src/lib.rs C:\Users\darks\.cargo\registry\src\index.crates.io-6f17d22bba15001f\wasm-bindgen-futures-0.4.45\src\queue.rs C:\Users\darks\.cargo\registry\src\index.crates.io-6f17d22bba15001f\wasm-bindgen-futures-0.4.45\src\task\singlethread.rs
+
+C:\Users\darks\OneDrive\Documents\react_ui_comparison\rust-wasm\target\wasm32-unknown-unknown\release\deps\wasm_bindgen_futures-797c794850afcbf9.d: C:\Users\darks\.cargo\registry\src\index.crates.io-6f17d22bba15001f\wasm-bindgen-futures-0.4.45\src/lib.rs C:\Users\darks\.cargo\registry\src\index.crates.io-6f17d22bba15001f\wasm-bindgen-futures-0.4.45\src\queue.rs C:\Users\darks\.cargo\registry\src\index.crates.io-6f17d22bba15001f\wasm-bindgen-futures-0.4.45\src\task\singlethread.rs
+
+C:\Users\darks\.cargo\registry\src\index.crates.io-6f17d22bba15001f\wasm-bindgen-futures-0.4.45\src/lib.rs:
+C:\Users\darks\.cargo\registry\src\index.crates.io-6f17d22bba15001f\wasm-bindgen-futures-0.4.45\src\queue.rs:
+C:\Users\darks\.cargo\registry\src\index.crates.io-6f17d22bba15001f\wasm-bindgen-futures-0.4.45\src\task\singlethread.rs:
