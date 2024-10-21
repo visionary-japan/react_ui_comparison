@@ -1,5 +1,5 @@
-import type { Coordinate } from '../@types';
-import { scrollAnimate } from './scrollAnimate';
+import type { Coordinate } from '../@types/index.ts';
+import { scrollAnimate } from './scrollAnimate.ts';
 
 export const snap = (
     target: HTMLDivElement,

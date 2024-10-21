@@ -7,13 +7,13 @@ import {
     useRef,
     useState,
 } from 'react';
-import { ButtonVite } from '../../components/button/ButtonVite';
-import { DivCustom } from '../../components/div/DivCustom';
-import { DivScrollable } from '../../components/div/DivScrollable';
-import { H2 } from '../../components/heading/H2';
-import { findIndexes } from '../../utils/findIndexes';
-import { snapToIndex } from '../../utils/snapToIndex';
-import { stylesCommon } from './styles';
+import { ButtonVite } from '../../components/button/ButtonVite.tsx';
+import { DivCustom } from '../../components/div/DivCustom.tsx';
+import { DivScrollable } from '../../components/div/DivScrollable.tsx';
+import { H2 } from '../../components/heading/H2.tsx';
+import { findIndexes } from '../../utils/findIndexes.ts';
+import { snapToIndex } from '../../utils/snapToIndex.ts';
+import { stylesCommon } from './styles.ts';
 
 const styles = stylex.create({
     wrapper: {

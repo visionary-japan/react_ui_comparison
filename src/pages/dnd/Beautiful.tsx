@@ -5,8 +5,8 @@ import {
     type DropResult,
     Droppable,
 } from 'react-beautiful-dnd';
-import { DivCustom } from '../../components/div/DivCustom';
-import { H1 } from '../../components/heading/H1';
+import { DivCustom } from '../../components/div/DivCustom.tsx';
+import { H1 } from '../../components/heading/H1.tsx';
 
 interface QuoteType {
     id: string;

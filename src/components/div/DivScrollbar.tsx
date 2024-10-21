@@ -13,9 +13,9 @@ import {
     useRef,
     useState,
 } from 'react';
-import type { RefHandle } from '../../@types/scrollable';
-import { useObserverMutationChild } from '../../hooks/useObserverMutationChild';
-import { useScrollSmooth } from '../../hooks/useScrollSmooth';
+import type { RefHandle } from '../../@types/scrollable.ts';
+import { useObserverMutationChild } from '../../hooks/useObserverMutationChild.tsx';
+import { useScrollSmooth } from '../../hooks/useScrollSmooth.tsx';
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
     id: string;

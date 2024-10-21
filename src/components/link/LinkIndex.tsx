@@ -1,6 +1,6 @@
 import { type FC, memo } from 'react';
 import { Link } from 'react-router-dom';
-import { H1 } from '../heading/H1';
+import { H1 } from '../heading/H1.tsx';
 
 interface Props {
     path?: string;

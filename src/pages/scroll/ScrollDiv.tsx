@@ -1,12 +1,12 @@
 import stylex from '@stylexjs/stylex';
 import { type FC, memo, useCallback, useRef } from 'react';
-import type { RefHandle } from '../../@types/scrollable';
-import { ButtonVite } from '../../components/button/ButtonVite';
-import { DivCustom } from '../../components/div/DivCustom';
-import { DivScrollbar } from '../../components/div/DivScrollbar';
-import { H2 } from '../../components/heading/H2';
-import { useScrollSmooth } from '../../hooks/useScrollSmooth';
-import { stylesCommon } from './styles';
+import type { RefHandle } from '../../@types/scrollable.ts';
+import { ButtonVite } from '../../components/button/ButtonVite.tsx';
+import { DivCustom } from '../../components/div/DivCustom.tsx';
+import { DivScrollbar } from '../../components/div/DivScrollbar.tsx';
+import { H2 } from '../../components/heading/H2.tsx';
+import { useScrollSmooth } from '../../hooks/useScrollSmooth.tsx';
+import { stylesCommon } from './styles.ts';
 
 const styles = stylex.create({
     wrapper: {

@@ -1,6 +1,6 @@
 import stylex from '@stylexjs/stylex';
 import { type FC, memo } from 'react';
-import type { Props } from '.';
+import type { Props } from './index.ts';
 
 const styles = stylex.create({
     base: {

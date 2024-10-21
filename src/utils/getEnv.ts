@@ -1,5 +1,5 @@
-import { castStrToBoolean } from './castStrToBoolean';
-import { castStrToNum } from './castStrToNum';
+import { castStrToBoolean } from './castStrToBoolean.ts';
+import { castStrToNum } from './castStrToNum.ts';
 
 export function getEnv() {
     // Viteの場合はimport.meta.env.を使用

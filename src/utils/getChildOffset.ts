@@ -1,4 +1,4 @@
-import type { Coordinate } from '../@types';
+import type { Coordinate } from '../@types/index.d.ts';
 
 type Type = (
     elem: HTMLDivElement,

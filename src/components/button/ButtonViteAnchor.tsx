@@ -2,7 +2,7 @@ import stylex from '@stylexjs/stylex';
 import type { StyleXStyles } from '@stylexjs/stylex';
 import type { UserAuthoredStyles } from '@stylexjs/stylex/lib/StyleXTypes';
 import { type AnchorHTMLAttributes, forwardRef, memo } from 'react';
-import { sizes, styls } from './buttonViteStyle';
+import { sizes, styls } from './buttonViteStyle.ts';
 
 interface Props extends AnchorHTMLAttributes<HTMLAnchorElement> {
     size?: 'small' | 'medium' | 'large';

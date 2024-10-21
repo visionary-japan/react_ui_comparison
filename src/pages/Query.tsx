@@ -1,8 +1,8 @@
 import stylex from '@stylexjs/stylex';
 import { type FC, memo, useCallback } from 'react';
-import { ButtonVite } from '../components/button/ButtonVite';
-import { H1 } from '../components/heading/H1';
-import { useQuery } from '../hooks/useQuery';
+import { ButtonVite } from '../components/button/ButtonVite.tsx';
+import { H1 } from '../components/heading/H1.tsx';
+import { useQuery } from '../hooks/useQuery.tsx';
 
 const styles = stylex.create({
     base: {

@@ -9,7 +9,7 @@ import {
 import { H1 } from '../../components/heading/H1.tsx';
 import { useObserverResize } from '../../hooks/useObserverResize.tsx';
 import { dropDatas } from './config/configs.ts';
-import type { DndKeys, DragData } from './config/index';
+import type { DndKeys, DragData } from './config/index.ts';
 
 const DROP_PADDING = 8;
 const DROP_GAP = 2;

@@ -2,12 +2,12 @@ import stylex from '@stylexjs/stylex';
 import { type FC, memo, useState } from 'react';
 import logoVite from '/vite.svg';
 import logoReact from '../assets/react.svg';
-import { ButtonVite } from '../components/button/ButtonVite';
-import { DivCustom } from '../components/div/DivCustom';
-import { H1 } from '../components/heading/H1';
-import { Logo } from '../components/image/Logo';
-import { LinkIndex } from '../components/link/LinkIndex';
-import { getEnv } from '../utils/getEnv';
+import { ButtonVite } from '../components/button/ButtonVite.tsx';
+import { DivCustom } from '../components/div/DivCustom.tsx';
+import { H1 } from '../components/heading/H1.tsx';
+import { Logo } from '../components/image/Logo.tsx';
+import { LinkIndex } from '../components/link/LinkIndex.tsx';
+import { getEnv } from '../utils/getEnv.ts';
 
 const styles = stylex.create({
     notProd: {

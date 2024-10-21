@@ -1,6 +1,6 @@
-import type { Coordinate } from '../@types';
-import { getChildOffset } from './getChildOffset';
-import { snap } from './snap';
+import type { Coordinate } from '../@types/index.ts';
+import { getChildOffset } from './getChildOffset.ts';
+import { snap } from './snap.ts';
 
 export const snapToIndex = (
     target: HTMLDivElement,

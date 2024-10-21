@@ -11,15 +11,15 @@ import {
     useImperativeHandle,
     useRef,
 } from 'react';
-import type { Coordinate } from '../../@types/index';
-import { useEventKeydown } from '../../hooks/useEventKeydown';
-import { useEventWheel } from '../../hooks/useEventWheel';
-import type { RefScroll } from '../../pages/scroll/Ultimate';
-import { getMostVisibleIndex } from '../../utils/getMostVisibleIndex';
-import { scrollAnimate } from '../../utils/scrollAnimate';
-import { snapPointer } from '../../utils/snapPointer';
-import { snapToIndex } from '../../utils/snapToIndex';
-import { snapWheel } from '../../utils/snapWheel';
+import type { Coordinate } from '../../@types/index.ts';
+import { useEventKeydown } from '../../hooks/useEventKeydown.tsx';
+import { useEventWheel } from '../../hooks/useEventWheel.tsx';
+import type { RefScroll } from '../../pages/scroll/Ultimate.tsx';
+import { getMostVisibleIndex } from '../../utils/getMostVisibleIndex.ts';
+import { scrollAnimate } from '../../utils/scrollAnimate.ts';
+import { snapPointer } from '../../utils/snapPointer.ts';
+import { snapToIndex } from '../../utils/snapToIndex.ts';
+import { snapWheel } from '../../utils/snapWheel.ts';
 
 interface Props extends HTMLAttributes<HTMLDivElement> {
     isSnap?: boolean;

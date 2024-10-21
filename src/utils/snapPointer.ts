@@ -1,8 +1,8 @@
 import type { PointerEvent } from 'react';
-import type { Coordinate } from '../@types';
-import { getChildOffsets } from './getChildOffsets';
-import { getClosestCoordinate } from './getClosestCoordinate';
-import { snap } from './snap';
+import type { Coordinate } from '../@types/index.ts';
+import { getChildOffsets } from './getChildOffsets.ts';
+import { getClosestCoordinate } from './getClosestCoordinate.ts';
+import { snap } from './snap.ts';
 
 export const snapPointer = (
     e: PointerEvent<HTMLDivElement>,

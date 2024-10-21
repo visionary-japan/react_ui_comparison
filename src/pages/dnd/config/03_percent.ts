@@ -1,5 +1,5 @@
 import * as stylex from '@stylexjs/stylex';
-import type { DragData, DropData } from '.';
+import type { DragData, DropData } from './index.ts';
 
 // ドラッグ要素のスタイル
 const dragStyles = stylex.create({

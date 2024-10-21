@@ -1,5 +1,5 @@
-import type { Coordinate } from '../@types';
-import { easeInOutQuad } from './easeInOutQuad';
+import type { Coordinate } from '../@types/index.ts';
+import { easeInOutQuad } from './easeInOutQuad.ts';
 
 const SCROLL_ANIMATE_DURATION = 250;
 

@@ -1,12 +1,12 @@
 import stylex from '@stylexjs/stylex';
 import { type FC, memo, useCallback, useRef } from 'react';
-import { ButtonVite } from '../../components/button/ButtonVite';
-import { DivCustom } from '../../components/div/DivCustom';
-import { H1 } from '../../components/heading/H1';
-import { useScrollSmooth } from '../../hooks/useScrollSmooth';
-import { ScrollCss } from './ScrollCss';
-import { ScrollDiv } from './ScrollDiv';
-import { Ultimate } from './Ultimate';
+import { ButtonVite } from '../../components/button/ButtonVite.tsx';
+import { DivCustom } from '../../components/div/DivCustom.tsx';
+import { H1 } from '../../components/heading/H1.tsx';
+import { useScrollSmooth } from '../../hooks/useScrollSmooth.tsx';
+import { ScrollCss } from './ScrollCss.tsx';
+import { ScrollDiv } from './ScrollDiv.tsx';
+import { Ultimate } from './Ultimate.tsx';
 
 const styles = stylex.create({
     wrap: {

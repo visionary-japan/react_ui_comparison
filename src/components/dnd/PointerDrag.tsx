@@ -1,9 +1,9 @@
 import stylex from '@stylexjs/stylex';
 import type { FC, PointerEvent } from 'react';
 import { memo, useCallback, useRef, useState } from 'react';
-import type { MutableDOMRect } from '.';
-import type { Coordinate } from '../../@types';
-import type { DragData, DropData } from '../../pages/dnd/config';
+import type { Coordinate } from '../../@types/index.ts';
+import type { DragData, DropData } from '../../pages/dnd/config/index.ts';
+import type { MutableDomRect } from './index.ts';
 
 const width = 72;
 const height = 72;
@@ -32,19 +32,18 @@ const calculateNewRect = (
     //
     if (rectLast === undefined) return undefined;
     //
-    const newRect: MutableDOMRect = { ...rect };
+    const newRect: MutableDomRect = { ...rect };
 
     for (const key in rect) {
         if (key in rect) {
             const value = rect[key as keyof DOMRect];
             const valueLast = rectLast[key as keyof DOMRect];
             if (typeof value === 'number' && typeof valueLast === 'number') {
-                newRect[key as keyof MutableDOMRect] =
-                    value + (value - valueLast) / timestampSub;
+                newRect[key] = value + (value - valueLast) / timestampSub;
             }
         }
     }
-    return newRect as DOMRect;
+    return newRect as unknown as DOMRect;
 };
 
 interface Props {
@@ -54,7 +53,7 @@ interface Props {
     handleDrag: (props: DragData) => void;
 }
 
-const Drag: FC<Props> = props => {
+const Drag: FC<Props> = ({ id, dropData, handleDragStart, handleDrag }) => {
     const [isDragging, setIsDragging] = useState<boolean>(false);
 
     // 要素の左上とカーソルの距離
@@ -97,13 +96,13 @@ const Drag: FC<Props> = props => {
             // タイムスタンプを取得
             setTimestamp(event.timeStamp);
             // ドロップ対象を更新
-            props.handleDragStart(props.id);
-            props.handleDrag({
+            handleDragStart(id);
+            handleDrag({
                 cooClient: { x: event.clientX, y: event.clientY },
                 rect,
             });
         },
-        [props],
+        [id, handleDragStart, handleDrag],
     );
     // ドラッグ中
     const handlePointerMove = useCallback(
@@ -140,13 +139,13 @@ const Drag: FC<Props> = props => {
             // タイムスタンプの差を算出
             const timestampSub = (event.timeStamp - timestamp) / 100;
             // ドロップ対象を更新
-            props.handleDrag({
+            handleDrag({
                 cooClient: { x: event.clientX, y: event.clientY },
                 rect,
                 rectNext: calculateNewRect(rect, rectLast, timestampSub),
             });
         },
-        [isDragging, cooOffset.x, cooOffset.y, props, rectLast, timestamp],
+        [isDragging, cooOffset.x, cooOffset.y, rectLast, timestamp, handleDrag],
     );
     // ドラッグ終了
     const handlePointerUp = useCallback(() => {
@@ -163,8 +162,8 @@ const Drag: FC<Props> = props => {
             {...stylex.props(
                 styles.base,
                 isDragging && styles.dragging,
-                props.dropData.dragStyles.base,
-                isDragging && props.dropData.dragStyles.dragging,
+                dropData.dragStyles.base,
+                isDragging && dropData.dragStyles.dragging,
             )}
         />
     );

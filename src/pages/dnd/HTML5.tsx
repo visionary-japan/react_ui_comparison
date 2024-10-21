@@ -1,6 +1,6 @@
 import type React from 'react';
 import { type FC, memo, useCallback, useState } from 'react';
-import { H1 } from '../../components/heading/H1';
+import { H1 } from '../../components/heading/H1.tsx';
 
 const Component: FC = () => {
     const [isDragging, setIsDragging] = useState(false);
@@ -52,7 +52,7 @@ const Component: FC = () => {
                     width: 64,
                     backgroundColor: isDragging ? 'red' : 'gray',
                 }}
-                draggable
+                draggable={true}
                 onDragStart={handleDragStart}
                 onDragEnd={handleDragEnd}
                 onDrag={handleDrag}

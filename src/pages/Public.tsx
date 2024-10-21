@@ -1,7 +1,7 @@
 import { type FC, memo } from 'react';
-import type { JsonConfigs } from '../@types';
-import { H1 } from '../components/heading/H1';
-import { loadJson } from '../utils/loadJson';
+import type { JsonConfigs } from '../@types/index.ts';
+import { H1 } from '../components/heading/H1.tsx';
+import { loadJson } from '../utils/loadJson.ts';
 
 const configsWindow = window.configs;
 const configsJson: JsonConfigs = await loadJson('/json/config.json');

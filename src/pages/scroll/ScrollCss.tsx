@@ -1,10 +1,10 @@
 import stylex from '@stylexjs/stylex';
 import { type FC, memo } from 'react';
-import { ButtonViteAnchor } from '../../components/button/ButtonViteAnchor';
-import { DivScrollableSection } from '../../components/div/DivScrollableSection';
-import { H2 } from '../../components/heading/H2';
-import { H3 } from '../../components/heading/H3';
-import { stylesCommon } from './styles';
+import { ButtonViteAnchor } from '../../components/button/ButtonViteAnchor.tsx';
+import { DivScrollableSection } from '../../components/div/DivScrollableSection.tsx';
+import { H2 } from '../../components/heading/H2.tsx';
+import { H3 } from '../../components/heading/H3.tsx';
+import { stylesCommon } from './styles.ts';
 
 const styles = stylex.create({
     container: {

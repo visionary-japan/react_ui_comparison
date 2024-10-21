@@ -1,64 +1,64 @@
 :root {
-  overflow: hidden scroll;
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 1.5;
-  color: rgb(255 255 255 / 87%);
-  color-scheme: light dark;
-  user-select: none;
-  background-color: #242424;
-  font-synthesis: none;
-  text-rendering: optimizelegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-touch-callout: none;
-  -webkit-tap-highlight-color: rgb(0 0 0 / 0%);
+    overflow: hidden scroll;
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: rgb(255 255 255 / 87%);
+    color-scheme: light dark;
+    user-select: none;
+    background-color: #242424;
+    font-synthesis: none;
+    text-rendering: optimizelegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: rgb(0 0 0 / 0%);
 
-  --is-mobile: false;
+    --is-mobile: false;
 
-  @media (width <= 540px) {
-    --is-mobile: true;
-  }
+    @media (width <= 540px) {
+        --is-mobile: true;
+    }
 }
 
-@container style(--is-mobile: true) {
-  .is-mobile {
-    background-color: red;
-  }
+@container style (--is-mobile: true) {
+    .is-mobile {
+        background-color: red;
+    }
 }
 
 body {
-  display: grid;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100svh;
-  margin: 0;
+    display: grid;
+    place-items: center;
+    min-width: 320px;
+    min-height: 100svh;
+    margin: 0;
 }
 
 img {
-  -webkit-user-drag: none;
+    -webkit-user-drag: none;
 }
 
 #root {
-  display: grid;
-  justify-content: center;
-  width: 100svw;
-  height: 100svh;
-  vertical-align: top;
+    display: grid;
+    justify-content: center;
+    width: 100svw;
+    height: 100svh;
+    vertical-align: top;
 }
 
 @media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #fff;
-  }
+    :root {
+        color: #213547;
+        background-color: #fff;
+    }
 
-  a:hover {
-    color: #747bff;
-  }
+    a:hover {
+        color: #747bff;
+    }
 }
 
 li {
-  text-align: left;
+    text-align: left;
 }

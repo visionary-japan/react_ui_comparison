@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { castStrToNum } from '../utils/castStrToNum';
+import { castStrToNum } from '../utils/castStrToNum.ts';
 
 export function useQuery() {
     const [searchParams, setSearchParams] = useSearchParams();

@@ -1,5 +1,5 @@
-import type { Coordinate } from '../@types';
-import { getChildOffset } from './getChildOffset';
+import type { Coordinate } from '../@types/index.d.ts';
+import { getChildOffset } from './getChildOffset.ts';
 
 type Type = (elem: HTMLDivElement) => Coordinate[];
 

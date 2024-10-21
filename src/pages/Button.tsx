@@ -1,11 +1,11 @@
 import { type FC, memo, useCallback } from 'react';
 import { Link } from 'react-router-dom';
-import { ButtonVite } from '../components/button/ButtonVite';
-import { ButtonZenn } from '../components/button/ButtonZenn';
-import { DivCustom } from '../components/div/DivCustom';
-import { H1 } from '../components/heading/H1';
-import { H2 } from '../components/heading/H2';
-import { H3 } from '../components/heading/H3';
+import { ButtonVite } from '../components/button/ButtonVite.tsx';
+import { ButtonZenn } from '../components/button/ButtonZenn.tsx';
+import { DivCustom } from '../components/div/DivCustom.tsx';
+import { H1 } from '../components/heading/H1.tsx';
+import { H2 } from '../components/heading/H2.tsx';
+import { H3 } from '../components/heading/H3.tsx';
 
 const Component: FC = () => {
     const handleClickButtonVite = useCallback(() => {

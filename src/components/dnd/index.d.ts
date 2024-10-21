@@ -1,5 +1,5 @@
-import type { Writable } from '../../@types';
+import type { Writable } from '../../@types.ts';
 
-export type MutableDOMRect = {
+export type MutableDomRect = {
     [K in keyof Writable<Omit<DOMRect, 'toJSON'>>]: DOMRect[K];
 };

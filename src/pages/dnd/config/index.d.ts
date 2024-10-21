@@ -1,5 +1,5 @@
 import type { UserAuthoredStyles } from '@stylexjs/stylex';
-import type { Coordinate } from '../../../@types';
+import type { Coordinate } from '../../../@types.ts';
 
 // ドラッグ情報
 export interface DragData {
@@ -14,7 +14,7 @@ type StyleKeys = 'base' | 'dragging';
 // ドロップ情報
 export interface DropData {
     isOver: (dragData: DragData, rectDrop: DOMRect) => boolean;
-    dragStyles: { [key in StyleKeys]: UserAuthoredStyles };
+    dragStyles: { [Key in StyleKeys]: UserAuthoredStyles };
     dropStyles: { over: UserAuthoredStyles };
 }
 

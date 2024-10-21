@@ -1,7 +1,7 @@
 import stylex from '@stylexjs/stylex';
 import { type FC, memo, useState } from 'react';
 import { ReactSortable } from 'react-sortablejs';
-import { H1 } from '../../components/heading/H1';
+import { H1 } from '../../components/heading/H1.tsx';
 
 const draggableList = [
     {
