@@ -41,6 +41,12 @@ export default {
 
 ## ライブラリ
 
+### インストール
+
+```
+npm install
+```
+
 ## VSCODE
 
 ### 拡張機能

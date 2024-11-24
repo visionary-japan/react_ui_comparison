@@ -103,7 +103,7 @@ const Drag: FC<Props> = props => {
                 rect,
             });
         },
-        [props],
+        [props.id, props.handleDragStart, props.handleDrag],
     );
     // ドラッグ中
     const handlePointerMove = useCallback(
@@ -146,7 +146,14 @@ const Drag: FC<Props> = props => {
                 rectNext: calculateNewRect(rect, rectLast, timestampSub),
             });
         },
-        [isDragging, cooOffset.x, cooOffset.y, props, rectLast, timestamp],
+        [
+            isDragging,
+            cooOffset.x,
+            cooOffset.y,
+            props.handleDrag,
+            rectLast,
+            timestamp,
+        ],
     );
     // ドラッグ終了
     const handlePointerUp = useCallback(() => {
