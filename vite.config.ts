@@ -12,5 +12,7 @@ export default defineConfig({
             'top-level-await': true,
         },
     },
-    optimizeDeps: { exclude: ['react-sortablejs'] },
+    worker: {
+        format: 'es',
+    },
 });

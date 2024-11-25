@@ -11,4 +11,4 @@ const styles = stylex.create({
 
 const Component: FC = () => <hr {...stylex.props(styles.base)} />;
 
-export const H1 = memo(Component);
+export const Hr = memo(Component);

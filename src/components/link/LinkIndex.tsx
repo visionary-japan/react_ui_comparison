@@ -24,6 +24,14 @@ const Component: FC<Props> = props => {
         </ul>
     );
 
+    const Wasm = () => (
+        <ul>
+            <li>
+                <Link to='/wasm/fibonacci'>Fibonacci</Link>
+            </li>
+        </ul>
+    );
+
     switch (props.path) {
         case '/dnd':
             return (
@@ -64,6 +72,12 @@ const Component: FC<Props> = props => {
                             <li>
                                 <Link to='/scroll'>Scroll</Link>
                             </li>
+                        </ul>
+                        <ul>
+                            <li>
+                                <Link to='/wasm'>Wasm</Link>
+                            </li>
+                            <Wasm />
                         </ul>
                         <ul>
                             <li>Nav</li>

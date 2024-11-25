@@ -7,10 +7,15 @@
         "dev": "vite --mode production",
         "build": "tsc && vite build",
         "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-        "preview": "vite preview"
+        "preview": "vite preview",
+        "asbuild:debug": "asc assembly/index.ts --target debug",
+        "asbuild:release": "asc assembly/index.ts --target release",
+        "asbuild": "npm run asbuild:debug && npm run asbuild:release",
+        "test": "node tests",
+        "start": "npx serve ."
     },
     "dependencies": {
-        "@stylexjs/stylex": "^0.6.1",
+        "@stylexjs/stylex": "^0.5.1",
         "react": "^18.3.1",
         "react-dom": "^18.3.1",
         "vite-plugin-stylex": "^0.8.3"
@@ -26,6 +31,7 @@
         "@typescript-eslint/eslint-plugin": "^7.7.1",
         "@typescript-eslint/parser": "^7.7.1",
         "@vitejs/plugin-react-swc": "^3.6.0",
+        "assemblyscript": "^0.27.31",
         "clsx": "^2.1.1",
         "eslint": "^9.1.1",
         "eslint-plugin-react": "^7.34.1",
@@ -42,11 +48,19 @@
         "stylelint-config-standard": "^36.0.0",
         "stylelint-prettier": "^5.0.0",
         "typescript": "^5.4.5",
-        "vite": "^5.2.10"
+        "vite": "^5.2.10",
+        "vite-plugin-top-level-await": "^1.4.4",
+        "vite-plugin-wasm": "^3.3.0"
     },
     "overrides": {
         "vite-plugin-stylex": {
             "@stylexjs/babel-plugin": "0.6.1"
+        }
+    },
+    "exports": {
+        ".": {
+            "import": "./build/release.js",
+            "types": "./build/release.d.ts"
         }
     }
 }

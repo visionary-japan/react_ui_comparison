@@ -7,6 +7,7 @@ type TypedStylesKeys =
     | 'center'
     | 'flexCenter'
     | 'flexStart'
+    | 'flexBetween'
     | 'flexColumn'
     | 'gap'
     | 'margin'
@@ -34,6 +35,11 @@ const typedStyles: Record<
     flexStart: {
         display: 'flex',
         justifyContent: 'center',
+        alignItems: 'start',
+    },
+    flexBetween: {
+        display: 'flex',
+        justifyContent: 'space-between',
         alignItems: 'start',
     },
     flexColumn: {
