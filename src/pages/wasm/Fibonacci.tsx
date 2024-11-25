@@ -4,7 +4,8 @@ import { Hr } from '../../components/Hr';
 import { ButtonVite } from '../../components/button/ButtonVite';
 import { DivCustom } from '../../components/div/DivCustom';
 import { H1 } from '../../components/heading/H1';
-import { fibonacci } from '../../utils/wasm/fibonacci';
+import { fibonacci as fibonacciTs } from '../../utils/wasm/fibonacci';
+import { fibonacci as fibonacciAs } from '../../utils/wasm/assemblyscript/build/release';
 
 const styles = stylex.create({
     input: {
@@ -30,9 +31,9 @@ const Component: FC = () => {
     const [tsAvgTime, setTsAvgTime] = useState<number>(0);
     const [asAvgTime, setAsAvgTime] = useState<number>(0);
 
-    const measureExecutionTime = (n: number): string => {
+    const measureExecutionTime = (n: number, type: 'ts' | 'as'): string => {
         const startTime = performance.now();
-        const result = fibonacci(n);
+        const result = type === 'ts' ? fibonacciTs(n) : fibonacciAs(n);
         const endTime = performance.now();
         const executionTime = endTime - startTime;
         return `${result} ( ${executionTime} ms )`;
@@ -41,8 +42,8 @@ const Component: FC = () => {
     const handleRun = () => {
         setSingleResultTs('計算中...');
         setSingleResultAs('計算中...');
-        setSingleResultTs(measureExecutionTime(n));
-        setSingleResultAs(measureExecutionTime(n));
+        setSingleResultTs(measureExecutionTime(n, 'ts'));
+        setSingleResultAs(measureExecutionTime(n, 'as'));
     };
 
     const handleRun10 = async () => {
@@ -58,14 +59,14 @@ const Component: FC = () => {
 
         for (let i = 0; i < 10; i++) {
             const startTimeTs = performance.now();
-            const resultTs = fibonacci(n);
+            const resultTs = fibonacciTs(n);
             const endTimeTs = performance.now();
             const executionTimeTs = endTimeTs - startTimeTs;
             tsTotalTime += executionTimeTs;
             tsResults.push(`${resultTs} ( ${executionTimeTs} ms )`);
 
             const startTimeAs = performance.now();
-            const resultAs = fibonacci(n);
+            const resultAs = fibonacciAs(n);
             const endTimeAs = performance.now();
             const executionTimeAs = endTimeAs - startTimeAs;
             asTotalTime += executionTimeAs;

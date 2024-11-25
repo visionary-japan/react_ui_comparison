@@ -10,27 +10,23 @@ export function fibonacci(n: number): number {
 // なお、通常はメモ化や動的計画法などにより計算の効率を高める
 
 // メモ化のコード例
-export function fibonacciMemoized(
-    n: number,
-    memo = new Map<number, number>(),
-): number {
-    if (n <= 1) return n;
-    const memoized = memo.get(n);
-    if (memoized !== undefined) return memoized;
-    const result =
-        fibonacciMemoized(n - 1, memo) + fibonacciMemoized(n - 2, memo);
-    memo.set(n, result);
-    return result;
-}
+// export function fibonacci(n: number, memo = new Map<number, number>()): number {
+//     if (n <= 1) return n;
+//     const memoized = memo.get(n);
+//     if (memoized !== undefined) return memoized;
+//     const result = fibonacci(n - 1, memo) + fibonacci(n - 2, memo);
+//     memo.set(n, result);
+//     return result;
+// }
 
-// 動的計画法のコード例
-export function fibonacciIterative(n: number): number {
-    if (n <= 1) return n;
+// 動的計画法 (itertive) のコード例
+// export function fibonacci(n: number): number {
+//     if (n <= 1) return n;
 
-    let a = 0;
-    let b = 1;
-    for (let i = 2; i <= n; i++) {
-        [a, b] = [b, a + b];
-    }
-    return b;
-}
+//     let a = 0;
+//     let b = 1;
+//     for (let i = 2; i <= n; i++) {
+//         [a, b] = [b, a + b];
+//     }
+//     return b;
+// }

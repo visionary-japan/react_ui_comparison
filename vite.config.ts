@@ -12,7 +12,4 @@ export default defineConfig({
             'top-level-await': true,
         },
     },
-    worker: {
-        format: 'es',
-    },
 });

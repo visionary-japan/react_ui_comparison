@@ -15,6 +15,7 @@ import { Scroll } from './pages/scroll/Scroll.tsx';
 import { ScrollCss } from './pages/scroll/ScrollCss.tsx';
 import { ScrollDiv } from './pages/scroll/ScrollDiv.tsx';
 import { Fibonacci } from './pages/wasm/Fibonacci.tsx';
+import { Grayscale } from './pages/wasm/Grayscale.tsx';
 import { getEnv } from './utils/getEnv.ts';
 
 const { rootName } = getEnv();
@@ -37,6 +38,7 @@ const App: FC = () => {
                 <Route path='scroll/css' element={<ScrollCss />} />
                 <Route path='wasm' element={<LinkIndex path='/wasm' />} />
                 <Route path='wasm/fibonacci' element={<Fibonacci />} />
+                <Route path='wasm/grayscale' element={<Grayscale />} />
                 <Route path='*' element={<Navigate to='/' />} />
             </Routes>
         </BrowserRouter>

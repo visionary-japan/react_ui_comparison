@@ -29,6 +29,12 @@ const Component: FC<Props> = props => {
             <li>
                 <Link to='/wasm/fibonacci'>Fibonacci</Link>
             </li>
+            <li>
+                <Link to='/wasm/grayscale'>Grayscale</Link>
+            </li>
+            <li>
+                <Link to='/wasm/mandelbrot'>Mandelbrot</Link>
+            </li>
         </ul>
     );
 
