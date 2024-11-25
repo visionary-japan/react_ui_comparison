@@ -41,12 +41,8 @@ const Component: FC = () => {
     const handleRun = () => {
         setSingleResultTs('計算中...');
         setSingleResultAs('計算中...');
-
-        const tsResult = measureExecutionTime(n);
-        const asResult = measureExecutionTime(n);
-
-        setSingleResultTs(tsResult);
-        setSingleResultAs(asResult);
+        setSingleResultTs(measureExecutionTime(n));
+        setSingleResultAs(measureExecutionTime(n));
     };
 
     const handleRun10 = async () => {
