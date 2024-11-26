@@ -37,7 +37,7 @@ jobs:
           node-version: 20
           cache: 'npm'
       - name: Install dependencies
-        run: npm install --save --legacy-peer-deps
+        run: npm install --save --legacy-peer-deps --force
       - name: Build
         run: npm run build
       - name: Set 404 Page
