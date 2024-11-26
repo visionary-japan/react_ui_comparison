@@ -38,7 +38,9 @@ jobs:
           cache: 'npm'
       - name: Install dependencies
         run: npm install --save --legacy-peer-deps --force
-      - name: Build
+      - name: Build AssemblyScript
+        run: cd src/utils/wasm/assemblyscript/ && npm run asbuild
+      - name: Build Vite
         run: npm run build
       - name: Set 404 Page
         run: cp ./dist/index.html ./dist/404.html

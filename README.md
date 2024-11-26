@@ -67,7 +67,7 @@ npm run dev
 以下のコマンドで `dist` ディレクトリにビルド内容が出力される。
 
 ```
-num run build
+npm run build
 ```
 
 ## 配置
