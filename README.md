@@ -44,7 +44,7 @@ export default {
 ### インストール
 
 ```
-npm install
+npm install --force
 ```
 
 ## VSCODE
