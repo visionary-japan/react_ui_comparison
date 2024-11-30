@@ -1,10 +1,16 @@
 import stylex from '@stylexjs/stylex';
-import { type ChangeEvent, type FC, memo, useRef, useState } from 'react';
+import {
+    type ChangeEvent,
+    type FC,
+    type RefObject,
+    memo,
+    useRef,
+    useState,
+} from 'react';
 import { ButtonVite } from '../../components/button/ButtonVite';
 import { DivCustom } from '../../components/div/DivCustom';
 import { H1 } from '../../components/heading/H1';
-import { grayscale as grayscaleAs } from '../../utils/wasm/assemblyscript/build/release';
-import { grayscale as grayscaleTs } from '../../utils/wasm/grayscale';
+import Worker from '../../utils/worker/grayscaleWorker.ts?worker';
 
 const styles = stylex.create({
     input: {
@@ -37,6 +43,8 @@ const Component: FC = () => {
     const tsCanvasRef = useRef<HTMLCanvasElement>(null);
     const asCanvasRef = useRef<HTMLCanvasElement>(null);
 
+    const workerRef = useRef<Worker>(new Worker());
+
     const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
         if (e.target.files?.[0]) {
             const reader = new FileReader();
@@ -53,72 +61,54 @@ const Component: FC = () => {
         }
     };
 
+    const processImage = (
+        canvasRef: RefObject<HTMLCanvasElement>,
+        type: 'ts' | 'as',
+    ) => {
+        if (!(image && canvasRef.current)) return;
+        const canvas = canvasRef.current;
+        const ctx = canvas.getContext('2d', { willReadFrequently: true });
+        if (ctx) {
+            canvas.width = image.width;
+            canvas.height = image.height;
+            ctx.drawImage(image, 0, 0);
+            const imageData = ctx.getImageData(
+                0,
+                0,
+                canvas.width,
+                canvas.height,
+            );
+            const pixels = imageData.data;
+
+            workerRef.current?.postMessage({ pixels, type });
+        }
+    };
+
+    const handleWorkerMessage = (event: MessageEvent) => {
+        const { result, executionTime, type } = event.data;
+        const canvasRef = type === 'ts' ? tsCanvasRef : asCanvasRef;
+        const setTime = type === 'ts' ? setTsTime : setAsTime;
+        //
+        setTime(executionTime);
+        if (canvasRef.current) {
+            const canvas = canvasRef.current;
+            const ctx = canvas.getContext('2d');
+            if (ctx) {
+                const newImageData = new ImageData(
+                    result,
+                    canvas.width,
+                    canvas.height,
+                );
+                ctx.putImageData(newImageData, 0, 0);
+            }
+        }
+    };
+
     const handleGrayscale = () => {
         if (!image) return;
-
-        // TypeScript
-        if (tsCanvasRef.current) {
-            const tsCanvas = tsCanvasRef.current;
-            const tsCtx = tsCanvas.getContext('2d', {
-                willReadFrequently: true,
-            });
-            if (tsCtx) {
-                tsCanvas.width = image.width;
-                tsCanvas.height = image.height;
-                tsCtx.drawImage(image, 0, 0);
-                const tsImageData = tsCtx.getImageData(
-                    0,
-                    0,
-                    tsCanvas.width,
-                    tsCanvas.height,
-                );
-                const tsPixels = tsImageData.data;
-
-                const tsStartTime = performance.now();
-                const tsResult = grayscaleTs(tsPixels);
-                const tsEndTime = performance.now();
-                setTsTime(tsEndTime - tsStartTime);
-
-                const tsNewImageData = new ImageData(
-                    tsResult,
-                    tsCanvas.width,
-                    tsCanvas.height,
-                );
-                tsCtx.putImageData(tsNewImageData, 0, 0);
-            }
-        }
-
-        // AssemblyScript
-        if (asCanvasRef.current) {
-            const asCanvas = asCanvasRef.current;
-            const asCtx = asCanvas.getContext('2d', {
-                willReadFrequently: true,
-            });
-            if (asCtx) {
-                asCanvas.width = image.width;
-                asCanvas.height = image.height;
-                asCtx.drawImage(image, 0, 0);
-                const asImageData = asCtx.getImageData(
-                    0,
-                    0,
-                    asCanvas.width,
-                    asCanvas.height,
-                );
-                const asPixels = asImageData.data;
-
-                const asStartTime = performance.now();
-                const asResult = grayscaleAs(asPixels);
-                const asEndTime = performance.now();
-                setAsTime(asEndTime - asStartTime);
-
-                const asNewImageData = new ImageData(
-                    asResult,
-                    asCanvas.width,
-                    asCanvas.height,
-                );
-                asCtx.putImageData(asNewImageData, 0, 0);
-            }
-        }
+        processImage(tsCanvasRef, 'ts');
+        processImage(asCanvasRef, 'as');
+        workerRef.current.onmessage = handleWorkerMessage;
     };
 
     return (

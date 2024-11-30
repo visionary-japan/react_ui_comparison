@@ -1,11 +1,10 @@
 import stylex from '@stylexjs/stylex';
-import { type FC, type ReactNode, memo, useState } from 'react';
+import { type FC, type ReactNode, memo, useRef, useState } from 'react';
 import { Hr } from '../../components/Hr';
 import { ButtonVite } from '../../components/button/ButtonVite';
 import { DivCustom } from '../../components/div/DivCustom';
 import { H1 } from '../../components/heading/H1';
-import { fibonacci as fibonacciTs } from '../../utils/wasm/fibonacci';
-import { fibonacci as fibonacciAs } from '../../utils/wasm/assemblyscript/build/release';
+import Worker from '../../utils/worker/fibonacciWorker.ts?worker';
 
 const styles = stylex.create({
     input: {
@@ -30,23 +29,35 @@ const Component: FC = () => {
     const [multiResultAs, setMultiResultAs] = useState<ReactNode>('実行待ち');
     const [tsAvgTime, setTsAvgTime] = useState<number>(0);
     const [asAvgTime, setAsAvgTime] = useState<number>(0);
+    const [tsRunning, setTsRunning] = useState<boolean>(false);
+    const [asRunning, setAsRunning] = useState<boolean>(false);
 
-    const measureExecutionTime = (n: number, type: 'ts' | 'as'): string => {
-        const startTime = performance.now();
-        const result = type === 'ts' ? fibonacciTs(n) : fibonacciAs(n);
-        const endTime = performance.now();
-        const executionTime = endTime - startTime;
-        return `${result} ( ${executionTime} ms )`;
-    };
+    const workerRef = useRef<Worker>(new Worker());
 
     const handleRun = () => {
+        if (tsRunning || asRunning) return;
+        setTsRunning(true);
+        setAsRunning(true);
         setSingleResultTs('計算中...');
         setSingleResultAs('計算中...');
-        setSingleResultTs(measureExecutionTime(n, 'ts'));
-        setSingleResultAs(measureExecutionTime(n, 'as'));
+        workerRef.current?.postMessage({ n, type: 'ts' });
+        workerRef.current?.postMessage({ n, type: 'as' });
+        workerRef.current.onmessage = (event: MessageEvent) => {
+            const { result, executionTime } = event.data;
+            if (event.data.type === 'ts') {
+                setSingleResultTs(`${result} ( ${executionTime} ms )`);
+                setTsRunning(false);
+            } else {
+                setSingleResultAs(`${result} ( ${executionTime} ms )`);
+                setAsRunning(false);
+            }
+        };
     };
 
     const handleRun10 = async () => {
+        if (tsRunning || asRunning) return;
+        setTsRunning(true);
+        setAsRunning(true);
         setMultiResultTs('計算中...');
         setMultiResultAs('計算中...');
         setTsAvgTime(0);
@@ -57,45 +68,57 @@ const Component: FC = () => {
         let tsTotalTime = 0;
         let asTotalTime = 0;
 
+        const promises = [];
+
         for (let i = 0; i < 10; i++) {
-            const startTimeTs = performance.now();
-            const resultTs = fibonacciTs(n);
-            const endTimeTs = performance.now();
-            const executionTimeTs = endTimeTs - startTimeTs;
-            tsTotalTime += executionTimeTs;
-            tsResults.push(`${resultTs} ( ${executionTimeTs} ms )`);
-
-            const startTimeAs = performance.now();
-            const resultAs = fibonacciAs(n);
-            const endTimeAs = performance.now();
-            const executionTimeAs = endTimeAs - startTimeAs;
-            asTotalTime += executionTimeAs;
-            asResults.push(`${resultAs} ( ${executionTimeAs} ms )`);
-
-            const tsAverage = tsTotalTime / (i + 1);
-            const asAverage = asTotalTime / (i + 1);
-            setTsAvgTime(tsAverage);
-            setAsAvgTime(asAverage);
-
-            setMultiResultTs(
-                <div>
-                    {tsResults.map((result, i) => (
-                        <div key={`ts-result-${i}-${result}`}>{result}</div>
-                    ))}
-                </div>,
+            promises.push(
+                new Promise<void>(resolve => {
+                    workerRef.current.postMessage({ n, type: 'ts', index: i });
+                    workerRef.current.postMessage({ n, type: 'as', index: i });
+                    workerRef.current.onmessage = (event: MessageEvent) => {
+                        const { result, executionTime, type, index } =
+                            event.data;
+                        if (type === 'ts') {
+                            tsTotalTime += executionTime;
+                            tsResults[index] =
+                                `${result} ( ${executionTime} ms )`;
+                            const tsAverage = tsTotalTime / (index + 1);
+                            setTsAvgTime(tsAverage);
+                            setMultiResultTs(
+                                <div>
+                                    {tsResults.map((result, i) => (
+                                        <div key={`ts-result-${i}-${result}`}>
+                                            {result}
+                                        </div>
+                                    ))}
+                                </div>,
+                            );
+                        } else {
+                            asTotalTime += executionTime;
+                            asResults[index] =
+                                `${result} ( ${executionTime} ms )`;
+                            const asAverage = asTotalTime / (index + 1);
+                            setAsAvgTime(asAverage);
+                            setMultiResultAs(
+                                <div>
+                                    {asResults.map((result, i) => (
+                                        <div key={`as-result-${i}-${result}`}>
+                                            {result}
+                                        </div>
+                                    ))}
+                                </div>,
+                            );
+                        }
+                        if (index === 9) resolve();
+                    };
+                }),
             );
-
-            setMultiResultAs(
-                <div>
-                    {asResults.map((result, i) => (
-                        <div key={`as-result-${i}-${result}`}>{result}</div>
-                    ))}
-                </div>,
-            );
-
-            // UIの更新を待つ
-            await new Promise(resolve => setTimeout(resolve, 0));
         }
+
+        await Promise.all(promises);
+
+        setTsRunning(false);
+        setAsRunning(false);
     };
 
     return (
@@ -110,7 +133,11 @@ const Component: FC = () => {
                 />
             </DivCustom>
             <DivCustom styleTypes={['margin']}>
-                <ButtonVite type='button' onClick={handleRun}>
+                <ButtonVite
+                    type='button'
+                    onClick={handleRun}
+                    disabled={asRunning || tsRunning}
+                >
                     1回実行
                 </ButtonVite>
             </DivCustom>
@@ -136,7 +163,11 @@ const Component: FC = () => {
             </DivCustom>
             <Hr />
             <DivCustom styleTypes={['margin']}>
-                <ButtonVite type='button' onClick={handleRun10}>
+                <ButtonVite
+                    type='button'
+                    onClick={handleRun10}
+                    disabled={asRunning || tsRunning}
+                >
                     10回実行
                 </ButtonVite>
             </DivCustom>
