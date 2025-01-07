@@ -1,7 +1,6 @@
 import stylex from '@stylexjs/stylex';
 import type { FC, PointerEvent } from 'react';
 import { memo, useCallback, useRef, useState } from 'react';
-import type { MutableDOMRect } from '.';
 import type { Coordinate } from '../../@types';
 import type { DragData, DropData } from '../../pages/dnd/config';
 
@@ -29,22 +28,16 @@ const calculateNewRect = (
     rectLast: DOMRect | undefined,
     timestampSub: number,
 ): DOMRect | undefined => {
-    //
     if (rectLast === undefined) return undefined;
-    //
-    const newRect: MutableDOMRect = { ...rect };
 
-    for (const key in rect) {
-        if (key in rect) {
-            const value = rect[key as keyof DOMRect];
-            const valueLast = rectLast[key as keyof DOMRect];
-            if (typeof value === 'number' && typeof valueLast === 'number') {
-                newRect[key as keyof MutableDOMRect] =
-                    value + (value - valueLast) / timestampSub;
-            }
-        }
-    }
-    return newRect as DOMRect;
+    const newRect = new DOMRect(
+        rect.x + (rect.x - rectLast.x) / timestampSub,
+        rect.y + (rect.y - rectLast.y) / timestampSub,
+        rect.width + (rect.width - rectLast.width) / timestampSub,
+        rect.height + (rect.height - rectLast.height) / timestampSub,
+    );
+
+    return newRect;
 };
 
 interface Props {

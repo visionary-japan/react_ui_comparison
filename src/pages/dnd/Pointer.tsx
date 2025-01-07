@@ -72,7 +72,7 @@ const Component: FC = () => {
                         // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
                         key={i}
                         dragData={dragData}
-                        dropData={dragId && dropDatas[dragId as DndKeys]}
+                        dropData={dragId && dropDatas[dragId]}
                     />
                 ))}
                 {Object.keys(dropDatas).map((key: string) => (

@@ -46,6 +46,13 @@ const Component: FC<Props> = props => {
                     <Dnd />
                 </>
             );
+        case '/wasm':
+            return (
+                <>
+                    <H1>Wasm</H1>
+                    <Wasm />
+                </>
+            );
         default:
             return (
                 <>

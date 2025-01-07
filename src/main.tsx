@@ -26,19 +26,25 @@ const App: FC = () => {
             <Routes>
                 <Route path='/' element={<Index />} />
                 <Route path='btn' element={<Button />} />
+                {/* DnD */}
                 <Route path='dnd' element={<LinkIndex path='/dnd' />} />
                 <Route path='dnd/htmlapi' element={<HTML5 />} />
                 <Route path='dnd/pointer' element={<Pointer />} />
                 {/* <Route path='dnd/sortablejs' element={<Sortablejs />} /> */}
                 <Route path='dnd/beautiful' element={<Beautiful />} />
+                {/* Query */}
                 <Route path='query' element={<Query />} />
+                {/* Public */}
                 <Route path='public' element={<Public />} />
+                {/* Scroll */}
                 <Route path='scroll' element={<Scroll />} />
                 <Route path='scroll/div' element={<ScrollDiv />} />
                 <Route path='scroll/css' element={<ScrollCss />} />
+                {/* WASM */}
                 <Route path='wasm' element={<LinkIndex path='/wasm' />} />
                 <Route path='wasm/fibonacci' element={<Fibonacci />} />
                 <Route path='wasm/grayscale' element={<Grayscale />} />
+                {/* Catch error route and navigate to root */}
                 <Route path='*' element={<Navigate to='/' />} />
             </Routes>
         </BrowserRouter>

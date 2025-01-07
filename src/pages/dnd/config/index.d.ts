@@ -14,7 +14,7 @@ type StyleKeys = 'base' | 'dragging';
 // ドロップ情報
 export interface DropData {
     isOver: (dragData: DragData, rectDrop: DOMRect) => boolean;
-    dragStyles: { [key in StyleKeys]: UserAuthoredStyles };
+    dragStyles: { [Key in StyleKeys]: UserAuthoredStyles };
     dropStyles: { over: UserAuthoredStyles };
 }
 
